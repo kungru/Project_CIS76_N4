@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Poppins:wght@500&family=Roboto:wght@300&family=Work+Sans:wght@400;600&display=swap');
+
+h5,h6{
+    text-align: center;
+
+}
+h5{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    color:#1c1c1c;
+    font-size: 15PX;
+    text-transform: uppercase;
+    line-height: 1.4em;
+    letter-spacing: .02em;
+}
+.card{
+    width: 19rem;
+    height: 315px;
+    height: 313.03px;
+    background: #f9f9f9;
+    border-style: none;
+    margin: 10px 25px 30px 15px;
+    overflow: hidden;
+}
+.card-body{
+    padding: 0;
+}
+
+.card-text{
+    text-align: center;
+    color:#1c1c1c;
+    font-weight: 600;
+}
+@media only screen and (max-width: 1435px){
+    .card{width: 17rem;}
+  }
+  @media only screen and (max-width: 1306px){
+    .card{width: 16rem;}
+  } 
+   @media only screen and (max-width: 1247px){
+    .card{width: 18rem;}
+    .col-9{width: 100%;}
+  }
+  @media only screen and (max-width: 1115px){
+   .card{width: 15rem;}
+  }
+  @media only screen and (max-width: 980px){
+    .card{width: 18rem;}
+   }
