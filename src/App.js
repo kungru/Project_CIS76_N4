@@ -3,6 +3,7 @@
 import Example from './Page/Body/Carousel_zx';
 import Header from './Page/Header/Header';
 import Footer from './Page/Footer/Footer';
+import Scrolltop from './Page/Body/Scrolltop';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Container_card from './Page/Body/Container_card';
@@ -27,6 +28,7 @@ function App() {
     <div className='App'>
 
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
+      <Scrolltop/>
         <Row>
           <Example/>
         </Row>
@@ -47,14 +49,16 @@ function App() {
                   />
                 )
               })}
+                
             </div>
           </Col>
         </Row>
         <Row>
           <Col>
-            <Footer />
+            <Footer /> 
           </Col>
         </Row>
+        
       </Container>
 
       {/* <Footer/> */}

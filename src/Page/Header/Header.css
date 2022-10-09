@@ -53,6 +53,7 @@ padding: 0;}
 }
 .sidebar_logolink{
     display: flex;
-    margin-top: 10px;
-    gap: 10px;
+    margin-top: 20px;
+    gap: 20px;
+    font-size: 30px;
 }
