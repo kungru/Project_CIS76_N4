@@ -1,6 +1,7 @@
 
 // import Header from './Page/Header/Header';
 import Example from './Page/Body/Carousel_zx';
+import Navigation from './Page/Navigation/Navigation';
 import Header from './Page/Header/Header';
 import Footer from './Page/Footer/Footer';
 import Scrolltop from './Page/Body/Scrolltop';
@@ -29,6 +30,9 @@ function App() {
 
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
       <Scrolltop/>
+      <Row>
+      <Navigation/>
+      </Row>
         <Row>
           <Example/>
         </Row>
