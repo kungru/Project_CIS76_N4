@@ -17,9 +17,9 @@ function App() {
         .then((res) => {
           return (res.json())
         }).then((data) => {
-          console.log(data);
+         
           setCards(data);
-          console.log(cards);
+          
         })
     }, []
 
