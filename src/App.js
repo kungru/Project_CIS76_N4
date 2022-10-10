@@ -1,6 +1,8 @@
 
 // import Header from './Page/Header/Header';
 import Example from './Page/Body/Carousel_zx';
+import Content from './Page/Content/Content';
+import Above_footer from './Page/Body/Above_footer';
 import Navigation from './Page/Navigation/Navigation';
 import Header from './Page/Header/Header';
 import Footer from './Page/Footer/Footer';
@@ -41,7 +43,8 @@ function App() {
             <Header />
           </Col>
           <Col xs={9} id="page-content-wrapper">
-            <div className='container_card'>
+            <Content/>
+            {/* <div className='container_card'>
               {cards.map((item) => {
                 return (
                   <Container_card
@@ -54,7 +57,12 @@ function App() {
                 )
               })}
                 
-            </div>
+            </div> */}
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <Above_footer/>
           </Col>
         </Row>
         <Row>
@@ -65,7 +73,7 @@ function App() {
         
       </Container>
 
-      {/* <Footer/> */}
+    
     </div>
   );
 }

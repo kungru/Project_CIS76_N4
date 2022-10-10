@@ -2,20 +2,11 @@ import './Container_card.css';
 import {React, useEffect,useState} from 'react';
 import {Card, CardBody,CardTitle,CardSubtitle, CardText,} from 'reactstrap';
 const Container_card = (props) => {
-  // const [cards,setCards]=useState([])
-  // useEffect(
-  //   ()=>{
-  //     fetch ('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card')
-  //     .then((res)=>{
-  //       return(res.json())
-  //     }).then((data)=>{
-  //       setCards(data);
-  //       console.log(data);
-  //     })
-  //   },[]
-    
-  // )
-  
+
+  const [heartActive,setHeartActive]=useState(true);
+  const changeHeart=()=>{
+    setHeartActive(current => !current)
+  }
   return (
     <div className='card_div'>
     <Card>
@@ -34,7 +25,12 @@ const Container_card = (props) => {
       {props.style} / {props.shape}
     </CardSubtitle>
     <CardText>
-      ${props.price}
+    <div className='card_invi'>
+      {heartActive ? <i class='bx bx-heart' onClick={changeHeart}></i> : <i class='bx bxs-heart' onClick={changeHeart} ></i>}
+      <i class='bx bx-shopping-bag' ></i>
+      <i class="fa-regular fa-eye"></i>
+      </div>
+      <span className='card_price'>${props.price}</span>
     </CardText>
   </CardBody>
 </Card>
