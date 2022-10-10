@@ -38,7 +38,7 @@ const Header = (  ) => {
             return response.json()
         }).then((data) => {
             
-            setApiUser(data[0])
+            setApiUser(data)
             
         })
     }, [])
@@ -88,21 +88,36 @@ const Header = (  ) => {
 
    
    
-    
+    const [nameUser, setNameUser] = useState(null)
+    let fakeEmail = null
+    let fakePass = null
     const handelLogin = (email, pass) => {
-       
-        
-        
-        if(email === apiUser.Email && pass === apiUser.Password){
-            setTimeout(() => {
-                
-                setAvatarUser(false)
-                setBlockLogin(0)
-                divRef.current.style.visibility = 'hidden';
-            }, 5000);
-        }
+        fakeEmail = email
+        fakePass = pass
+        waitLogin()
+    }
+    
+    
+    
+    
+    function waitLogin() {
+        for(let i=0; i< apiUser.length; i++){
             
-   }
+            
+            if(fakeEmail === apiUser[i].Email && fakePass === apiUser[i].Password){
+                setTimeout(() => {
+                    setNameUser(apiUser[i].Name)
+                    setAvatarUser(false)
+                    setBlockLogin(0)
+                    divRef.current.style.visibility = 'hidden';
+                }, 3000);
+            }
+        };
+        
+        }
+   
+
+    
    const avartRef = useRef()
    const avartRef1 = useRef()
     
@@ -228,8 +243,16 @@ const Header = (  ) => {
                        </div>) : 
                        (<div ref={avartRef} >
                        <div  className='avatar'><img src='https://dvdn247.net/wp-content/uploads/2020/07/avatar-mac-dinh-1.png'></img></div>
-                       <span style={{fontSize:'14px'}}>{apiUser.Name}</span> 
-                       <button type='button' onClick={handelLogout} className='logout'>Log out</button></div>)} 
+                       <span style={{fontSize:'14px'}}>{nameUser}</span> 
+                        
+                        
+                       <button type='button' onClick={handelLogout} className='logout'>Log out</button></div>)}
+
+                       
+                       
+                       
+                       
+                       
                     </NavItem>
                     <NavItem>
                         <a
@@ -291,7 +314,7 @@ const Login = (props) => {
     const [loginApi, setLoginApi] = useState([])
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
-    props.onLogin(email, pass, )
+    props.onLogin(email, pass,)
 
     const[loading, setLoading] = useState(true)
 
@@ -302,7 +325,7 @@ const Login = (props) => {
         .then((response) => {
             return response.json()
         }).then((data) => {
-            setLoginApi(data[0], data[1])
+            setLoginApi(data)
 
             
             
@@ -334,32 +357,39 @@ const Login = (props) => {
        
  
     const handelLogin =() => {
-        
+     
         const valid = validationAll()
         if(!valid) return
-        
-        
-        if(email === loginApi.Email && pass === loginApi.Password){
+        let checkEmail = false;
+        let checkPass = false;
+
+        for(let i=0; i< loginApi.length; i++){
             
+            if(email === loginApi[i].Email ){
+                checkEmail = true
+                if(pass === loginApi[i].Password){
+                    checkPass = true
+                    setLoading(false)
+                    
+
+                    setTimeout(() => {
+                        setValidation1('')
+                        setLoading(true)
+                    }, 5000);
+                }
+            }
+        };
+        if(checkEmail == false && checkPass == false) {
             setLoading(false)
-            
-            setTimeout(() => {
-                setValidation1('')
-                setLoading(true)
-            }, 5000);
-            
-        }else{
-           
-            setLoading(false)
-            
+                
             setTimeout(() => {
                 setValidation1('Email or Password is not valid')
                 setLoading(true)
             }, 3000);
-            
-        }   
+
+        }
         
-    }
+    };
    
     
 
@@ -425,7 +455,8 @@ const Login = (props) => {
     }, [])
     
     const [email, setEmail] = useState('')
-    const [name, setName] = useState('')
+    const [firtname, setFirtName] = useState('')
+    const [lastname, setLastName] = useState('')
     const [pass, setPass] = useState('')
     const [repeatPass, setRepeatPass] = useState('')
 
@@ -439,8 +470,11 @@ const Login = (props) => {
     const validationAll = () => {
        
         const msg = {}
-        if( isEmpty(name)){
-            msg.name = 'Please input your Name'
+        if( isEmpty(firtname)){
+            msg.firtname = 'Please input your Firt Name'
+        }
+        if( isEmpty(lastname)){
+            msg.lastname = 'Please input your Last Name'
         }
         if(isEmpty(email)){
             msg.email = 'Please input your Email'
@@ -464,8 +498,14 @@ const Login = (props) => {
         
         const msg1 = {}
         const inclu = email.includes('@gmail.com')
-        if(!isNaN(name)){
-            msg1.name = "Wrong name format"
+        if(!isNaN(firtname)){
+            msg1.firtname = "Wrong name format"
+        }
+        else if(!isNaN(lastname)){
+            msg1.lastname = "Wrong name format"
+        }
+        else if(lastname > 5){
+            msg1.lastname = "The name is too long"
         }
        else if(!inclu){
             msg1.email = "Email invalid"
@@ -476,7 +516,7 @@ const Login = (props) => {
             msg1.repeatPass = "Password doesn't match"
         }
             
-       else if(pass.length < 5 && repeatPass.length < 5){
+       else if(pass.length < 5){
             msg1.pass = "Minimum length 5 characters"
 
         }else {
@@ -484,7 +524,7 @@ const Login = (props) => {
             setLoading(false)
             if(email !== registerApi.Email ){
                 const newUser = {
-                    Name : name,
+                    Name : lastname,
                     Email: email,
                     Password: pass,
                 }
@@ -512,7 +552,8 @@ const Login = (props) => {
                             setLoading(true)
                             setRegisterUp('Sign Up Success')
 
-                            setName('')
+                            setLastName('')
+                            setFirtName('')
                             setEmail('')
                             setPass('')
                             setRepeatPass('')
@@ -530,18 +571,30 @@ const Login = (props) => {
       <div>
           <div className='all-register'>
           <form>
-            <div className='margin-login'> 
-              <input
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                placeholder='User Name *'
+            <div className='margin-login'>
+
+            <div className='input-name'>
+            <input
+
+                onChange={(e) => setFirtName(e.target.value)}
+                value={firtname}
+                placeholder='Firt Name *'
                 type='text'
                />
-               <p className='error'>{validation.name || validation1.name}</p>
+               <input
+                onChange={(e) => setLastName(e.target.value)}
+                value={lastname}
+                placeholder='Last Name *'
+                type='text'
+               />
+            </div>
+               <p className='error firtname'>{validation.firtname || validation1.firtname}</p>
+               <p className='error lastname'>{validation.lastname || validation1.lastname}</p>
                  
             </div>
             <div className='margin-login'> 
               <input
+                className='inputs'
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 placeholder='Email *'
@@ -551,6 +604,7 @@ const Login = (props) => {
             </div>
             <div className='margin-login'>
                 <input
+                    className='inputs'
                     onChange={(e) => setPass(e.target.value)}
                     value={pass}
                     placeholder='Password *'
@@ -561,6 +615,7 @@ const Login = (props) => {
             </div>
             <div className='margin-login'>
                 <input
+                    className='inputs'
                     onChange={(e) => setRepeatPass(e.target.value)}
                     value={repeatPass}
                     placeholder='Repeat Password *'
