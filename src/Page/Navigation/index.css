@@ -189,7 +189,7 @@ header-firs
   width: 25%;
   height: 430px;
   bottom: auto;
-    
+  z-index: 999;
   position: fixed;
     left: 38%;
     top:13%;

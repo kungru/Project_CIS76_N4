@@ -21,6 +21,12 @@ h5{
     border-style: none;
     margin: 10px 25px 30px 15px;
     overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+.card_div{
+    position: relative;
+    z-index: 0;
 }
 .card-body{
     padding: 0;
