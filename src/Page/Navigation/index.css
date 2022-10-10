@@ -3,6 +3,7 @@
   font-family: "Work Sans",sans-serif;
   border: none;
   
+  
 }
 a{
   text-decoration: none;
@@ -186,8 +187,8 @@ header-firs
 
 
 .form-login{
-  width: 25%;
-  height: 430px;
+  width: 30rem;
+  height: 27rem;
   bottom: auto;
   z-index: 999;
   position: fixed;
@@ -220,7 +221,7 @@ header-firs
   /* z-index: 1000; */
   width: 100%;
   height: 100vh;
-
+  bottom: 0;
   /* height: 105px; */
   position: fixed;
   top: 0;
@@ -228,6 +229,8 @@ header-firs
   /* height: 115px; */
   height: 100%;
   transition: all 0.5s ease;
+  position: absolute;
+    z-index: 9981;
 }
 .all-login{
   position: absolute;
@@ -256,7 +259,7 @@ header-firs
   position: absolute;
   bottom: -174px;
     left: -1px;
-    width: 480px;
+    width: 30rem;
     background: white;
     /* padding-bottom: 4px; */
     /* height: 333px; */
