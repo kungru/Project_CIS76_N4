@@ -1,0 +1,430 @@
+*{
+  list-style: none;
+  font-family: "Work Sans",sans-serif;
+  border: none;
+  
+  
+}
+a{
+  text-decoration: none;
+}
+.search-block{
+  width: 100%;
+  height: 100px;
+  
+  animation: block linear 0.5s;
+ 
+  top: 0;
+  right: -271px;
+  background: white;
+  border-left: 1px solid #ccc;
+  
+    
+
+}
+.remove-block{
+  position: absolute;
+  right: 28%;
+  z-index: 100;
+  color: #c7c6c6;
+  font-size: 19px;
+  cursor: pointer;
+}
+
+
+
+
+
+.header-content{
+  text-transform: uppercase;
+    gap: 42px;
+    /* font-weight: bold; */
+    /* opacity: 0.9; */
+    letter-spacing: 2px;
+    font-size: 15px;
+}
+.header-right{
+  gap: 57px;
+}
+
+
+.header{
+padding: 0;
+margin: 0;
+    
+   
+    
+}
+.address{
+  background: black;
+  height: 31px;
+  display: flex;
+  /* justify-content: space-around; */
+  font-size: 13px;
+  justify-content: space-between;
+  padding: 4px 18px;
+}
+.list-icon{
+  display: flex;
+  gap:20px;
+}
+.icon i{
+  color: #ffffffdc;
+}
+.onl-phone{
+  display: flex;
+  margin-right: 21px;
+}
+.header_first{
+  
+  display: flex;
+    justify-content: space-between;
+    font-family: work sans,sans-serif;
+    
+    padding: 0px 51px 29px 51px;
+    margin-top: 49px;
+
+
+
+}
+
+.header_first a{
+  
+  color: #1c1c1c;
+
+}
+
+.title_header{
+     margin-top: -17px;
+    height: 48px;
+  
+}
+.nav_header{
+  margin-bottom: auto;
+  text-align: center;
+  margin-right: 45px;
+ 
+ 
+}
+.header-search{
+  position: relative;
+}
+.header-search::after{
+  content: '';
+  height: 20px;
+  width: 1px;
+  background-color: #ccc;
+  position: absolute;
+  left: 40px;
+  top: -2px;
+}
+.header-input{
+  outline: none;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 0px ;
+    width: 203px;
+    position: absolute;
+    padding-bottom: 7px;
+    margin-left: 36px;
+    margin-right: 17px; 
+
+    
+    right: 220px;
+    transition:  all 1s  ease-out;
+}
+.header-input-search{
+  padding: 2px 16px;
+}
+
+
+
+.ul_nav_header{
+  display: flex;
+  margin-top: 88px;
+}
+.ul_nav_header  li  {
+  margin: 34px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 15px;
+  
+
+
+
+}
+.ul_nav_header a{
+  color: #1c1c1c;
+  font-weight: 500;
+}
+
+.ul_nav_header  li span:hover{
+
+      border-bottom: 1px solid #1c1c1c;
+      cursor: default;
+
+}
+header-firs
+.content{
+
+    width: 100%;
+    margin-left: 271px;
+    height: 1000px;
+    background-color: #ccc;
+}
+.content-menu{
+  height: 200px;
+  width: 200px;
+  
+}
+.footer{
+  background-color: #1c1c1c;
+
+  width: 100%;
+  height: 200px;
+}
+
+
+
+.form-login{
+  width: 30rem;
+  height: 27rem;
+  bottom: auto;
+    
+  position: fixed;
+    left: 38%;
+    top:13%;
+    border: 1px solid #ccc;
+    transition: all 0.5s ease;
+    background: #fff;
+    
+    
+}
+
+
+.remove-block-login{
+  float: right;
+    margin-right: -24px;
+    margin-top: -97px;
+    /* color: #141313; */
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.5s ease;
+    color: white;
+    
+    
+}
+
+.all-dark-login{
+  visibility: hidden;
+  background: #0000009e;
+  /* z-index: 1000; */
+  width: 100%;
+  height: 100vh;
+  bottom: 0;
+  /* height: 105px; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* height: 115px; */
+  height: 100%;
+  transition: all 0.5s ease;
+  position: absolute;
+    z-index: 9981;
+}
+.all-login{
+  position: absolute;
+  bottom: 150px;
+  left: 58px;
+}
+
+.all-login input{
+  outline: none;
+  border: 1px solid #cccccc3b;
+  padding: 18px 92px 18px 74px;
+  text-align: center;
+}
+.all-login button{
+  padding: 14px 67px;
+  position: absolute;
+  right: 0;
+  top: 196px;
+  text-transform: uppercase;
+  background-color: #262525;
+  color: white;
+  font-size: 13px;
+
+}
+.all-register{
+  position: absolute;
+  bottom: -174px;
+    left: -1px;
+    width: 30rem;
+    background: white;
+    /* padding-bottom: 4px; */
+    /* height: 333px; */
+    padding-top: -30px;
+    padding-bottom: 131px;
+    border: 1px solid #ccc;
+    border-top:none ;
+}
+
+.all-register .inputs{
+  outline: none;
+  border: 1px solid #cccccc3b;
+  padding: 18px 92px 18px 74px;
+  text-align: center;
+}
+.all-register button{
+  padding: 14px 67px;
+  position: absolute;
+  right: 145px;
+    bottom: 59px;
+  text-transform: uppercase;
+  background-color: #262525;
+  color: white;
+  font-size: 13px;
+
+}
+.margin-login{
+  margin-bottom: 17px;
+  height: 72px;
+}
+.title-login-register{
+  width: 100%;
+  /* height: 200px; */
+  height: 70px;
+  text-transform: uppercase;
+  display: flex;
+  font-size: 14px;
+}
+.title-login{
+  width: 50%;
+  text-align: center;
+ 
+  cursor: pointer;
+  
+  padding-top: 24px;
+  background: #cccccc24
+    
+}
+.title-register{
+    width: 50%;
+    text-align: center;
+    padding-top: 24px;
+    background: #cccccc24;   
+    cursor: pointer;
+    
+   
+}
+.active{
+  background-color: white;
+}
+
+
+form{
+  text-align: center;
+}
+.login-check{
+  position: absolute;
+    left: 6px;
+}
+.link-login{
+  color: #000000c4;
+  font-weight: bold;
+}
+.link-login:hover{
+  color: #000000c4;
+}
+.remember{
+  color: #6a6a6a;
+}
+
+
+
+.error{
+  color: red;
+  font-size: .75rem;
+  font-style: italic;
+  
+}
+
+.error1{
+  color: red;
+    font-size: 14px;
+    font-style: italic;
+    position: absolute;
+    bottom: -80px;
+    left: -17px;
+}
+.success{
+  color: green;
+  font-size: 14px;
+  font-style: italic;
+  position: absolute;
+  right: 41%;
+  bottom: 109px;
+
+    
+}
+.loading{
+  position: absolute;
+    /* right: 94px; */
+    bottom: -53px;
+    right: 81px;
+    font-size: 1px;
+}
+.loading1{
+  position: absolute;
+   
+    bottom: 67px;
+    right: 227px;
+    font-size: 1px;
+}
+.logout{
+  background: #ccc;
+    color: white;
+    padding: 4px;
+    font-size: 13px;
+    position: absolute;
+    top: 106px;
+    right: 138px;
+    cursor: pointer;
+  
+}
+.avatar{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 172px;
+  cursor: pointer;
+  
+  border-radius: 110%;
+  top: 78px;
+}
+.avatar img{
+  width: 100%;
+  border-radius: 100%;
+}
+.input-name{
+  display: flex;
+    width: 30rem;
+    justify-content: center;
+    gap: 44px;
+}
+.input-name input{
+  width: 10rem;
+  outline: none;
+  border: 1px solid #cccccc3b;
+  text-align: center;
+  padding: 16px;
+}
+.firtname{
+  left: 53px;
+    position: absolute;
+}
+.lastname{
+  right : 53px;
+    position: absolute;
+}
+
