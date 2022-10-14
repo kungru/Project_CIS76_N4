@@ -179,12 +179,12 @@ const Header = (  ) => {
             </div>
                 <Nav className='header-content ' >
                     <NavItem>
-                        <a className='text-color'
+                        <Link className='text-color'
                         
-                        href="#"
+                        to="/crud"
                         >
                         Home
-                        </a>
+                        </Link>
                     </NavItem>
                     <NavItem>
                         <a href="#">
@@ -192,9 +192,9 @@ const Header = (  ) => {
                         </a>
                     </NavItem>
                     <NavItem>
-                        <a href="#">
+                        <Link to="/">
                         Shop
-                        </a>
+                        </Link>
                     </NavItem>
                     <NavItem>
                         <a

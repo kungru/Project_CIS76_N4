@@ -11,7 +11,9 @@ import Scrolltop from './Page/Body/Scrolltop';
 import DetailPopup from './Page/detail_popup/detailPopup';
 import ContentHung from './Page/Body/ContentHung';
 import React, { useState, useEffect } from 'react';
+import Crud from './Page/Crud/Crud';
 import { Container, Row, Col, Navlink } from 'reactstrap';
+import {Routes, Route, NavLink,Link} from 'react-router-dom'
 // import Container_card from './Page/Body/Container_card';
 function App() {
   const [cards, setCards] = useState([]);
@@ -29,30 +31,34 @@ function App() {
     }, []
 
   )
-
-  return (
-    <div className='App'>
-      
-      <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
+const MainPage=()=>{
+  return(
+   <>
       {/* <DetailPopup/> */}
-      <Scrolltop/>
+      {/* <Scrolltop/>
       <Row>
       <Navigation/>
       </Row>
         <Row>
           <Example/>
-        </Row>
+        </Row> */}
         <Row>
           <Col xs={3} id="sidebar-wrapper">
             <Header />
           </Col>
           <Col xs={9} id="page-content-wrapper">
             <Content/>
+
           </Col>
-          <Col>
-          <ContentHung/>
-          </Col>
+
         </Row>
+
+        {/* <Row>
+        <Col>
+          <ContentHung/>
+          
+          </Col>
+        </Row> */}
         <Row>
           <Col>
           <Above_footer/>
@@ -63,7 +69,30 @@ function App() {
             <Footer /> 
           </Col>
         </Row>
-        
+        </>
+
+  )
+}
+const Crud_test=()=>{
+  return(
+    <Crud/>
+  )
+}
+  return (
+    <div className='App'>
+
+      <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
+      <Scrolltop/>
+      <Row>
+      <Navigation/>
+      </Row>
+        <Row>
+          <Example/>
+        </Row>
+      <Routes>
+				<Route path="/" element={<MainPage />} />
+				<Route path="/crud" element={<Crud_test />} />
+			</Routes>
       </Container>
 
     

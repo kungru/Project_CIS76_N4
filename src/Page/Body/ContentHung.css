@@ -1,24 +1,24 @@
 .content{
-    width: 118rem;
+    width: 100%;
     position: relative;
     
 }
 .content-img{
     
-    width: 59rem;
+    width: 30rem;
     
     
 }
 .content-img img{
     width: 100%;
 }
-.content-img1 img{
+/* .content-img1 img{
     width: 54%;
     position: absolute;
     top: -18px;
     right: 53rem;
     z-index: 1;
-}
+} */
 .content-title{
     position: absolute;
     right: 0;
