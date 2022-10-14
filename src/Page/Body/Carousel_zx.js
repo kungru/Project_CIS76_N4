@@ -63,6 +63,22 @@ function Example(args) {
         key={item.src}
       >
         <img src={item.src} alt={item.altText} style={{objectFit:`${item.objectfit}`, objectPosition:`${item.objectpos}`}}/>
+        <div className='anh'>
+            <div className='img-anh'>
+                  <img src= "https://neoocular.qodeinteractive.com/wp-content/uploads/2021/08/main-home-rev-img-19.png"/>
+                  <div className='btn-book'>
+                  BOOK NOW
+                  </div>
+                    <span className='btn-hover'></span>
+            </div>
+        </div>
+        
+            <div className='anh__h1'>
+                <h1>VISION YOU DESERVE</h1>
+                <p>Offering you the best service possible</p>
+                <button className='btn__viewmore'>VIEW MORE</button>
+            </div>
+        
         <CarouselCaption
           captionText={item.caption}
           captionHeader={item.caption}

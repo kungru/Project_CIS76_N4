@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-
-
-
 import React from 'react';
 import { useState, useRef,useEffect } from 'react';
 import { Routes, Route, Link, NavLink } from 'react-router-dom';
@@ -36,12 +31,6 @@ const Header = (  ) => {
 
     const [avatarUser, setAvatarUser] = useState(true)
     const [apiUser, setApiUser] = useState([])
-
-
-
-    const [logOut, setLogOut] = useState([]);
-
-
    
     useEffect(()=>{
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
@@ -50,10 +39,6 @@ const Header = (  ) => {
         }).then((data) => {
             
             setApiUser(data)
-
-            setLogOut(data)
-
-
             
         })
     }, [])
@@ -104,38 +89,17 @@ const Header = (  ) => {
    
    
     const [nameUser, setNameUser] = useState(null)
-
-    const handelLogin = (email, pass) => {
-       
-        
-             for(let i=0; i< apiUser.length; i++){
-                 
-                 
-                 if(email === apiUser[i].Email && pass === apiUser[i].Password){
-                     setTimeout(() => {
-                         setNameUser(apiUser[i].Name)
-                         setAvatarUser(false)
-                         setBlockLogin(0)
-                         divRef.current.style.visibility = 'hidden';
-                     }, 3000);
-                 }
-             };
-
     let fakeEmail = null
     let fakePass = null
     const handelLogin = (email, pass) => {
         fakeEmail = email
         fakePass = pass
         waitLogin()
-
     }
     
     
     
     
-      
-        
-
     function waitLogin() {
         for(let i=0; i< apiUser.length; i++){
             
@@ -151,7 +115,6 @@ const Header = (  ) => {
         };
         
         }
-
    
 
     
@@ -161,18 +124,8 @@ const Header = (  ) => {
     
   
    
- const handelLogout = (e) => {
-
-    if(e.target){
-        setAvatarUser(true)
-       
-    }else{
-        
-    }
-
    const handelLogout = () => {
     setAvatarUser(true)
-
     
       
 
@@ -226,12 +179,12 @@ const Header = (  ) => {
             </div>
                 <Nav className='header-content ' >
                     <NavItem>
-                        <a className='text-color'
+                        <Link className='text-color'
                         
-                        href="#"
+                        to="/crud"
                         >
                         Home
-                        </a>
+                        </Link>
                     </NavItem>
                     <NavItem>
                         <a href="#">
@@ -239,9 +192,9 @@ const Header = (  ) => {
                         </a>
                     </NavItem>
                     <NavItem>
-                        <a href="#">
+                        <Link to="/">
                         Shop
-                        </a>
+                        </Link>
                     </NavItem>
                     <NavItem>
                         <a

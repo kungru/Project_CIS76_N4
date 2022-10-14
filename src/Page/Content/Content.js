@@ -1,5 +1,5 @@
 import Container_card from '../Body/Container_card';
-
+import { Link, NavLink } from 'react-router-dom';
 import React, {useEffect,useState} from 'react';
 import {Spinner} from 'reactstrap';
 import './Content.css';
@@ -57,12 +57,12 @@ const Content = () => {
             </div>
             
             <div className='Content_pagination'>
-                <a href=''>01</a>
-                <a href=''>02</a>
-                <a href=''>03</a>
-                <a href=''>04</a>
-                <a href=''>05</a>
-                <a href='' style={{textDecoration:'none',fontSize:'bigger'}}><i class='bx bx-chevron-right'></i></a>
+                <NavLink to='01'>01</NavLink>
+                <NavLink to='02'>02</NavLink>
+                <NavLink to='03'>03</NavLink>
+                <NavLink to='04'>04</NavLink>
+                <NavLink to='05'>05</NavLink>
+                <NavLink to='' style={{textDecoration:'none',fontSize:'bigger'}}><i class='bx bx-chevron-right'></i></NavLink>
             </div>
             </>
        } 
