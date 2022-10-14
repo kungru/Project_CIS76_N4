@@ -1,0 +1,29 @@
+.Above_footer{
+    height: 228px;
+    background-color: #fbfbfb;
+}
+.af_footer_outside{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 80px;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.af_footer_outside img{
+    width: 57px;
+    height: 46px;
+}
+.af_footer_container{
+    width: 260px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+.af_footer_text{
+    display: flex;
+    flex-direction: column;
+}
+.af_footer_text_1{
+    font-weight: bold;
+}

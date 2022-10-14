@@ -1,0 +1,26 @@
+
+.Content_pagination{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 200px;
+    align-items: center;
+    height: 5rem;
+}
+.Content_pagination a{
+    display: flex;
+    justify-content: center;
+    color: gray;
+}
+.Content_pagination a:hover{
+    color: #565656;
+    text-decoration: underline;
+}
+.spinner_container{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

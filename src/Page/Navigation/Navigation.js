@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+
+
 
 
 import React from 'react';
@@ -35,7 +38,10 @@ const Header = (  ) => {
     const [apiUser, setApiUser] = useState([])
 
 
+
     const [logOut, setLogOut] = useState([]);
+
+
    
     useEffect(()=>{
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
@@ -44,7 +50,10 @@ const Header = (  ) => {
         }).then((data) => {
             
             setApiUser(data)
+
             setLogOut(data)
+
+
             
         })
     }, [])
@@ -95,7 +104,7 @@ const Header = (  ) => {
    
    
     const [nameUser, setNameUser] = useState(null)
-  
+
     const handelLogin = (email, pass) => {
        
         
@@ -111,13 +120,38 @@ const Header = (  ) => {
                      }, 3000);
                  }
              };
+
+    let fakeEmail = null
+    let fakePass = null
+    const handelLogin = (email, pass) => {
+        fakeEmail = email
+        fakePass = pass
+        waitLogin()
+
     }
     
     
     
     
+      
         
+
+    function waitLogin() {
+        for(let i=0; i< apiUser.length; i++){
+            
+            
+            if(fakeEmail === apiUser[i].Email && fakePass === apiUser[i].Password){
+                setTimeout(() => {
+                    setNameUser(apiUser[i].Name)
+                    setAvatarUser(false)
+                    setBlockLogin(0)
+                    divRef.current.style.visibility = 'hidden';
+                }, 3000);
+            }
+        };
         
+        }
+
    
 
     
@@ -127,7 +161,7 @@ const Header = (  ) => {
     
   
    
-   const handelLogout = (e) => {
+ const handelLogout = (e) => {
 
     if(e.target){
         setAvatarUser(true)
@@ -135,6 +169,10 @@ const Header = (  ) => {
     }else{
         
     }
+
+   const handelLogout = () => {
+    setAvatarUser(true)
+
     
       
 

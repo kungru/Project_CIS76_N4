@@ -1,0 +1,166 @@
+*{
+    list-style: none;
+}
+.crud-all h1{
+    text-transform: uppercase;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+.crud-all-flex{
+    display: flex;
+    /* flex-direction: column; */
+    gap: 20px;
+    margin-left:-30px
+    
+}
+.crud-all-flex input {
+    outline: none;
+    border: 1px solid #cccccc3b;
+    padding: 5px 45px;
+    
+}
+.btn-add{
+    padding: 3px 20px;
+    background: white;
+    border: 1px solid #cccccc3b;
+    
+
+}
+.btn-add:hover {
+    background-color: black;
+    color: white;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Poppins:wght@500&family=Roboto:wght@300&family=Work+Sans:wght@400;600&display=swap');
+
+h5,h6{
+    text-align: center;
+
+}
+h5{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    color:#1c1c1c;
+    font-size: 15PX;
+    text-transform: uppercase;
+    line-height: 1.4em;
+    letter-spacing: .02em;
+}
+.card{
+    width: 19rem;
+    height: 315px;
+    height: 313.03px;
+    background: #f9f9f9;
+    border-style: none;
+    margin: 10px 25px 30px 15px;
+    overflow: hidden;
+}
+.card-body{
+    padding: 0;
+}
+
+.card-text{
+    text-align: center;
+    color:#1c1c1c;
+    font-weight: 600;
+}
+@media only screen and (max-width: 1435px){
+    .card{width: 17rem;}
+  }
+  @media only screen and (max-width: 1306px){
+    .card{width: 16rem;}
+  } 
+   @media only screen and (max-width: 1247px){
+    .card{width: 18rem;}
+    .col-9{width: 100%;}
+  }
+  @media only screen and (max-width: 1115px){
+   .card{width: 15rem;}
+  }
+  @media only screen and (max-width: 980px){
+    .card{width: 18rem;}
+   }
+
+
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 73px
+}
+.btn-style{
+    border: 1px solid #cccccc3b;
+    background: white;
+}
+.btn_remove{
+    margin-right: 10px;
+    margin-left: 16px;
+}
+.btn_remove:hover{
+    background: red;
+    color: white;
+}
+.btn_edit:hover{
+    background: blue;
+    color: white;
+}
+.btn-update{
+    margin-left: 20px;
+    border: 1px solid #cccccc3b;
+    background: #fff;
+    padding: 3px 9px;
+}
+.btn-update:hover{
+    background: green;
+    color: white;
+}
+.all_reminder{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #00000096;
+    height: 100vh;
+    visibility: hidden;
+}
+.reminder{
+    width: 25rem;
+    height: 200px;
+    border: 1px solid #cccccd;
+    position: fixed;
+    top: 9rem;
+    left: 44rem;
+    background: #fff;
+}
+.reminder h5{
+    margin-top: 81px;
+}
+.btn-ok{
+    background: white;
+    border: 1px solid #cccccd66;
+    padding: 2px 15px;
+    font-size: 12px;
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+}
+.btn-ok:hover{
+    background: black;
+    color: white;
+}
+.url{
+    position: absolute;
+    /* left: 63%; */
+    top: 5rem;
+    right: 454px;
+    width: 45%;
+}
+.images{
+    width: 20px;
+    height: 222px;
+    
+}
+.images img{
+    width: 20rem;
+}

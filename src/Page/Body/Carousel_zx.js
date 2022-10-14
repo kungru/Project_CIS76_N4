@@ -62,13 +62,6 @@ function Example(args) {
         onExited={() => setAnimating(false)}
         key={item.src}
       >
-        <div className='anh '>
-           <div className='img-anh'>
-           <img src="https://neoocular.qodeinteractive.com/wp-content/uploads/2021/08/main-home-rev-img-19.png" />
-           <span className='btn-book'>BOOK NOW</span>
-           <div className='btn-hover'></div>
-           </div>
-        </div>
         <img src={item.src} alt={item.altText} style={{objectFit:`${item.objectfit}`, objectPosition:`${item.objectpos}`}}/>
         <CarouselCaption
           captionText={item.caption}
@@ -79,13 +72,19 @@ function Example(args) {
   });
 
   return (
+
     
+
+
     <Carousel
       activeIndex={activeIndex}
       next={next}
       previous={previous}
       {...args}
+
     
+
+
     >
       <CarouselIndicators
         items={items}
