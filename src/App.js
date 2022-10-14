@@ -7,9 +7,10 @@ import Navigation from './Page/Navigation/Navigation';
 import Header from './Page/Header/Header';
 import Footer from './Page/Footer/Footer';
 import Scrolltop from './Page/Body/Scrolltop';
+import DetailPopup from './Page/detail_popup/detailPopup';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Navlink } from 'reactstrap';
-import Container_card from './Page/Body/Container_card';
+// import Container_card from './Page/Body/Container_card';
 function App() {
   const [cards, setCards] = useState([]);
 
@@ -29,8 +30,9 @@ function App() {
 
   return (
     <div className='App'>
-        
+      
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
+      <DetailPopup/>
       <Scrolltop/>
       <Row>
       <Navigation/>
@@ -44,20 +46,6 @@ function App() {
           </Col>
           <Col xs={9} id="page-content-wrapper">
             <Content/>
-            {/* <div className='container_card'>
-              {cards.map((item) => {
-                return (
-                  <Container_card
-                    name={item.name}
-                    style={item.style}
-                    shape={item.shape}
-                    url={item.url}
-                    price={item.price}
-                  />
-                )
-              })}
-                
-            </div> */}
           </Col>
         </Row>
         <Row>

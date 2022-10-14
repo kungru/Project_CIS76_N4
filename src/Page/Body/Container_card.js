@@ -7,8 +7,11 @@ const Container_card = (props) => {
   const changeHeart=()=>{
     setHeartActive(current => !current)
   }
+  const showPopup=()=>{
+    props.onPopup(props.id);
+  }
   return (
-    <div className='card_div'>
+    <div className='card_div' id={props.id}>
     <Card>
   <img
     alt="Sample"
@@ -28,7 +31,7 @@ const Container_card = (props) => {
     <div className='card_invi'>
       {heartActive ? <i class='bx bx-heart' onClick={changeHeart}></i> : <i class='bx bxs-heart' onClick={changeHeart} ></i>}
       <i class='bx bx-shopping-bag' ></i>
-      <i class="fa-regular fa-eye"></i>
+      <i class="fa-regular fa-eye" onClick={showPopup}></i>
       </div>
       <span className='card_price'>${props.price}</span>
     </CardText>
