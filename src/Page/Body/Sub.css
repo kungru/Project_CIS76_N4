@@ -1,0 +1,67 @@
+.sub{
+    position: fixed;
+    z-index: 200;
+    background: #00000073;
+    visibility: visible;
+    width: 100%;
+    right: 0;
+    height: 100vh;
+    transition: all 0.5s ease-out;
+
+}
+
+.sub-all{
+   
+    position: relative;
+    right: -31rem;
+    width: 60rem;
+    height: 30rem;
+    top: 7rem;
+}
+.sub-img{
+    width: 30rem;
+    height: 30rem;
+    position: absolute;
+    left: 0;
+}
+
+.sub-img img{
+    width: 30rem;
+    height: 30rem;
+}
+.subscribe{
+    width: 30rem;
+    position: absolute;
+    right: 0;
+    height: 30rem;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.subscribe-title{
+    
+    text-align: center;
+}
+.subscribe-title h3{
+    font-size: 1.5rem;
+}
+.remove-block {
+    position: absolute;
+    top: 3px;
+    right: 12px;
+    font-size: 22px;
+}
+.checksub{
+    width: 13px;
+    height: 13px;
+    border: 1px solid;
+    margin-top: 1vh;
+   
+}
+.checksub-all ul{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}

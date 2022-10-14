@@ -5,9 +5,11 @@ import Content from './Page/Content/Content';
 import Above_footer from './Page/Body/Above_footer';
 import Navigation from './Page/Navigation/Navigation';
 import Header from './Page/Header/Header';
+import Sub from './Page/Body/Sub';
 import Footer from './Page/Footer/Footer';
 import Scrolltop from './Page/Body/Scrolltop';
 import DetailPopup from './Page/detail_popup/detailPopup';
+import ContentHung from './Page/Body/ContentHung';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Navlink } from 'reactstrap';
 // import Container_card from './Page/Body/Container_card';
@@ -32,7 +34,7 @@ function App() {
     <div className='App'>
       
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
-      <DetailPopup/>
+      {/* <DetailPopup/> */}
       <Scrolltop/>
       <Row>
       <Navigation/>
@@ -46,6 +48,9 @@ function App() {
           </Col>
           <Col xs={9} id="page-content-wrapper">
             <Content/>
+          </Col>
+          <Col>
+          <ContentHung/>
           </Col>
         </Row>
         <Row>

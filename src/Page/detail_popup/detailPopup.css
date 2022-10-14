@@ -1,4 +1,13 @@
 .detail_popup_grab{
     width: 1000px;
-    height: 500px;
+    height: 470px;
+    border:1px solid black;
+    display: flex;
+    position: fixed;
+    top:20%;
+    left: 15%;
+}
+.detail_img_popup img{
+    width: 500px;
+    height: 400px;
 }
