@@ -9,13 +9,14 @@
     transition: all 0.5s ease-out;
 
 }
+
 .sub-all{
    
     position: relative;
-    right: -12rem;
+    right: -31rem;
     width: 60rem;
     height: 30rem;
-    top: 2rem;
+    top: 7rem;
 }
 .sub-img{
     width: 30rem;

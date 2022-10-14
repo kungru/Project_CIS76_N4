@@ -6,6 +6,7 @@ import Header from './Page/Header/Header';
 import Footer from './Page/Footer/Footer';
 import Sub from './Page/Body/Sub';
 import Scrolltop from './Page/Body/Scrolltop';
+import Content from './Page/Body/Content';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Navlink } from 'reactstrap';
 import Container_card from './Page/Body/Container_card';
@@ -32,7 +33,7 @@ function App() {
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
       <Scrolltop/>
       <Row>
-        <Sub />
+        {/* <Sub /> */}
       <Navigation/>
       </Row>
         <Row>
@@ -57,6 +58,9 @@ function App() {
               })}
                 
             </div>
+          </Col>
+          <Col>
+                <Content />
           </Col>
         </Row>
         <Row>
