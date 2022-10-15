@@ -235,6 +235,9 @@ const Header = (  ) => {
                         </div>
                     </NavItem>
                     <NavItem>
+                        <a href='#' ><i className='bx bx-heart'></i> </a>
+                    </NavItem>
+                    <NavItem>
                        {avatarUser ? (<div ref={avartRef1}>
                         
                         <span  onClick={handelBlockLogin} href="#">
@@ -259,7 +262,7 @@ const Header = (  ) => {
                       
                         href="#"
                         >
-                        <i className="fa-solid fa-cart-shopping"></i>
+                        <i className="bx bx-shopping-bag"></i>
                         </a>
                     </NavItem>
                 </Nav>

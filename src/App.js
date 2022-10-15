@@ -84,15 +84,29 @@ const Crud_test=()=>{
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
       <Scrolltop/>
       <Row>
-      <Navigation/>
+        <Navigation/>
       </Row>
+      
         <Row>
+        
           <Example/>
         </Row>
+        {/* <Col xs={3} id="sidebar-wrapper">
+            <Header />
+          </Col> */}
+          {/* <Col xs={9} id="page-content-wrapper">
+            <Content/>
+
+          </Col> */}
       <Routes>
 				<Route path="/" element={<MainPage />} />
 				<Route path="/crud" element={<Crud_test />} />
 			</Routes>
+      <Row>
+          <Col>
+            <Footer /> 
+          </Col>
+        </Row>
       </Container>
 
     

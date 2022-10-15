@@ -1,16 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import './Header.css';
 const Header = () => {
+        const [block, setBlock] = useState(true)
+    const handelView = () => {
+        setBlock(false)
+    }
+    const hadelHome = () => {
+        setBlock(true)
+    }
+    // setBlock(true)
   return (
-    <div className='Header'>
+    <>
+      
+        
+         {block && <div className='Header'>
         <div className='Header_container'>
             <div className='Header_logo'>
                 <img alt='logo' src='./images/logo-img-04.png' className='Header_logoimg' />
             </div>
             <ul className='sidebar_route'>
+             
                 <li>home</li>
-                <li>pages</li>
-                <li>cart</li>
+                <li><Link to='/content'>Content</Link></li>
+                <li><Link onClick={hadelHome} to=''>HomeProduct</Link></li>
                 <li>blog</li>
                 <li>landing</li>
             </ul>
@@ -32,7 +45,10 @@ const Header = () => {
                 </div>
             </div>
         </div>
-    </div>
+    </div> }
+    
+    </>
+   
   )
 }
 

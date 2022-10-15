@@ -26,6 +26,7 @@ const Container_card = (props) => {
       tag="h6"
     >
       {props.style} / {props.shape}
+      
     </CardSubtitle>
     <CardText>
     <div className='card_invi'>

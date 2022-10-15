@@ -1,10 +1,10 @@
 import Container_card from '../Body/Container_card';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import React, {useEffect,useState} from 'react';
 import {Spinner} from 'reactstrap';
 import './Content.css';
 const Content = () => {
-   
+    const params = useParams()
         const [cards, setCards] = useState([]);
         const [IsLoading,setIsLoading]=useState(false);
         const [popupCard,setPopupCard]=useState(false);
@@ -30,7 +30,8 @@ const Content = () => {
   return (
 
    
-    <div className='Content_container'>
+    <div  className='Content_container'>
+      {params.id}
        {
         IsLoading  ? 
         <div className='spinner_container'>
