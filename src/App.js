@@ -102,11 +102,11 @@ const Crud_test=()=>{
 				<Route path="/" element={<MainPage />} />
 				<Route path="/crud" element={<Crud_test />} />
 			</Routes>
-      <Row>
+      {/* <Row>
           <Col>
             <Footer /> 
           </Col>
-        </Row>
+        </Row> */}
       </Container>
 
     

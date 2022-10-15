@@ -6,6 +6,7 @@ import './Content.css';
 const Content = () => {
     const params = useParams()
         const [cards, setCards] = useState([]);
+        const [addtoCards, setAddtoCards] = useState([]);
         const [IsLoading,setIsLoading]=useState(false);
         const [popupCard,setPopupCard]=useState(false);
     useEffect(
@@ -25,7 +26,57 @@ const Content = () => {
         }, []
     
       )
+
+     // api addtocard
+     useEffect(
+      () => {
+      setIsLoading(true);
+
+        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard')
+          .then((res) => {
+            return (res.json())
+          }).then((data) => {
+           
+            setAddtoCards(data);
+            
+            setIsLoading(false)
+          });
+          
+      }, []
+  
+    )
+     
  
+
+      const handelAddtoCard = (id,name,style,shape,url,price) => {
+          console.log(id)
+          const newCard = {
+            id,
+            name,
+            style,
+            shape,
+            price,
+            url,
+            
+
+          }
+          fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard', {
+            method: 'POST',
+            headers: {
+                Acceps: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newCard)
+          })
+          .then((res) => {
+            return (res.json())
+          }).then((data) => {
+           
+            setAddtoCards(data);
+            
+            setIsLoading(false)
+          });
+      }
 
   return (
 
@@ -49,7 +100,7 @@ const Content = () => {
                     shape={item.shape}
                     url={item.url}
                     price={item.price}
-                    
+                    onAddtoCard ={handelAddtoCard}
                     id={item.id}
                   />
                 )

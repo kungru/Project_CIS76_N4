@@ -10,6 +10,11 @@ const Container_card = (props) => {
   const showPopup=()=>{
     props.onPopup(props.id);
   }
+
+
+  const handelAddtoCard = () => {
+    props.onAddtoCard(props.id,props.name,props.style,props.shape,props.price,props.url);
+  }
   return (
     <div className='card_div' id={props.id}>
     <Card>
@@ -31,7 +36,7 @@ const Container_card = (props) => {
     <CardText>
     <div className='card_invi'>
       {heartActive ? <i class='bx bx-heart' onClick={changeHeart}></i> : <i class='bx bxs-heart' onClick={changeHeart} ></i>}
-      <i class='bx bx-shopping-bag' ></i>
+      <i onClick={handelAddtoCard} class='bx bx-shopping-bag' ></i>
       <i class="fa-regular fa-eye" onClick={showPopup}></i>
       </div>
       <span className='card_price'>${props.price}</span>

@@ -131,6 +131,66 @@ const Header = (  ) => {
 
 
    }
+
+   //card
+   const [cards, setCards] = useState('');
+   const [removeCards, setRemoveCards] = useState(false);
+   const [blockCard, setBlockCard] = useState(true);
+   const [dataCard,setDataCard] = useState([])
+   const [isData, setIsData] = useState(true);
+
+   const blockRef = useRef()
+
+   useEffect(
+    () => {
+        // setIsLoading(true);
+        setBlockCard(true)
+      fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard')
+        .then((res) => {
+          return (res.json())
+        }).then((data) => {
+         
+            setDataCard(data);
+            // setIsData(!isData)
+            setBlockCard(false)
+          
+        //   setIsLoading(false)
+        });
+        
+    }, [isData]
+
+  )
+
+
+
+   const handelSaveCard =() => {
+    setCards(30)
+    setRemoveCards(true)
+    blockRef.current.style.visibility = 'visible'
+   }
+   const handelRemoveBlock = () => {
+    setCards(0)
+    setRemoveCards(false)
+    blockRef.current.style.visibility = 'hidden'
+
+
+
+   }
+   const handelRemoveCard =(id) => {
+    console.log(id)
+    
+    
+    
+
+    fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/${id}` , {
+        method: 'DELETE',
+      })
+      .then(res => res.text()) // or res.json()
+      .then(res => {
+        setIsData(!isData)
+      }
+     )
+   }
     
   return (
     
@@ -259,10 +319,10 @@ const Header = (  ) => {
                     </NavItem>
                     <NavItem>
                         <a
-                      
+                        
                         href="#"
                         >
-                        <i className="bx bx-shopping-bag"></i>
+                        <i onClick={handelSaveCard} className="bx bx-shopping-bag"></i>
                         </a>
                     </NavItem>
                 </Nav>
@@ -270,6 +330,31 @@ const Header = (  ) => {
 
             
         </div>
+        <div ref={blockRef} className='dark-card'>
+
+        <div className='card-products' style={{width:`${cards}rem`}}>
+         {removeCards && <div className='header-card'><i className='bx bx-shopping-bag'></i><h4>MY CARD</h4> <span onClick={handelRemoveBlock}>X</span></div> }
+                        
+            <div className='card__1'>
+                {dataCard.map((item,index) => (
+                   <ListProducts
+                   key={item.id}
+                        price={item.price}
+                        url={item.url}
+                        name={item.name}
+                        id={item.id}
+                        onRemove ={handelRemoveCard}
+                     />
+
+                ))}
+                {blockCard && <div>
+                                    
+                                    <p>No products in the cart.</p>
+                                </div> }      
+            </div>
+        </div>
+        </div>
+
         <div ref={divRef}  className='all-dark-login' style={{ opacity: `${blockLogin}` }}>
             <div  className='form-login'  >
                 <div className='title-login-register'>
@@ -309,7 +394,24 @@ const Header = (  ) => {
 }
 
 
-
+const ListProducts = (props) => {
+    const handelRemoveCard =() => {
+     props.onRemove(props.id)
+    }
+   return (
+            <ul>
+            <li className='url__card'><img src={props.price}  /></li>
+            
+            <div className='information'>
+                <li style={{fontWeight:'600'}}>{props.name}</li>
+                <li>Quantity: 1</li>
+                
+                <li>{props.url}</li>
+            </div>
+            <div onClick={handelRemoveCard} style={{cursor:'pointer',position:'absolute', right:'56px'}}>X</div>
+            </ul>
+   )
+}
 
 const Login = (props) => {
 
