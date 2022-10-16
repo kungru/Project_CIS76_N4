@@ -3,11 +3,14 @@ import Container_card from '../Body/Container_card';
 import React, {useEffect,useState} from 'react';
 import {Spinner} from 'reactstrap';
 import './Content.css';
+import DetailPopup from '../detail_popup/detailPopup';
 const Content = () => {
    
         const [cards, setCards] = useState([]);
         const [IsLoading,setIsLoading]=useState(false);
         const [popupCard,setPopupCard]=useState(false);
+        const [isShowDetail, setIsShowDetail] = useState(false)
+        // tạo state lưu thông tin sản phẩm
     useEffect(
         () => {
         setIsLoading(true);
@@ -31,6 +34,8 @@ const Content = () => {
 
    
     <div className='Content_container'>
+      {isShowDetail ? <DetailPopup/> :""}
+     
        {
         IsLoading  ? 
         <div className='spinner_container'>
@@ -50,6 +55,7 @@ const Content = () => {
                     price={item.price}
                     
                     id={item.id}
+                    setIsShowDetail={setIsShowDetail}
                   />
                 )
               })}

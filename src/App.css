@@ -31,12 +31,26 @@ padding: 0;
   flex-wrap: wrap;
  
 }
-
+::-webkit-scrollbar {
+  width: 1em;
+  height: 2em
+}
+::-webkit-scrollbar-button {
+  background: #ccc
+}
+::-webkit-scrollbar-track-piece {
+  background: white
+}
+::-webkit-scrollbar-thumb {
+  background: #1c1c1c
+}​
+body{}
 @media only screen and (max-width: 827px){
   .col-9{width: 70%;};
 
   .col-3{display: none;}
-}@media only screen and (max-width: 1247px){
+}
+@media only screen and (max-width: 1247px){
   .col-3{display: none;}
   .container_card{margin-left: 7rem;}
 }

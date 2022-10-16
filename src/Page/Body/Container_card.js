@@ -1,6 +1,7 @@
 import './Container_card.css';
 import {React, useEffect,useState} from 'react';
 import {Card, CardBody,CardTitle,CardSubtitle, CardText,} from 'reactstrap';
+import DetailPopup from '../detail_popup/detailPopup';
 const Container_card = (props) => {
 
   const [heartActive,setHeartActive]=useState(true);
@@ -8,7 +9,9 @@ const Container_card = (props) => {
     setHeartActive(current => !current)
   }
   const showPopup=()=>{
-    props.onPopup(props.id);
+    // props.onPopup(props.id);
+    props.setIsShowDetail(false);
+    // 
   }
   return (
     <div className='card_div' id={props.id}>
@@ -37,6 +40,7 @@ const Container_card = (props) => {
     </CardText>
   </CardBody>
 </Card>
+{/* <DetailPopup/> */}
 </div>
 
   )
