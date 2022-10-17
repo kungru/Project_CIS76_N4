@@ -33,7 +33,7 @@ const Header = (  ) => {
     const [apiUser, setApiUser] = useState([])
    
     useEffect(()=>{
-        setTransition(false)
+        
 
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
         .then((response) => {
@@ -41,7 +41,7 @@ const Header = (  ) => {
         }).then((data) => {
             
             setApiUser(data)
-            setTransition(true)
+           
         })
     }, [])
 
@@ -143,7 +143,7 @@ const Header = (  ) => {
    const [loadCard, setloadCard] = useState(true);
 //    const [total, setTotal] = useState(0)
    const blockRef = useRef()
-   const [transition, setTransition] = useState('')
+//    const [transition, setTransition] = useState(true)
 
    useEffect(
     () => {
@@ -221,6 +221,10 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
    
    const handelViewCard = () => {
      navigate('/card')
+     setCards(0)
+     setRemoveCards(false)
+    blockRef.current.style.visibility = 'hidden'
+
    }
     
   return (
@@ -390,9 +394,9 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
                                     <p>No products in the cart.</p>
                                 }
             <div className='total_card'>TOTAL: <div>${total}.00</div></div> 
-                {transition &&  <button onClick={handelViewCard}> <Link to="/card">
+                  <button onClick={handelViewCard}> <Link to="/card">
                                 CARD & CHECKOUT
-                        </Link></button> }                     
+                        </Link></button>                   
             </div>
         </div>
         </div>
