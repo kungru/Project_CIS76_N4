@@ -9,6 +9,8 @@ const Content = () => {
         const [addtoCards, setAddtoCards] = useState([]);
         const [IsLoading,setIsLoading]=useState(false);
         const [popupCard,setPopupCard]=useState(false);
+        const [isData, setIsData] = useState(true)
+        const [total, setTotal] = useState(0)
     useEffect(
         () => {
         setIsLoading(true);
@@ -50,6 +52,7 @@ const Content = () => {
 
       const handelAddtoCard = (id,name,style,shape,url,price) => {
           console.log(id)
+         
           const newCard = {
             id,
             name,
@@ -73,9 +76,10 @@ const Content = () => {
           }).then((data) => {
            
             setAddtoCards(data);
-            
+            // setIsData(!isData)
             setIsLoading(false)
           });
+        
       }
 
   return (

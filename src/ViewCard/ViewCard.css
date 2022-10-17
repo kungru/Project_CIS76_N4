@@ -1,0 +1,85 @@
+.viewcard{
+    margin-top: 20px;
+}
+.view-card {
+    display: flex;
+    height: 10rem;
+    /* margin: auto; */
+    justify-content: center;
+}
+.view-card img{
+    width: 8rem;
+    margin-top: 36px;
+
+}
+.durgs{
+    
+    margin-top: 68px;
+    
+        display: flex;
+        
+        margin-left: 30px;
+        width: 50%;
+        gap: 83px;
+    }
+    .view-card-list{
+    border: 1px solid #cccccb45;
+
+}
+.table_card img{
+    width: 11rem;
+    margin-left: 20px;
+    
+}
+.quantity{
+    width: 12rem;
+    height: 4rem;
+    border: 1px solid #cccccc3b;
+    display: flex;
+    justify-content: space-around;
+    margin-left: -74px;
+}
+
+.quantity input{
+    border: none;
+    outline: none;
+    text-align: center;
+    margin-top: 2px;
+
+}
+.sum{
+    margin-top: 18px;
+    cursor: pointer;
+}
+.checkout{
+    line-height: 69px;
+    margin-top: 113px;
+}
+.color{
+    font-size: 20px;
+    color: #cccccb;
+    position: absolute;
+    
+    right: 70rem;
+}
+.btn{
+    position: relative;
+    right: 14rem;
+}
+.btn1_viewcard{
+    padding: 1px 20px;
+    border: 1px solid black;
+    background: white;
+    font-size: 14px;
+    margin-top: 43px;
+    letter-spacing: 2px;
+}
+.btn1_viewcard:hover{
+    background-color: black;
+    color: white;
+}
+.border_view{
+             border-bottom: 1px solid #cccc;
+             width: 84rem;
+            
+}

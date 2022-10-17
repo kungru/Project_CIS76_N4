@@ -12,6 +12,7 @@ import DetailPopup from './Page/detail_popup/detailPopup';
 import ContentHung from './Page/Body/ContentHung';
 import React, { useState, useEffect } from 'react';
 import Crud from './Page/crud/crud';
+import ViewCard from './ViewCard/ViewCard';
 import { Container, Row, Col, Navlink } from 'reactstrap';
 import {Routes, Route, NavLink,Link} from 'react-router-dom'
 // import Container_card from './Page/Body/Container_card';
@@ -78,6 +79,11 @@ const Crud_test=()=>{
     <Crud/>
   )
 }
+const ViewCard_test=()=>{
+  return(
+    <ViewCard />
+  )
+}
   return (
     <div className='App'>
 
@@ -101,12 +107,13 @@ const Crud_test=()=>{
       <Routes>
 				<Route path="/" element={<MainPage />} />
 				<Route path="/crud" element={<Crud_test />} />
+        <Route path='/card' element={ <ViewCard_test /> } />
 			</Routes>
-      {/* <Row>
+      <Row>
           <Col>
             <Footer /> 
           </Col>
-        </Row> */}
+        </Row>
       </Container>
 
     
