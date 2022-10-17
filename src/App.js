@@ -12,7 +12,6 @@ import DetailPopup from './Page/detail_popup/detailPopup';
 import ContentHung from './Page/Body/ContentHung';
 import React, { useState, useEffect } from 'react';
 import Crud from './Page/Crud/crud';
-import Crud from './Page/crud/crud';
 import ViewCard from './ViewCard/ViewCard';
 import { Container, Row, Col, Navlink } from 'reactstrap';
 import {Routes, Route, NavLink,Link} from 'react-router-dom'
