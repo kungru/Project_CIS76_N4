@@ -1,7 +1,7 @@
 import './Container_card.css';
 import {React, useEffect,useState} from 'react';
 import {Card, CardBody,CardTitle,CardSubtitle, CardText,} from 'reactstrap';
-import DetailPopup from '../detail_popup/detailPopup';
+
 const Container_card = (props) => {
 
   const [heartActive,setHeartActive]=useState(true);
@@ -10,8 +10,14 @@ const Container_card = (props) => {
   }
   const showPopup=()=>{
     // props.onPopup(props.id);
-    props.setIsShowDetail(false);
+    props.setIsShowDetail(true);
+    console.log(true)
     // 
+  }
+
+
+  const handelAddtoCard = () => {
+    props.onAddtoCard(props.id,props.name,props.style,props.shape,props.price,props.url);
   }
   return (
     <div className='card_div' id={props.id}>
@@ -29,18 +35,19 @@ const Container_card = (props) => {
       tag="h6"
     >
       {props.style} / {props.shape}
+      
     </CardSubtitle>
     <CardText>
     <div className='card_invi'>
       {heartActive ? <i class='bx bx-heart' onClick={changeHeart}></i> : <i class='bx bxs-heart' onClick={changeHeart} ></i>}
-      <i class='bx bx-shopping-bag' ></i>
+      <i onClick={handelAddtoCard} class='bx bx-shopping-bag' ></i>
       <i class="fa-regular fa-eye" onClick={showPopup}></i>
       </div>
       <span className='card_price'>${props.price}</span>
     </CardText>
   </CardBody>
 </Card>
-{/* <DetailPopup/> */}
+
 </div>
 
   )

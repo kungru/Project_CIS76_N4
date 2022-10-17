@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Poppins:wght@500&family=Roboto:wght@300&family=Work+Sans:wght@400;600&display=swap');
+
+h5,h6{
+    text-align: center;
+
+}
+h5{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    color:#1c1c1c;
+    font-size: 15PX;
+    text-transform: uppercase;
+    line-height: 1.4em;
+    letter-spacing: .02em;
+}
+.cart1{
+
+    /* width: 33rem;
+    height: 315px;
+    height: 313.03px; */
+    width: 51rem;
+    height: 350px !important;
+
+    /* background: #f9f9f9; */
+    border-style: none;
+    margin: 10px 25px 30px 15px;
+    overflow: hidden;
+    position: relative;
+
+}
+.cart1 img{
+    width: 34rem;
+}
+.card-body1{
+    padding: 0;
+    position: relative;
+    z-index: 0;
+}
+.text__title{
+    text-align: center;
+    text-align: center;
+   
+    margin-bottom: 6rem;
+    margin-right: 5rem;
+
+}
+.text__title h1{
+    font-weight: 600;
+}
+.text__title p{
+    color: #4c4c4b;
+}
+
+.card_div1{
+    display: flex;
+    justify-content: space-between;
+    /* height: 32rem; */
+    width: 107rem;
+    position: relative;
+    right: 12rem;
+    top: -5rem;
+    
+}
+.card-body1{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    /* background: #4c4c4b12; */
+    /* gap: 35px; */
+    height: 6rem;
+    /* line-height: 30px; */
+    margin-top: 16px;
+    gap: 8px;
+}
+.card_invi{
+    display: none;
+
+}
+
+.card-text{
+    text-align: center;
+    color:#1c1c1c;
+    font-weight: 600;
+
+    transition: .3 ease-out;
+    width: 70%;
+}
+
+.card_price{cursor: pointer;}
+
+.card-text:hover .card_invi{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3.5rem;
+    cursor: pointer;}
+.card-text:hover .card_price .card-price1{
+    display: none;
+}
+
+
+
+@media only screen and (max-width: 1435px){
+    .card{width: 17rem;}
+  }
+  @media only screen and (max-width: 1306px){
+    .card{width: 16rem;}
+  } 
+   @media only screen and (max-width: 1247px){
+    .card{width: 18rem;}
+    .col-9{width: 100%;}
+  }
+  @media only screen and (max-width: 1115px){
+   .card{width: 15rem;}
+  }
+  @media only screen and (max-width: 980px){
+    .card{width: 18rem;}
+   }
+
+
+   .all__three_product{
+    margin-top: 11rem;
+    margin-bottom: 9rem;
+    /* float: left; */
+    position: relative;
+    left: -13rem;
+   }
+   .three__sale{
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    background: black;
+    border-radius: 100%;
+    right: 0;
+   }
+   .three__sale span{
+    font-size: 15px;
+    color: white;
+    
+    margin-top: 11px;
+   
+    display: block;
+    margin-left: 10px;
+   }
+   .card_price1{
+    text-decoration: line-through;
+    margin-right: 2px;
+    font-size: 15px;
+}
+.three__viewmore{
+    position: absolute;
+    left: 54rem;
+    padding: 10px 20px;
+    border: 1px solid #cccccb54;
+    /* bottom: -1rem; */
+    color: black;
+    position: relative;
+    top: 47rem;
+   
+  }
+  .three__viewmore:hover{
+    background: black;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    
+  }
+   

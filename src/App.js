@@ -11,9 +11,10 @@ import Scrolltop from './Page/Body/Scrolltop';
 import DetailPopup from './Page/detail_popup/detailPopup';
 import ContentHung from './Page/Body/ContentHung';
 import React, { useState, useEffect } from 'react';
-import Crud from './Page/Crud/Crud';
+import Crud from './Page/Crud/crud';
 import { Container, Row, Col, Navlink } from 'reactstrap';
 import {Routes, Route, NavLink,Link} from 'react-router-dom'
+import { Login,Register } from './Page/Navigation/Navigation';
 // import Container_card from './Page/Body/Container_card';
 function App() {
   const [cards, setCards] = useState([]);
@@ -29,7 +30,6 @@ function App() {
           
         })
     }, []
-
   )
 const MainPage=()=>{
   return(
@@ -53,12 +53,12 @@ const MainPage=()=>{
 
         </Row>
 
-        {/* <Row>
+        <Row>
         <Col>
           <ContentHung/>
           
           </Col>
-        </Row> */}
+        </Row>
         <Row>
           <Col>
           <Above_footer/>
@@ -84,15 +84,32 @@ const Crud_test=()=>{
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
       <Scrolltop/>
       <Row>
-      <Navigation/>
+        <Navigation/>
       </Row>
+      
         <Row>
+        
           <Example/>
         </Row>
+        {/* <Col xs={3} id="sidebar-wrapper">
+            <Header />
+          </Col> */}
+          {/* <Col xs={9} id="page-content-wrapper">
+            <Content/>
+
+          </Col> */}
       <Routes>
 				<Route path="/" element={<MainPage />} />
+ 
+
+                
 				<Route path="/crud" element={<Crud_test />} />
 			</Routes>
+      {/* <Row>
+          <Col>
+            <Footer /> 
+          </Col>
+        </Row> */}
       </Container>
 
     

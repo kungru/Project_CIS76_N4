@@ -5,20 +5,20 @@
 }
 .content-img{
     
-    width: 30rem;
+    width: 59rem;
     
     
 }
 .content-img img{
     width: 100%;
 }
-/* .content-img1 img{
+.content-img1 img{
     width: 54%;
     position: absolute;
     top: -18px;
     right: 53rem;
     z-index: 1;
-} */
+}
 .content-title{
     position: absolute;
     right: 0;

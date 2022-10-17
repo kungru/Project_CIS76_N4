@@ -14,15 +14,26 @@ h5{
     letter-spacing: .02em;
 }
 .card{
+
+    width: 19rem;
+    height: 315px;
+    height: 313.03px;
     width: 20rem;
     height: 350px !important;
+
     background: #f9f9f9;
     border-style: none;
     margin: 10px 25px 30px 15px;
     overflow: hidden;
+
+}
+.card-body{
+    padding: 0;
     position: relative;
     z-index: 0;
 }
+
+
 .card_div{
     position: relative;
     z-index: 0;
@@ -34,17 +45,23 @@ h5{
     justify-content: center;
     align-items: center;
 }
+.card_invi:nth-child(-n+3){
+    font-size: 1.3rem;
+}
 .card_invi{
     display: none;
 
 }
+
 .card-text{
     text-align: center;
     color:#1c1c1c;
     font-weight: 600;
+
     transition: .3 ease-out;
     width: 70%;
 }
+
 .card_price{cursor: pointer;}
 
 .card-text:hover .card_invi{
@@ -56,6 +73,7 @@ h5{
 .card-text:hover .card_price{
     display: none;
 }
+
 
 @media only screen and (max-width: 1435px){
     .card{width: 17rem;}

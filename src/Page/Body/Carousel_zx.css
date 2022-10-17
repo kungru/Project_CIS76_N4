@@ -1,13 +1,125 @@
 .carousel.slide{
     padding: 0;
+
+    position: relative;
+
+
 }
 
 .carousel-item img{
    width: 100%;
 
-    height: 500px;
+
+    height: 52rem;
+
+    height: 802px;
+
     object-fit: cover;
 }
 .carousel-control-next, .carousel-control-prev{
     width: 10%;
 }
+
+.anh {
+    width: 25rem;
+    height: 35rem;
+    /* background-color: red; */
+    position: absolute;
+    left: 10rem;
+    top: 8rem;
+    background: white;
+    animation: linear 1.5s anhAnimation;
+    padding: 20px 13px;
+
+}
+.anh img{
+    width: 23rem;
+    height: 27rem;
+}
+.img-anh{
+    width: 100%;
+    height: 100%;
+}
+.anh__h1{
+    position: absolute;
+    right: 12rem;
+    top: 19rem;
+    text-align: center;
+    line-height: 21px;
+    animation: linear 1.5s anhAnimation;
+}
+.anh__h1 h1{
+    color: #fff;
+    font-weight: 600;
+}
+.anh__h1 p {
+    color: #fff;
+}
+.btn-book{
+    cursor: pointer;
+    position: absolute;
+    
+    bottom: 3rem;
+    left: 9rem;
+}
+/* .btn-book::before{
+    content: "";
+   
+    height: 1px;
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: linear 1s booknow;
+    display: none;
+} */
+.btn-hover{
+    height: 1px;
+    background-color: black;
+    
+    position: absolute;
+    bottom: 48px;
+    left: 145px;
+    
+    animation: linear 1s booknow;
+    width: 90px;
+    /* opacity: 0; */
+}
+
+
+ .btn-book:hover .btn-hover{
+    opacity: 1;
+
+    
+}
+.btn__viewmore{
+    background: none;
+    color: white;
+    border: 1px solid #fff;
+    padding: 14px 51px;
+}
+.btn__viewmore:hover{
+    background: black;
+    border: none;
+}
+
+@keyframes booknow {
+    from {
+        width: 0px;
+    }
+    to{
+        width: 90px;
+    }
+}   
+@keyframes anhAnimation {
+    from {
+        opacity: 0;
+        
+    }
+    to {
+        opacity: 1;
+       
+    }
+}
+
+

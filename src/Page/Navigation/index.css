@@ -190,7 +190,11 @@ header-firs
   width: 30rem;
   height: 27rem;
   bottom: auto;
+
+    
+
   z-index: 999;
+
   position: fixed;
     left: 38%;
     top:13%;
@@ -427,4 +431,73 @@ form{
   right : 53px;
     position: absolute;
 }
+.card-products{
+  z-index: 1;
+    position: fixed;
+    right: 0;
+    /* width: 20rem; */
+    bottom: 0;
+    top: 0;
+    background: white;
+    border-left: 1px solid #cccccb47;
+    transition: all 0.5s ease-in;
+}
+.card-products span{
+  position: absolute;
+  right: 13px;
+  font-size: 21px;
+  font-weight: 700;
+  top: 6vh;
+  cursor: pointer;
+}
+.card-products p{
+  position: absolute;
+  top: 22rem;
+  left: 11rem;
+}
+.card-products h4{
+  position: absolute;
+  left: 12rem;
+  top: 7vh;
+    font-weight: 600;
+}
+.card-products i{
+  font-size: 21px;
+  top: 7vh;
+  position: absolute;
+  left: 1rem;
+}
+.header-card{
+  height: 8rem;
+   
+    border-bottom: 1px solid #cccccb54;
+}
+.card__1{
+  /* width: 33rem; */
+  margin-top: 65px;
+}
+.card__1 ul{
+  display: flex;
+}
+.url__card{
+  width: 10rem;
+    height: 10rem;
+}
+.url__card img{
+  width: 9rem;
+}
+.information{
+  line-height: 35px;
+}
+.dark-card{
+  position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    width: 119rem;
+    bottom: 0;
+    visibility: hidden;
+}
+
+
 
