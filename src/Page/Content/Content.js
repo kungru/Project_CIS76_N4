@@ -13,6 +13,8 @@ const Content = () => {
         const [popupCard,setPopupCard]=useState(false);
         const [isShowDetail, setIsShowDetail] = useState(false)
         // tạo state lưu thông tin sản phẩm
+        const [isData, setIsData] = useState(true)
+        const [total, setTotal] = useState(0)
     useEffect(
         () => {
         setIsLoading(true);
@@ -54,6 +56,7 @@ const Content = () => {
 
       const handelAddtoCard = (id,name,style,shape,url,price) => {
           console.log(id)
+         
           const newCard = {
             id,
             name,
@@ -77,9 +80,10 @@ const Content = () => {
           }).then((data) => {
            
             setAddtoCards(data);
-            
+            // setIsData(!isData)
             setIsLoading(false)
           });
+        
       }
 const sortCard=()=>{
 

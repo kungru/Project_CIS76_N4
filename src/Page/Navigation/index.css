@@ -8,6 +8,12 @@
 a{
   text-decoration: none;
 }
+.loadcard{
+  position: absolute;
+    top: 23rem;
+    left: 15rem;
+    font-size: 4px;
+}
 .search-block{
   width: 100%;
   height: 100px;
@@ -450,27 +456,51 @@ form{
   top: 6vh;
   cursor: pointer;
 }
-.card-products p{
-  position: absolute;
+.card-products h5{
+  /* position: absolute;
   top: 22rem;
-  left: 11rem;
+  left: 11rem; */
+  cursor: pointer;
+  font-size: 20px;
 }
 .card-products h4{
-  position: absolute;
+  /* position: absolute;
   left: 12rem;
-  top: 7vh;
+  top: 7vh; */
     font-weight: 600;
 }
 .card-products i{
   font-size: 21px;
-  top: 7vh;
+  /* top: 7vh;
   position: absolute;
-  left: 1rem;
+  left: 1rem; */
 }
 .header-card{
-  height: 8rem;
-   
-    border-bottom: 1px solid #cccccb54;
+  padding-top: 44px;
+    display: flex;
+    justify-content: space-around;
+}
+.card__1 button{
+  background: #fff;
+  padding: 10px 20px;
+  border: 1px solid #cccccb61;
+  font-size: 12px;
+  margin-left: 11rem;
+  margin-top: 1rem;
+}
+.card__1 button:hover{
+  background-color: black;
+  color: #fff;
+}
+.total_card{
+    font-style: italic;
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 42px;
+    border-top: 1px solid #cccccb3d;
+    margin-top: 44px;
+    padding-top: 21px;
 }
 .card__1{
   /* width: 33rem; */
@@ -478,6 +508,7 @@ form{
 }
 .card__1 ul{
   display: flex;
+  height: 105px;
 }
 .url__card{
   width: 10rem;

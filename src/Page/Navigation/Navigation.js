@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useRef,useEffect } from 'react';
-import { Routes, Route, Link, NavLink } from 'react-router-dom';
+import { Routes, Route, Link, NavLink,useNavigate } from 'react-router-dom';
 
 import isEmpty from 'validator/lib/isEmpty'
 
@@ -19,7 +19,7 @@ import {
 
 const Header = (  ) => {
 
-    
+    const navigate = useNavigate();
     const inputRef = useRef()
     const divRef = useRef()
 
@@ -33,13 +33,15 @@ const Header = (  ) => {
     const [apiUser, setApiUser] = useState([])
    
     useEffect(()=>{
+        
+
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
         .then((response) => {
             return response.json()
         }).then((data) => {
             
             setApiUser(data)
-            
+           
         })
     }, [])
 
@@ -138,11 +140,14 @@ const Header = (  ) => {
    const [blockCard, setBlockCard] = useState(true);
    const [dataCard,setDataCard] = useState([])
    const [isData, setIsData] = useState(true);
-
+   const [loadCard, setloadCard] = useState(true);
+//    const [total, setTotal] = useState(0)
    const blockRef = useRef()
+//    const [transition, setTransition] = useState(true)
 
    useEffect(
     () => {
+        setloadCard(true)
         // setIsLoading(true);
         setBlockCard(true)
       fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard')
@@ -152,14 +157,27 @@ const Header = (  ) => {
          
             setDataCard(data);
             // setIsData(!isData)
-            setBlockCard(false)
-          
+            // setBlockCard(false)
+            setloadCard(false)
+         
+            if(dataCard.length <= 0){
+                setBlockCard(true)
+                
+            }
+
+            if(dataCard.length >= 0){
+                setBlockCard(false)
+            }
         //   setIsLoading(false)
         });
-        
+       
+      
     }, [isData]
 
   )
+  useEffect(() => {
+    
+  },[])    
 
 
 
@@ -167,17 +185,24 @@ const Header = (  ) => {
     setCards(30)
     setRemoveCards(true)
     blockRef.current.style.visibility = 'visible'
-   }
+    
+    
+    
+    
+}
+const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
    const handelRemoveBlock = () => {
     setCards(0)
     setRemoveCards(false)
+    setBlockCard(false)
     blockRef.current.style.visibility = 'hidden'
-
+    
 
 
    }
    const handelRemoveCard =(id) => {
     console.log(id)
+    
     
     
     
@@ -188,8 +213,18 @@ const Header = (  ) => {
       .then(res => res.text()) // or res.json()
       .then(res => {
         setIsData(!isData)
+        // setTotal(total)
+        
       }
      )
+   }
+   
+   const handelViewCard = () => {
+     navigate('/card')
+     setCards(0)
+     setRemoveCards(false)
+    blockRef.current.style.visibility = 'hidden'
+
    }
     
   return (
@@ -252,9 +287,9 @@ const Header = (  ) => {
                         </a>
                     </NavItem>
                     <NavItem>
-                        <Link to="/">
+                        <a href="/card">
                         Shop
-                        </Link>
+                        </a>
                     </NavItem>
                     <NavItem>
                         <a
@@ -333,9 +368,16 @@ const Header = (  ) => {
         <div ref={blockRef} className='dark-card'>
 
         <div className='card-products' style={{width:`${cards}rem`}}>
-         {removeCards && <div className='header-card'><i className='bx bx-shopping-bag'></i><h4>MY CARD</h4> <span onClick={handelRemoveBlock}>X</span></div> }
-                        
+
+         {removeCards && <div className='header-card'>
+         <i className='bx bx-shopping-bag'></i>
+         <h4>MY CARD</h4>
+        
+         <h5 onClick={handelRemoveBlock}>X</h5></div> }
+
+          {loadCard && <Spinner className='loadcard'>Loading...</Spinner>}              
             <div className='card__1'>
+                        
                 {dataCard.map((item,index) => (
                    <ListProducts
                    key={item.id}
@@ -347,10 +389,14 @@ const Header = (  ) => {
                      />
 
                 ))}
-                {blockCard && <div>
+                {blockCard && 
                                     
                                     <p>No products in the cart.</p>
-                                </div> }      
+                                }
+            <div className='total_card'>TOTAL: <div>${total}.00</div></div> 
+                  <button onClick={handelViewCard}> <Link to="/card">
+                                CARD & CHECKOUT
+                        </Link></button>                   
             </div>
         </div>
         </div>
