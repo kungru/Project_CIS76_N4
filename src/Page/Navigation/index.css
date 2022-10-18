@@ -437,6 +437,36 @@ form{
   right : 53px;
     position: absolute;
 }
+
+
+.quantity_sum{
+  width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 100%;
+    color: white;
+    font-size: 11px;
+    padding-left: 4px;
+    margin-left: -111px;
+}
+.flex__quantity{
+  display: flex;
+  font-size: 19px;
+}
+.quantity_sum1{
+  width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 100%;
+    color: white;
+    font-size: 11px;
+    padding-left: 4px;
+    /* margin-left: -111px; */
+    /* padding: 1px; */
+    /* padding-right: 2px; */
+    /* margin-bottom: -4px; */
+    display: block;
+}
 .card-products{
   z-index: 1;
     position: fixed;

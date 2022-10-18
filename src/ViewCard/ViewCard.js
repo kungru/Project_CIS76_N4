@@ -102,6 +102,7 @@ const ViewCard = () => {
                 name = {item.name}
                 price = {item.price}
                 url = {item.url}
+                quantity={item.quantity}
                 onSetCount ={handelSetCouse}
                 onSetCount1 ={handelSetCouse1}
                 sum = {count}
@@ -208,7 +209,7 @@ const Productssss = (prop) => {
                     <div style={{marginLeft:'2rem'}}>
                         <div className='quantity'>
                             <div onClick={handelSetCouse1} className='sum'>-</div>
-                            <input ref={inputRef}  value={change} className='sum' type='text' size='4' />
+                            <input ref={inputRef}  value={prop.quantity} className='sum' type='text' size='4' />
                             <div onClick={handelSetCouse}  className='sum'>+</div>
                         </div>
                     </div>
@@ -218,7 +219,7 @@ const Productssss = (prop) => {
                   right: '12rem',}}>  ${prop.url} </div>
                 </td>
                 <td>
-                  <button className='btn' onClick={handelDeleteCart}>X</button>
+                  <button className='btn1' onClick={handelDeleteCart}>X</button>
                 </td>
               </tr>
       )

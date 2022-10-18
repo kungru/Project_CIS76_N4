@@ -28,7 +28,7 @@ const Content = () => {
         }, []
     
       )
-
+      const [isData1, setIsData1] = useState(true)
      // api addtocard
      useEffect(
       () => {
@@ -44,13 +44,13 @@ const Content = () => {
             setIsLoading(false)
           });
           
-      }, []
+      }, [isData1]
   
     )
      
- 
+      
 
-      const handelAddtoCard = (id,name,style,shape,url,price) => {
+      const handelAddtoCard = (id,name,style,shape,url,price,quantity) => {
           console.log(id)
          
           const newCard = {
@@ -58,29 +58,70 @@ const Content = () => {
             name,
             style,
             shape,
+
             price,
             url,
+            quantity : 1
             
 
           }
-          fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard', {
-            method: 'POST',
-            headers: {
-                Acceps: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newCard)
-          })
-          .then((res) => {
-            return (res.json())
-          }).then((data) => {
+         
+          const checkId = addtoCards.find(c => c.id === id) 
+          if(checkId){
+            checkId.quantity +=1;
            
-            setAddtoCards(data);
-            // setIsData(!isData)
-            setIsLoading(false)
-          });
-        
-      }
+            fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` +id,  {
+                            method: 'PUT',
+                            crossDomain: true,
+
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                              headers: {
+                                Accept: 'application/json',
+                                'Content-Type': 'application/json',
+                              },
+                              body: JSON.stringify({
+                                quantity
+                              })
+                            })
+                            .then(res => {
+                              res.json().then((res) => {
+                                setIsData1(!isData1)
+                               
+                              })
+                            })
+                            .catch(err => {
+                              console.error(err)
+                            })
+          }else{
+            
+            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard', {
+              method: 'POST',
+              headers: {
+                  Acceps: 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(newCard)
+            })
+            .then((res) => {
+              return (res.json())
+            }).then((data) => {
+              setIsData1(!isData1)
+            
+              setIsLoading(false)
+            });
+          }
+
+         
+          
+         
+            
+          
+         
+          
+          
+        }
 
   return (
 

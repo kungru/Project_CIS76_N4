@@ -143,6 +143,8 @@ const Header = (  ) => {
    const [loadCard, setloadCard] = useState(true);
 //    const [total, setTotal] = useState(0)
    const blockRef = useRef()
+
+   const [quantity, setQuantity] = useState()
 //    const [transition, setTransition] = useState(true)
 
    useEffect(
@@ -160,13 +162,19 @@ const Header = (  ) => {
             // setBlockCard(false)
             setloadCard(false)
          
-            if(dataCard.length == 0){
-                setBlockCard(true)
+            if(dataCard){
+                setBlockCard(false)
                 
             }else{
-                setBlockCard(false)
+                setBlockCard(true)
             }
+            // const fill1 = [...dataCard]
+            // if(fill1.id){
+            //     setQuantity(quantity+1)
 
+            // }else{
+
+            // }
           
         //   setIsLoading(false)
         });
@@ -180,11 +188,13 @@ const Header = (  ) => {
   },[])    
 
 
-
+  
    const handelSaveCard =() => {
     setCards(30)
     setRemoveCards(true)
     blockRef.current.style.visibility = 'visible'
+    
+    
     
     
     
@@ -212,11 +222,13 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
       })
       .then(res => res.text()) // or res.json()
       .then(res => {
-        setIsData(!isData)
+        setIsData(arr)
         // setTotal(total)
         
       }
      )
+     const fakeDataCart = [...dataCard]
+     const arr = fakeDataCart.filter(item => !(item.id === id))
    }
    
    const handelViewCard = () => {
@@ -226,6 +238,8 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
     blockRef.current.style.visibility = 'hidden'
 
    }
+   const totalQuantity = dataCard.reduce((items, {quantity}) => items + quantity, 0)
+
     
   return (
     
@@ -353,11 +367,12 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
                        
                     </NavItem>
                     <NavItem>
-                        <a
+                        <a className='flex__quantity'
                         
                         href="#"
                         >
                         <i onClick={handelSaveCard} className="bx bx-shopping-bag"></i>
+                        <span className='quantity_sum1'>{totalQuantity}</span>
                         </a>
                     </NavItem>
                 </Nav>
@@ -370,7 +385,7 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
         <div className='card-products' style={{width:`${cards}rem`}}>
 
          {removeCards && <div className='header-card'>
-         <i className='bx bx-shopping-bag'></i>
+         <i className='bx bx-shopping-bag'></i><div className='quantity_sum'>{totalQuantity}</div>
          <h4>MY CARD</h4>
         
          <h5 onClick={handelRemoveBlock}>X</h5></div> }
@@ -385,6 +400,7 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
                         url={item.url}
                         name={item.name}
                         id={item.id}
+                        quantity={item.quantity}
                         onRemove ={handelRemoveCard}
                      />
 
@@ -450,7 +466,7 @@ const ListProducts = (props) => {
             
             <div className='information'>
                 <li style={{fontWeight:'600'}}>{props.name}</li>
-                <li>Quantity: 1</li>
+                <li>Quantity: {props.quantity}</li>
                 
                 <li>{props.url}</li>
             </div>
