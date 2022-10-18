@@ -160,14 +160,14 @@ const Header = (  ) => {
             // setBlockCard(false)
             setloadCard(false)
          
-            if(dataCard.length <= 0){
+            if(dataCard.length == 0){
                 setBlockCard(true)
                 
-            }
-
-            if(dataCard.length >= 0){
+            }else{
                 setBlockCard(false)
             }
+
+          
         //   setIsLoading(false)
         });
        
@@ -201,7 +201,7 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
 
    }
    const handelRemoveCard =(id) => {
-    console.log(id)
+   
     
     
     

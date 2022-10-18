@@ -13,6 +13,7 @@ import ContentHung from './Page/Body/ContentHung';
 import React, { useState, useEffect } from 'react';
 import Crud from './Page/crud/crud';
 import ViewCard from './ViewCard/ViewCard';
+import Checkout from './Checkout/Checkout';
 import { Container, Row, Col, Navlink } from 'reactstrap';
 import {Routes, Route, NavLink,Link} from 'react-router-dom'
 // import Container_card from './Page/Body/Container_card';
@@ -84,6 +85,11 @@ const ViewCard_test=()=>{
     <ViewCard />
   )
 }
+const ChecKout_test=()=>{
+  return(
+      <Checkout />
+  )
+}
   return (
     <div className='App'>
 
@@ -108,6 +114,7 @@ const ViewCard_test=()=>{
 				<Route path="/" element={<MainPage />} />
 				<Route path="/crud" element={<Crud_test />} />
         <Route path='/card' element={ <ViewCard_test /> } />
+        <Route path='/checkoutCart' element={ <ChecKout_test /> } />
 			</Routes>
       <Row>
           <Col>

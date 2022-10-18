@@ -126,7 +126,7 @@ const ViewCard = () => {
                           <td style={{fontSize:'20px',position:'absolute',right:'70rem'}}>${total1}.00</td>
                       </tr>
                       <tr>
-                        <button className='btn1_viewcard'>PROCEE TO CHECKOUT</button>
+                        <button  className='btn1_viewcard'><Link to='/checkoutCart'>PROCEE TO CHECKOUT</Link></button>
                       </tr>
                 </Table>
 
