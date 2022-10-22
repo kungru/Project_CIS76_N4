@@ -4,6 +4,20 @@ import { Link, useNavigate } from 'react-router-dom'
 import {Card, CardBody,CardTitle,CardSubtitle, CardText,} from 'reactstrap';
 const ThreeProduc = (props) => {
 
+    
+useEffect(() => {
+      document.addEventListener('keydown', (e) => {
+
+       if(e.keyCode === 27){
+        setShowTile(false)
+       }
+       if(e.keyCode === 13){
+        navigate('/shop')
+       }
+})
+},[])
+
+
   const [heartActive,setHeartActive]=useState(true);
   const [showTitle,setShowTile]=useState(false);
 

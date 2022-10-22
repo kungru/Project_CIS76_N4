@@ -1,6 +1,7 @@
 import React from 'react'
 import './SenNow.css'
 import { useState } from 'react'
+import ProductComment from './ProductComment'
 
 const SenNow = () => {
     const [send, setSend] =useState('')
@@ -16,7 +17,8 @@ const SenNow = () => {
 
     }
   return (
-    <div className='sendnow_all'>
+   <>
+     <div className='sendnow_all'>
         <div className='bgr_img_sendnow'>
             <div className='block_sendnow_pa'>
                     <div className='block_sendnow_1'>
@@ -42,6 +44,8 @@ const SenNow = () => {
             </div>
         </div>
     </div>
+    <ProductComment />
+   </>
   )
 }
 

@@ -18,6 +18,7 @@ import {
 
 
 const Header = (  ) => {
+  
     const [position, setPosition] = useState('')
     // useEffect(() => {
     //     window.addEventListener('scroll', (e) => {
@@ -57,7 +58,7 @@ const Header = (  ) => {
     }, [])
 
 
-
+   
     const handleBlock = (e) => {
      inputRef.current.focus()
         setRemoveblock(true)
@@ -173,8 +174,9 @@ const Header = (  ) => {
    useEffect(
     () => {
         setloadCard(true)
+        setBlockCard(true) 
         // setIsLoading(true);
-        setBlockCard(true)
+        
       fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard')
         .then((res) => {
           return (res.json())
@@ -182,25 +184,10 @@ const Header = (  ) => {
            
             setDataCard(data);
             // setIsData(!isData)
-            
-            if(data !== []){
-                setBlockCard(false)  
-            }else{
-                setBlockCard(true)  
-
-            }
-            // setBlockCard(false)
             setloadCard(false)
-         
-            // const fill1 = [...dataCard]
-            // if(fill1.id){
-            //     setQuantity(quantity+1)
-
-            // }else{
-
-            // }
-          
-        //   setIsLoading(false)
+           
+            setloadCard(false)
+           
         });
       
       
@@ -247,13 +234,14 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
       })
       .then(res => res.text()) // or res.json()
       .then(res => {
-        setIsData(arr)
+        // setIsData(arr)
         // setTotal(total)
+        setIsData(!isData)
         
       }
      )
-     const fakeDataCart = [...dataCard]
-     const arr = fakeDataCart.filter(item => !(item.id === id))
+    //  const fakeDataCart = [...dataCard]
+    //  const arr = fakeDataCart.filter(item => !(item.id === id))
    }
    
    const handelViewCard = () => {
@@ -271,7 +259,8 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
 
    
 
-    
+ 
+
   return (
     
     <div className='header'  >
