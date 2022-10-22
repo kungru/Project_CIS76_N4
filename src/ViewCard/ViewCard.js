@@ -75,7 +75,7 @@ const ViewCard = () => {
   return (
     <div className='viewcard'>
     <Container>
-    <div className='title_viewcard'><span>Home/</span>Card</div>
+    <div className='title_viewcard'><Link to='/'>Home/</Link>Card</div>
 
       <Table>
               <thead>

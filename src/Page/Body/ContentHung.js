@@ -1,7 +1,13 @@
 import React from 'react'
 import './ContentHung.css'
+
+import ThreeProduc from './ThreeProduc';
+// import SenNow from './SenNow';
+
 const ContentHung = () => {
   return (
+   <>
+             <ThreeProduc /> 
     <div className='content'>
         <div className='content-img'>
                 <img src='https://neoocular.qodeinteractive.com/wp-content/uploads/2021/10/Main-Home-stacked-img-big-001.jpg' />
@@ -26,6 +32,8 @@ const ContentHung = () => {
                 <button className='btn-view'>VIEW MORE</button>
         </div>
     </div>
+    
+   </>
   )
 }
 

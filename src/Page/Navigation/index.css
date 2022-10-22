@@ -82,13 +82,15 @@ margin: 0;
   margin-right: 21px;
 }
 .header_first{
-  
+  z-index: 100;
   display: flex;
     justify-content: space-between;
     font-family: work sans,sans-serif;
-    
+    background-color: #fff;
     padding: 0px 51px 29px 51px;
     margin-top: 49px;
+    transition: all 0.5s ease;
+    /* position: fixed; */
 
 
 
@@ -442,7 +444,7 @@ form{
 .quantity_sum{
   width: 15px;
     height: 15px;
-    background: red;
+    background: black;
     border-radius: 100%;
     color: white;
     font-size: 11px;
@@ -456,7 +458,7 @@ form{
 .quantity_sum1{
   width: 15px;
     height: 15px;
-    background: red;
+    background: black;
     border-radius: 100%;
     color: white;
     font-size: 11px;

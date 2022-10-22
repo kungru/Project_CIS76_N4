@@ -1,15 +1,27 @@
 import './ThreeProduc.css';
 import {React, useEffect,useState} from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {Card, CardBody,CardTitle,CardSubtitle, CardText,} from 'reactstrap';
 const ThreeProduc = (props) => {
 
   const [heartActive,setHeartActive]=useState(true);
+  const [showTitle,setShowTile]=useState(false);
+
+  const navigate = useNavigate()
   const changeHeart=()=>{
     setHeartActive(current => !current)
   }
   const showPopup=()=>{
     props.onPopup(props.id);
+  }
+  const goToShop = () => {
+    setShowTile(true)
+  }
+  const showCart = ()=>{
+    setTimeout (() => {
+        setShowTile(false)
+        navigate('/shop')
+    }, 1000)
   }
 
   const handelViewMore = () => {}
@@ -42,7 +54,7 @@ const ThreeProduc = (props) => {
                 <CardText>
                 <div className='card_invi'>
                 {heartActive ? <i class='bx bx-heart' onClick={changeHeart}></i> : <i class='bx bxs-heart' onClick={changeHeart} ></i>}
-                <i class='bx bx-shopping-bag' ></i>
+                <i class='bx bx-shopping-bag' onClick={goToShop}></i>
                 <i class="fa-regular fa-eye" onClick={showPopup}></i>
                 </div>
                 
@@ -50,6 +62,12 @@ const ThreeProduc = (props) => {
                 </CardText>
             </div>
         </div>
+               {showTitle ? <div className='goto_shop'>
+                    <div className='goto_shop_ok'>
+                    Please go to the store to order
+                    <button onClick={showCart}>GO TO SHOP</button>
+                    </div>
+                </div> : '' }
         <div className='cart1'>
         <div className='three__sale'>
             <span>sale</span>
@@ -71,7 +89,7 @@ const ThreeProduc = (props) => {
                 <CardText>
                 <div className='card_invi'>
                 {heartActive ? <i class='bx bx-heart' onClick={changeHeart}></i> : <i class='bx bxs-heart' onClick={changeHeart} ></i>}
-                <i class='bx bx-shopping-bag' ></i>
+                <i class='bx bx-shopping-bag' onClick={goToShop}></i>
                 <i class="fa-regular fa-eye" onClick={showPopup}></i>
                 </div>
                 <span className='card_price'><span className='card_price1'>$299.00</span>$199.00</span>
@@ -99,14 +117,14 @@ const ThreeProduc = (props) => {
                 <CardText>
                 <div className='card_invi'>
                 {heartActive ? <i class='bx bx-heart' onClick={changeHeart}></i> : <i class='bx bxs-heart' onClick={changeHeart} ></i>}
-                <i class='bx bx-shopping-bag' ></i>
+                <i class='bx bx-shopping-bag' onClick={goToShop}></i>
                 <i class="fa-regular fa-eye" onClick={showPopup}></i>
                 </div>
                 <span className='card_price'><span className='card_price1'>$299.00</span>$199.00</span>
                 </CardText>
             </div>
         </div>
-        <Link  to='/content' className='three__viewmore'>VIEW MORE</Link>
+        {/* <Link  to='/content' className='three__viewmore'>VIEW MORE</Link> */}
     </div>
                    
    </div> 

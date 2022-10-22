@@ -67,13 +67,15 @@ const Content = () => {
           }
          
           const checkId = addtoCards.find(c => c.id === id) 
-          if(checkId){
-            checkId.quantity +=1;
+          
+          if(checkId && checkId !== ''){
+            const checkQuantity = checkId.quantity += 1 ;
+            console.log(checkQuantity)
+            
            
-            fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` +id,  {
-                            method: 'PUT',
-                            crossDomain: true,
-
+            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', + id, {
+              method: 'PUT',
+              crossDomain: true,
                             xhrFields: {
                                 withCredentials: true
                             },
@@ -81,22 +83,30 @@ const Content = () => {
                                 Accept: 'application/json',
                                 'Content-Type': 'application/json',
                               },
-                              body: JSON.stringify({
-                                quantity
-                              })
-                            })
-                            .then(res => {
-                              res.json().then((res) => {
-                                setIsData1(!isData1)
-                               
-                              })
-                            })
-                            .catch(err => {
-                              console.error(err)
-                            })
+              body: JSON.stringify({
+                
+                name,
+                style,
+                shape,
+    
+                price,
+                url,
+                quantity: checkQuantity
+              })
+            })
+            .then(res => {
+              res.json().then((res) => {
+
+                
+                setIsData1(!isData1) 
+              })
+            })
+            .catch(err => {
+              console.error(err)
+            })
           }else{
             
-            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard', {
+            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
               method: 'POST',
               headers: {
                   Acceps: 'application/json',
@@ -147,6 +157,7 @@ const Content = () => {
                     price={item.price}
                     onAddtoCard ={handelAddtoCard}
                     id={item.id}
+                    quantity={item.quantity}
                   />
                 )
               })}

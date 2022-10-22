@@ -1,8 +1,14 @@
 import React from 'react'
 import './Above_footer.css';
+import SenNow from './SenNow';
 const Above_footer = () => {
   return (
-    <div className='Above_footer'>
+    <>
+        <div className='Above_footer'>
+        <div className='title_footer_firt'>
+                <h1>ONLINE SHOP SERVICES</h1>
+                <p>Our entire offer is only just one click away</p>
+        </div>
         <div className='af_footer_outside'>
         <div className='af_footer_container'>
             <img src='https://neoocular.qodeinteractive.com/wp-content/uploads/2021/07/Content-bottom-icon-01.png' alt='car_ship'/>
@@ -65,6 +71,8 @@ const Above_footer = () => {
         </div> */}
 
     </div>
+    <SenNow />
+    </>
   )
 }
 
