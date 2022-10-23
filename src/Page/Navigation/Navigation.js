@@ -174,7 +174,7 @@ const Header = (  ) => {
    useEffect(
     () => {
         setloadCard(true)
-        setBlockCard(true) 
+        
         // setIsLoading(true);
         
       fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard')
@@ -186,7 +186,12 @@ const Header = (  ) => {
             // setIsData(!isData)
             setloadCard(false)
            
-            setloadCard(false)
+            if(data.length < 0){
+                setBlockCard(true) 
+            }
+            else{
+                setBlockCard(false)
+            }
            
         });
       
@@ -228,8 +233,9 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
     
     
     
-
-    fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/${id}` , {
+       
+       
+       fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/${id}` , {
         method: 'DELETE',
       })
       .then(res => res.text()) // or res.json()

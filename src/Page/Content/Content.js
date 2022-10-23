@@ -1,5 +1,5 @@
 import Container_card from '../Body/Container_card';
-import { Link, NavLink, useParams } from 'react-router-dom';
+import { Link, NavLink, parsePath, useParams } from 'react-router-dom';
 import React, {useEffect,useState} from 'react';
 import {Spinner} from 'reactstrap';
 import './Content.css';
@@ -50,8 +50,8 @@ const Content = () => {
      
       
 
-      const handelAddtoCard = (id,name,style,shape,url,price,quantity) => {
-          console.log(id)
+      const handelAddtoCard = (id,name,style,shape,url,price) => {
+          
          
           const newCard = {
             id,
@@ -63,44 +63,46 @@ const Content = () => {
             url,
             quantity : 1
             
+            
 
           }
-         
+          
+          
           const checkId = addtoCards.find(c => c.id === id) 
           
-          if(checkId && checkId !== ''){
+          
+          if(checkId && addtoCards.length !== 0){
+            
+            // parseInt(checkId.quantity)
+            
             const checkQuantity = checkId.quantity += 1 ;
-            console.log(checkQuantity)
+            
+
+            // const string = JSON.stringify(checkQuantity)
             
            
             fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', + id, {
               method: 'PUT',
               crossDomain: true,
-                            xhrFields: {
-                                withCredentials: true
-                            },
-                              headers: {
-                                Accept: 'application/json',
-                                'Content-Type': 'application/json',
-                              },
-              body: JSON.stringify({
-                
-                name,
-                style,
-                shape,
-    
-                price,
-                url,
-                quantity: checkQuantity
+              xhrFields: {
+                  withCredentials: true
+              },
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  quantity: checkQuantity
+                  
+                })
               })
-            })
-            .then(res => {
-              res.json().then((res) => {
+          .then(res => {
+            res.json().then((res) => {
 
-                
-                setIsData1(!isData1) 
-              })
+              
+              setIsData1(!isData1) 
             })
+          })
             .catch(err => {
               console.error(err)
             })
