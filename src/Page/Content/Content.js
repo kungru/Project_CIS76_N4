@@ -95,6 +95,19 @@ const[button,setButton]=useState(false);
 const testBtn=()=>{
   setButton(true)
 }
+const setTest = (id,name,style,shape,url,price) => {
+  console.log(id)
+ 
+  const newCardPopup = {
+    id,
+    name,
+    style,
+    shape,
+    price,
+    url,
+    
+  }
+  }
   return (
    
     <div className='Content_container'>
@@ -108,6 +121,7 @@ const testBtn=()=>{
     key={product.id}
     setIsShowDetail={setIsShowDetail}
     name={product.name}
+    setTest={product.test}
     />
    )
 

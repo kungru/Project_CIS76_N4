@@ -10,6 +10,7 @@ const Container_card = (props) => {
   }
   const showPopup=()=>{
     // props.onPopup(props.id);
+    props.onDisplay(props.id,props.name,props.style,props.shape,props.price,props.url);
     props.setIsShowDetail(true);
     console.log(true)
     // 

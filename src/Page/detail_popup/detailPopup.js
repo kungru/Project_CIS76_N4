@@ -10,7 +10,7 @@ const DetailPopup = (product) => {
         product.setIsShowDetail(false)
     }
 
-const a={...product};
+console.log(product)
   return (
     <>
 {}
