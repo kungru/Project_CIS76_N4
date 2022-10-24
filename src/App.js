@@ -53,7 +53,10 @@ const MainPage=()=>{
         <Row>
           <Example/>
         </Row> */}
-        
+
+              <Row>
+        <Navigation/>
+      </Row>
 
         <Row>
         <Col>
@@ -77,6 +80,7 @@ const MainPage=()=>{
 }
 const Content_test = () => {
   return  <>
+
     <Row>
           <Col xs={3} id="sidebar-wrapper">
             <Header />
@@ -96,12 +100,18 @@ const Crud_test=()=>{
 }
 const ViewCard_test=()=>{
   return(
+    <>
+
     <ViewCard />
+    </>
   )
 }
 const ChecKout_test=()=>{
   return(
+    <>
+
       <Checkout />
+    </>
   )
 }
 const Profile_test = () => {

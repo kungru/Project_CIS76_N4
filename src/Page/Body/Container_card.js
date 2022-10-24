@@ -5,10 +5,11 @@ import DetailPopup from '../detail_popup/detailPopup';
 const Container_card = (props) => {
 
   const [heartActive,setHeartActive]=useState(true);
-  
+  const [invi,setinvi]=useState(true)
   // const [detail,setIsShowDetail]=useState(false)
   const changeHeart=()=>{
     setHeartActive(current => !current)
+    setinvi(!invi)
   }
   const showPopup=()=>{
     // props.onPopup(props.id);
@@ -46,16 +47,25 @@ const Container_card = (props) => {
       {props.style} / {props.shape}
       
     </CardSubtitle>
-    <CardText>
-    <div className='card_invi'>
+    {invi?
+    <CardText className='textcard_invi'>
+ <div className='card_invi'>
       {heartActive ? <i class='bx bx-heart' onClick={changeHeart}></i> : <i class='bx bxs-heart' onClick={changeHeart} ></i>}
       <i onClick={handelAddtoCard} class='bx bx-shopping-bag' ></i>
       <i class="fa-regular fa-eye" onClick={showPopup}></i>
       </div>
       <span className='card_price'>${props.price}</span>
       <span>{props.quantity}</span>
+      </CardText>: <CardText className='textcard_notinvi'><div className='card_notinvi'>
+      {heartActive ? <i class='bx bx-heart' onClick={changeHeart}></i> : <i class='bx bxs-heart' onClick={changeHeart} ></i>}
+      <i onClick={handelAddtoCard} class='bx bx-shopping-bag' ></i>
+      <i class="fa-regular fa-eye" onClick={showPopup}></i>
+      </div>
+      <span className='card_price'>${props.price}</span>
 
-    </CardText>
+ 
+    <span>{props.quantity}</span></CardText>
+    }
   </CardBody>
 </Card>
 

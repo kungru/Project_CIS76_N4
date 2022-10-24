@@ -45,6 +45,10 @@ h5{
     justify-content: center;
     align-items: center;
 }
+.card_notinvi:nth-child(-n+3){
+    font-size: 1.3rem;
+}
+
 .card_invi:nth-child(-n+3){
     font-size: 1.3rem;
 }
@@ -52,7 +56,6 @@ h5{
     display: none;
 
 }
-
 .card-text{
     text-align: center;
     color:#1c1c1c;
@@ -70,7 +73,19 @@ h5{
     align-items: center;
     gap: 3.5rem;
     cursor: pointer;}
-.card-text:hover .card_price{
+    .card-text:hover .card_notinvi{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3.5rem;
+        cursor: pointer;}
+        .card-text .card_notinvi{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3.5rem;
+            cursor: pointer;}
+.textcard_invi:hover .card_price{
     display: none;
 }
 
