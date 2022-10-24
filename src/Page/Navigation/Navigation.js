@@ -110,24 +110,33 @@ const Header = (  ) => {
     
      
     const handelLogin = (email, pass) => {
-        
-      
+        console.log(email, pass)
        
-        
-        for(let i=0; i< apiUser.length; i++){
-            
-            
-            if(email === apiUser[i].Email && pass === apiUser[i].Password){
-                
+        //   if(email){
+            //     divRef.current.style.visibility = 'hidden';
                    
-                    // setLogOut(true)
-                    // setAvatarUser(false)
+    //   }
+        
+    for(let i=0; i< apiUser.length; i++){
+        
+            
+            if(apiUser[i].Email && apiUser[i].Password){
+                setTimeout(() => {
                     setBlockLogin(0)
                     divRef.current.style.visibility = 'hidden';
+                }, 3000)
+           
                 
-            }
+                
+              
+                
+                    
+                
+            }   
         };
         }
+         
+      
         
             
     
@@ -135,10 +144,6 @@ const Header = (  ) => {
     
     
     
-    function waitLogin() {
-       
-        
-        }
    
 
     
@@ -149,9 +154,7 @@ const Header = (  ) => {
    
    const handelLogout = (e) => {
     
-    setAvatarUser(true)
-    setNameUser('')
-    setLogOut(false)
+   
     
       
 
@@ -384,9 +387,9 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
                     <NavItem>
                       <div ref={avartRef1}>
                         
-                        <span  onClick={handelBlockLogin} href="#">
+                        <Link to='/login'  onClick={handelBlockLogin} href="#">
                              <i className="fa-regular fa-user"></i>
-                        </span>
+                        </Link>
                        </div>
 
                        
@@ -507,6 +510,7 @@ const ListProducts = (props) => {
 const Login = (props) => {
 
    
+   
 
     const navigate = useNavigate()
     const blockRef = useRef()
@@ -516,7 +520,6 @@ const Login = (props) => {
     const [pass, setPass] = useState('')
     const fakeEmail = email;
     const fakePass = pass;
-    props.onLogin(props.fakeEmail, props.fakePass)
 
     const[loading, setLoading] = useState(true)
 
@@ -576,29 +579,32 @@ const Login = (props) => {
          })
 },[])    
     const handelLogin =() => {
-       
         
         const user = {
             email,
+            pass,
             
-
+            
         }
-        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
-            method: 'POST',
-            headers: {
-                Acceps: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-          })
-          .then((res) => {
-            return (res.json())
-          }).then((data) => {
-              setIsUser(!isUser)
+        localStorage.setItem('key', JSON.stringify(user))
+        props.onLogin(props.email, props.pass)
+        
+        // fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
+        //     method: 'POST',
+        //     headers: {
+        //         Acceps: 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(user)
+        //   })
+        //   .then((res) => {
+        //     return (res.json())
+        //   }).then((data) => {
+        //       setIsUser(!isUser)
             
           
-            // setIsLoading(false)
-          });
+        //     // setIsLoading(false)
+        //   });
         
         const valid = validationAll()
         if(!valid) return
@@ -613,13 +619,14 @@ const Login = (props) => {
                     checkPass = true
                     setLoading(false)
                     
-
+                    setEmail('')
+                    setPass('')   
                     setTimeout(() => {
                         setValidation1('')
                         setLoading(true)
-                    
-                        // blockRef.current.style.visibility = 'hidden';
-                        navigate('/profile')
+                        
+                        
+                        // navigate('/profile')
                        
                     }, 3000);
                 }

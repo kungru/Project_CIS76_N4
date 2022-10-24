@@ -71,11 +71,17 @@ const Content = () => {
           const checkId = addtoCards.find(c => c.id === id) 
           
           
-          if(checkId && addtoCards.length !== 0){
+          if(checkId){
             
             // parseInt(checkId.quantity)
             
             const checkQuantity = checkId.quantity += 1 ;
+            
+             const checkCart =   addtoCards.map(c => (c.id === id ? {...checkId, quantity: checkId.quantity + 1 }: c))
+
+            
+            
+            console.log(checkCart)
             
 
             // const string = JSON.stringify(checkQuantity)
@@ -92,7 +98,7 @@ const Content = () => {
                   'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                  quantity: checkQuantity
+                  checkCart,
                   
                 })
               })
