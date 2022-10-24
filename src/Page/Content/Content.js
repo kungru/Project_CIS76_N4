@@ -2,31 +2,28 @@ import Container_card from '../Body/Container_card';
 import { Link, NavLink, parsePath, useParams } from 'react-router-dom';
 import React, {useEffect,useState} from 'react';
 import {Spinner} from 'reactstrap';
-import './Content.css';
 import DetailPopup from '../detail_popup/detailPopup';
+import './Content.css';
 const Content = () => {
     const params = useParams()
         const [cards, setCards] = useState([]);
         const [addtoCards, setAddtoCards] = useState([]);
         const [IsLoading,setIsLoading]=useState(false);
-        
         const [popupCard,setPopupCard]=useState(false);
-        const [isShowDetail, setIsShowDetail] = useState(false)
-        // tạo state lưu thông tin sản phẩm
         const [isData, setIsData] = useState(true)
         const [total, setTotal] = useState(0)
     useEffect(
         () => {
         setIsLoading(true);
-        setPopupCard(false);
+
           fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card')
             .then((res) => {
               return (res.json())
             }).then((data) => {
-              console.log(data);
+
               setCards(data);
+   
               setIsLoading(false)
-              setPopupCard(true)
             });
             
         }, []
@@ -128,56 +125,36 @@ const Content = () => {
               setIsLoading(false)
             });
           }
-
-         
-          
-         
-            
-          
-         
-          
-          
         }
+  // const a=cards.filter((e)=>e.id==id)
+  const [popupInfo,setPopupInfo]=useState('')
+const handlePopup=(id,name,style,shape,url,price)=>{
+// const newCard1={id,name,style,shape,url,price}
+// newCard1={...cards}
+
+const a=cards.filter((e)=>e.id==id)
+
+setPopupInfo(a)
+
+
+console.log(popupInfo[0].name)
+}
+const [detail,setIsShowDetail]=useState(false)
+const setDetailPopup=()=>{
+setIsShowDetail(true)
 
 }
-  const att=[...cards].sort((a,b)=> a.name - b.name ?1:-1)
-
-console.log(att)
-const[button,setButton]=useState(false);
-const testBtn=()=>{
-  setButton(true)
+const hideDetail=()=>{
+  setIsShowDetail(false)
 }
-const setTest = (id,name,style,shape,url,price) => {
-  console.log(id)
- 
-  const newCardPopup = {
-    id,
-    name,
-    style,
-    shape,
-    price,
-    url,
-    
-  }
-  
   return (
+
    
-    <div className='Content_container'>
-      {/* {isShowDetail ? <DetailPopup setIsShowDetail={setIsShowDetail} /> :""} */}
-
-
-     {isShowDetail ?  cards.map((product)=>{
+    <div  className='Content_container'>
+      {params.id}
+      {detail ?<DetailPopup hideDetail={hideDetail}  name={popupInfo[0].name} price={popupInfo[0].price} url={popupInfo[0].url}/>:''}
+     
    
-   return(
-    <DetailPopup 
-    key={product.id}
-    setIsShowDetail={setIsShowDetail}
-    name={product.name}
-    setTest={product.test}
-    />
-   )
-
-     }):''}
        {
         IsLoading  ? 
         <div className='spinner_container'>
@@ -186,43 +163,8 @@ const setTest = (id,name,style,shape,url,price) => {
       </Spinner>    
         </div>
          : <>
-     <button onClick={testBtn}>123</button>
-
-   
-      
        <div className='container_card'>
-        {button ?[...cards].sort((a,b)=>a.name>b.name ?1:-1).map(item=>{
-          return(
-            <Container_card
-            name={item.name}
-            style={item.style}
-            shape={item.shape}
-            url={item.url}
-            price={item.price}
-            onAddtoCard ={handelAddtoCard}
-            id={item.id}
-            setIsShowDetail={setIsShowDetail}
-            sortCard={sortCard}
-          />
-          )
-        }) :  cards.map((item) => {
-
-          return (
-            <Container_card
-              name={item.name}
-              style={item.style}
-              shape={item.shape}
-              url={item.url}
-              price={item.price}
-              onAddtoCard ={handelAddtoCard}
-              id={item.id}
-              setIsShowDetail={setIsShowDetail}
-              sortCard={sortCard}
-            />
-          )
-        })}
-              {/* {cards.map((item) => {
-
+              {cards.map((item) => {
                 return (
                   <Container_card
                     name={item.name}
@@ -231,14 +173,17 @@ const setTest = (id,name,style,shape,url,price) => {
                     url={item.url}
                     price={item.price}
                     onAddtoCard ={handelAddtoCard}
+                    onDisplay={handlePopup}
                     id={item.id}
                     quantity={item.quantity}
+                    setIsShowDetail={setDetailPopup}
+
                   />
                 )
-              })} */}
+              })}
                 
             </div>
-            
+           
             <div className='Content_pagination'>
                 <NavLink to='01'>01</NavLink>
                 <NavLink to='02'>02</NavLink>
@@ -252,7 +197,7 @@ const setTest = (id,name,style,shape,url,price) => {
       
     </div>
   
-  )}
-      
+  )
+}
 
 export default Content

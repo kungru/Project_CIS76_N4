@@ -1,27 +1,35 @@
 import './Container_card.css';
 import {React, useEffect,useState} from 'react';
 import {Card, CardBody,CardTitle,CardSubtitle, CardText,} from 'reactstrap';
-
+import DetailPopup from '../detail_popup/detailPopup';
 const Container_card = (props) => {
 
   const [heartActive,setHeartActive]=useState(true);
+  
+  // const [detail,setIsShowDetail]=useState(false)
   const changeHeart=()=>{
     setHeartActive(current => !current)
   }
   const showPopup=()=>{
     // props.onPopup(props.id);
     props.onDisplay(props.id,props.name,props.style,props.shape,props.price,props.url);
-    props.setIsShowDetail(true);
-    console.log(true)
-    // 
+    props.setIsShowDetail();
+
   }
 
 
   const handelAddtoCard = () => {
     props.onAddtoCard(props.id,props.name,props.style,props.shape,props.price,props.url,props.quantity);
   }
+
+
+
+
+
   return (
+    
     <div className='card_div' id={props.id}>
+
     <Card>
   <img
     alt="Sample"
@@ -46,6 +54,7 @@ const Container_card = (props) => {
       </div>
       <span className='card_price'>${props.price}</span>
       <span>{props.quantity}</span>
+
     </CardText>
   </CardBody>
 </Card>

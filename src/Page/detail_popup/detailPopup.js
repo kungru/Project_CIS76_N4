@@ -1,23 +1,34 @@
 import React from 'react'
 import './detailPopup.css';
 import { useState ,useEffect} from 'react';
-
+import Container_card from '../Body/Container_card';
 const DetailPopup = (product) => {
+    const [cards,setCards]=useState([])
+    useEffect(
+        () => {
+          fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card')
+            .then((res) => {
+              return (res.json())
+            }).then((data) => {
+              setCards(data);
+            });
+            
+        }, []
     
-    // var product = {}
+      )
 
     const PopUpX = ()=>{
-        product.setIsShowDetail(false)
+        product.hideDetail()
+
     }
 
-console.log(product)
   return (
     <>
-{}
+{cards.filter((e)=>e.id==product.id)}
  <div className='detail_popup' style={{position:'absolute',height:'100%',zIndex:'9'}}>
-        <div className='detail_popup_grab'  key={product.id} >
+        <div className='detail_popup_grab'   >
             <div className='detail_popup_x' onClick={PopUpX}><i class='bx bx-x' ></i></div>
-            <div className='detail_img_popup'><img src='https://neoocular.qodeinteractive.com/wp-content/uploads/2021/07/Shop-Single-01-img-01-768x552.jpg' alt='r'/></div>
+            <div className='detail_img_popup'><img src={product.url} alt='r'/></div>
             <div className='detail_content_popup'>
                 <h2 className='detail_name_popup'>{product.name}</h2>
                 <p className='detail_price_popup'>{product.price}</p>
