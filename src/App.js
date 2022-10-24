@@ -54,9 +54,9 @@ const MainPage=()=>{
           <Example/>
         </Row> */}
 
-              <Row>
+              {/* <Row>
         <Navigation/>
-      </Row>
+      </Row> */}
 
         <Row>
         <Col>

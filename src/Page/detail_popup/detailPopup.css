@@ -10,6 +10,7 @@
     top:20%;
     left: 15%;
     background-color: white;
+
   
 }
 .detail_img_popup{
@@ -62,5 +63,5 @@ text-transform: uppercase;
     border: 1px solid #1c1c1c;
 }
 @keyframes popup {
-    
+    from{opacity: 0;} to{opacity: 1;}
 }

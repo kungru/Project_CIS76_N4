@@ -72,7 +72,9 @@ h5{
     justify-content: center;
     align-items: center;
     gap: 3.5rem;
-    cursor: pointer;}
+    cursor: pointer;
+    animation: linear 1s hover_icon;
+}
     .card-text:hover .card_notinvi{
         display: flex;
         justify-content: center;
@@ -84,11 +86,15 @@ h5{
             justify-content: center;
             align-items: center;
             gap: 3.5rem;
+            animation: linear 1s hover_icon;
             cursor: pointer;}
 .textcard_invi:hover .card_price{
     display: none;
+    animation: linear 1s hover_icon;
 }
-
+@keyframes hover_icon{
+    from {opacity: 0;} to {opacity: 1;}
+}
 
 @media only screen and (max-width: 1435px){
     .card{width: 17rem;}

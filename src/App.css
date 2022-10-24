@@ -18,7 +18,9 @@ body{
 .col-3{min-width: 200px;
 padding: 0;
 }
-
+a{
+  color: #1c1c1c !important;
+}
 .row{
   flex-direction: row;
   width: 100%;

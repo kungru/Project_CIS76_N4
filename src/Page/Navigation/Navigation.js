@@ -474,7 +474,7 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
                         <Route path='/' />
                     </Routes>
                     
-                    <Link onClick={handelRemoveLogin} className='remove-block-login' to='/'>X</Link>      
+                    <Link onClick={handelRemoveLogin} className='remove-block-login' to='/shop'>X</Link>      
             </div>
                 <div className='dark-login-body'>
                     
