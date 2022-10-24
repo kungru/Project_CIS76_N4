@@ -64,6 +64,10 @@ const Crud = () => {
 
           fetch ('https://633e973783f50e9ba3b3be2f.mockapi.io/CRUD', {
             method: 'POST',
+            crossDomain: true,
+            xhrFields: {
+                withCredentials: true
+            },
             headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
@@ -74,11 +78,11 @@ const Crud = () => {
           
           
           
-              .then((res)=>{
-                return(res.json())
-            }).then((data)=>{
+          .then((res)=>{
+            return(res.json())
+          }).then((data)=>{
+              setIsAdd(!isAdd)
                 console.log(data)
-                setIsAdd(!isAdd)
                 setLoading(!loading)
                 
                 
@@ -102,6 +106,7 @@ const Crud = () => {
         const handelRemove =(id) => {
             
           
+          setLoading(!loading)
 
             fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/CRUD/' + id, {
               method: 'DELETE',
@@ -109,7 +114,6 @@ const Crud = () => {
             .then(res => res.text()) // or res.json()
             .then(res => {
               setIsAdd(!isAdd)
-              setLoading(!loading)
             }
         )
             buttonRef.current.style.visibility = "visible"
@@ -154,7 +158,7 @@ const Crud = () => {
 
            const handelUpdateNew =() => {
               
-                 
+                 setIsAdd(!isAdd) 
 
 
                   fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/CRUD/` +expenseUpdate,  {
@@ -174,7 +178,7 @@ const Crud = () => {
                             .then(res => {
                               res.json().then((res) => {
           
-                                setIsAdd(!isAdd) 
+                                
                                 setLoading(!loading) 
                               })
                             })

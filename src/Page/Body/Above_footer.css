@@ -1,13 +1,13 @@
 .Above_footer{
     height: 228px;
-    background-color: #fbfbfb;
+    /* background-color: #fbfbfb; */
 }
 .af_footer_outside{
     height: 100%;
     display: flex;
     align-items: center;
-    margin: 0 80px;
-    justify-content: space-between;
+    margin: 0 226px;
+    justify-content: space-around;
     overflow: hidden;
 }
 .af_footer_outside img{
@@ -26,4 +26,16 @@
 }
 .af_footer_text_1{
     font-weight: bold;
+}
+.title_footer_firt{
+    text-align: center;
+    letter-spacing: 1px;
+}
+.title_footer_firt h1{
+    font-weight: bold;
+    font-size: 38px;
+}
+.title_footer_firt p{
+    font-size: 16px;
+    margin-top: 19px;
 }

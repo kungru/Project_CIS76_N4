@@ -22,8 +22,8 @@ const Header = () => {
             <ul className='sidebar_route'>
              
                 <li>home</li>
-                <li><Link to='/content'>Content</Link></li>
-                <li><Link onClick={handelHome} to=''>HomeProduct</Link></li>
+                <li><Link to='/crud'>CRUD</Link></li>
+                <li><Link to=''>Shop</Link></li>
                 <li>blog</li>
                 <li>landing</li>
             </ul>

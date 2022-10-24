@@ -1,5 +1,5 @@
 .viewcard{
-    margin-top: 20px;
+    margin-top: 77px;
 }
 .view-card {
     display: flex;
@@ -62,7 +62,7 @@
     
     right: 70rem;
 }
-.btn{
+.btn1{
     position: relative;
     right: 14rem;
 }

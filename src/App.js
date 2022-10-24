@@ -10,12 +10,22 @@ import Footer from './Page/Footer/Footer';
 import Scrolltop from './Page/Body/Scrolltop';
 import DetailPopup from './Page/detail_popup/detailPopup';
 import ContentHung from './Page/Body/ContentHung';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,createContext } from 'react';
 import Crud from './Page/Crud/crud';
 import ViewCard from './ViewCard/ViewCard';
+import Checkout from './Checkout/Checkout';
 import { Container, Row, Col, Navlink } from 'reactstrap';
-import {Routes, Route, NavLink,Link} from 'react-router-dom'
-import { Login,Register } from './Page/Navigation/Navigation';
+import {Routes, Route, NavLink,Link,useNavigate} from 'react-router-dom'
+// import { Login } from './Page/Navigation/Navigation';
+
+
+
+
+
+
+import Profile from './Profile/Profile';
+
+export const ThemeContext = createContext()
 // import Container_card from './Page/Body/Container_card';
 function App() {
   const [cards, setCards] = useState([]);
@@ -43,7 +53,31 @@ const MainPage=()=>{
         <Row>
           <Example/>
         </Row> */}
+        
+
         <Row>
+        <Col>
+            <ContentHung />
+          
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <Above_footer/>
+          </Col>
+        </Row>
+        {/* <Row>
+          <Col>
+            <Footer /> 
+          </Col>
+        </Row> */}
+        </>
+
+  )
+}
+const Content_test = () => {
+  return  <>
+    <Row>
           <Col xs={3} id="sidebar-wrapper">
             <Header />
           </Col>
@@ -53,26 +87,7 @@ const MainPage=()=>{
           </Col>
 
         </Row>
-
-        <Row>
-        <Col>
-          <ContentHung/>
-          
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-          <Above_footer/>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Footer /> 
-          </Col>
-        </Row>
-        </>
-
-  )
+  </>
 }
 const Crud_test=()=>{
   return(
@@ -84,14 +99,44 @@ const ViewCard_test=()=>{
     <ViewCard />
   )
 }
+const ChecKout_test=()=>{
+  return(
+      <Checkout />
+  )
+}
+const Profile_test = () => {
+  return(
+    <Profile />
+)
+
+}
+
+const [profile, setProfile] = useState([])
+useEffect(() => {
+    fetch ('https://633e973783f50e9ba3b3be2f.mockapi.io/Login')
+    .then((res)=>{
+      return(res.json())
+    }).then((data)=>{
+        
+        setProfile(data);
+        // setLoading(true)
+        
+        
+     
+    })
+},[])
+const navigate = useNavigate()
+const [theme,setTheme] = useState()
   return (
+   
+
     <div className='App'>
 
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
-      <Scrolltop/>
       <Row>
         <Navigation/>
       </Row>
+      <Scrolltop/>
       
         <Row>
         
@@ -104,6 +149,7 @@ const ViewCard_test=()=>{
             <Content/>
 
           </Col> */}
+          
       <Routes>
 				<Route path="/" element={<MainPage />} />
  
@@ -111,7 +157,11 @@ const ViewCard_test=()=>{
                 
 				<Route path="/crud" element={<Crud_test />} />
         <Route path='/card' element={ <ViewCard_test /> } />
+        <Route path='/shop' element={ <Content_test />} />
+        <Route path='/checkoutCart' element={ <ChecKout_test /> } />
+        {/* <Route path='/profile' element={ profile.email ? <Profile_test /> : <p>checkout</p>  } /> */}
 			</Routes>
+      
       <Row>
           <Col>
             <Footer /> 

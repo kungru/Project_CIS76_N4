@@ -1,5 +1,5 @@
 import Container_card from '../Body/Container_card';
-import { Link, NavLink, useParams } from 'react-router-dom';
+import { Link, NavLink, parsePath, useParams } from 'react-router-dom';
 import React, {useEffect,useState} from 'react';
 import {Spinner} from 'reactstrap';
 import './Content.css';
@@ -32,8 +32,8 @@ const Content = () => {
         }, []
     
       )
-
-    //  api addtocard
+      const [isData1, setIsData1] = useState(true)
+     // api addtocard
      useEffect(
       () => {
       setIsLoading(true);
@@ -48,44 +48,96 @@ const Content = () => {
             setIsLoading(false)
           });
           
-      }, [cards]
+      }, [isData1]
   
     )
      
- 
+      
 
       const handelAddtoCard = (id,name,style,shape,url,price) => {
-          console.log(id)
+          
          
           const newCard = {
             id,
             name,
             style,
             shape,
+
             price,
             url,
+            quantity : 1
+            
             
 
           }
-          fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard', {
-            method: 'POST',
-            headers: {
-                Acceps: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newCard)
-          })
-          .then((res) => {
-            return (res.json())
-          }).then((data) => {
+          
+          
+          const checkId = addtoCards.find(c => c.id === id) 
+          
+          
+          if(checkId && addtoCards.length !== 0){
+            
+            // parseInt(checkId.quantity)
+            
+            const checkQuantity = checkId.quantity += 1 ;
+            
+
+            // const string = JSON.stringify(checkQuantity)
+            
            
-            setAddtoCards(data);
-            // setIsData(!isData)
-            setIsLoading(false)
-          });
-        
-      }
-const sortCard=()=>{
+            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', + id, {
+              method: 'PUT',
+              crossDomain: true,
+              xhrFields: {
+                  withCredentials: true
+              },
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  quantity: checkQuantity
+                  
+                })
+              })
+          .then(res => {
+            res.json().then((res) => {
+
+              
+              setIsData1(!isData1) 
+            })
+          })
+            .catch(err => {
+              console.error(err)
+            })
+          }else{
+            
+            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
+              method: 'POST',
+              headers: {
+                  Acceps: 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(newCard)
+            })
+            .then((res) => {
+              return (res.json())
+            }).then((data) => {
+              setIsData1(!isData1)
+            
+              setIsLoading(false)
+            });
+          }
+
+         
+          
+         
+            
+          
+         
+          
+          
+        }
 
 }
   const att=[...cards].sort((a,b)=> a.name - b.name ?1:-1)
@@ -107,7 +159,7 @@ const setTest = (id,name,style,shape,url,price) => {
     url,
     
   }
-  }
+  
   return (
    
     <div className='Content_container'>
@@ -180,8 +232,7 @@ const setTest = (id,name,style,shape,url,price) => {
                     price={item.price}
                     onAddtoCard ={handelAddtoCard}
                     id={item.id}
-                    setIsShowDetail={setIsShowDetail}
-                    sortCard={sortCard}
+                    quantity={item.quantity}
                   />
                 )
               })} */}
@@ -201,7 +252,7 @@ const setTest = (id,name,style,shape,url,price) => {
       
     </div>
   
-  )
-}
+  )}
+      
 
 export default Content

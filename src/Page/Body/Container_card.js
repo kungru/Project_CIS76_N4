@@ -18,7 +18,7 @@ const Container_card = (props) => {
 
 
   const handelAddtoCard = () => {
-    props.onAddtoCard(props.id,props.name,props.style,props.shape,props.price,props.url);
+    props.onAddtoCard(props.id,props.name,props.style,props.shape,props.price,props.url,props.quantity);
   }
   return (
     <div className='card_div' id={props.id}>
@@ -45,6 +45,7 @@ const Container_card = (props) => {
       <i class="fa-regular fa-eye" onClick={showPopup}></i>
       </div>
       <span className='card_price'>${props.price}</span>
+      <span>{props.quantity}</span>
     </CardText>
   </CardBody>
 </Card>

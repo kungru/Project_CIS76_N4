@@ -1,9 +1,9 @@
 import React from 'react';
-import { useState, useRef,useEffect } from 'react';
+import { useState, useRef,useEffect ,useContext} from 'react';
+import { ThemeContext } from '../../App';
 import { Routes, Route, Link, NavLink,useNavigate } from 'react-router-dom';
 
 import isEmpty from 'validator/lib/isEmpty'
-
 import { Spinner } from 'reactstrap';
 import './index.css'
 
@@ -18,6 +18,18 @@ import {
 
 
 const Header = (  ) => {
+  
+    const [position, setPosition] = useState('')
+    // useEffect(() => {
+    //     window.addEventListener('scroll', (e) => {
+    //         if(document.documentElement.scrollTop >= 500){
+    //             setPosition('fixed')
+    //         }else{
+    //             setPosition('')
+
+    //         }
+    //     })
+    // }, [])
 
     const navigate = useNavigate();
     const inputRef = useRef()
@@ -46,7 +58,7 @@ const Header = (  ) => {
     }, [])
 
 
-
+   
     const handleBlock = (e) => {
      inputRef.current.focus()
         setRemoveblock(true)
@@ -89,32 +101,42 @@ const Header = (  ) => {
     //set Backgroundcolor cho login-register
 
    
+    const [logOut, setLogOut] = useState(false)
    
-    const [nameUser, setNameUser] = useState(null)
-    let fakeEmail = null
-    let fakePass = null
+    const [nameUser, setNameUser] = useState()
+
+
+    // loginSuccess
+    
+     
     const handelLogin = (email, pass) => {
-        fakeEmail = email
-        fakePass = pass
-        waitLogin()
-    }
+        
+      
+       
+        
+        for(let i=0; i< apiUser.length; i++){
+            
+            
+            if(email === apiUser[i].Email && pass === apiUser[i].Password){
+                
+                   
+                    // setLogOut(true)
+                    // setAvatarUser(false)
+                    setBlockLogin(0)
+                    divRef.current.style.visibility = 'hidden';
+                
+            }
+        };
+        }
+        
+            
+    
     
     
     
     
     function waitLogin() {
-        for(let i=0; i< apiUser.length; i++){
-            
-            
-            if(fakeEmail === apiUser[i].Email && fakePass === apiUser[i].Password){
-                setTimeout(() => {
-                    setNameUser(apiUser[i].Name)
-                    setAvatarUser(false)
-                    setBlockLogin(0)
-                    divRef.current.style.visibility = 'hidden';
-                }, 3000);
-            }
-        };
+       
         
         }
    
@@ -124,10 +146,12 @@ const Header = (  ) => {
    const avartRef1 = useRef()
     
     
-  
    
-   const handelLogout = () => {
+   const handelLogout = (e) => {
+    
     setAvatarUser(true)
+    setNameUser('')
+    setLogOut(false)
     
       
 
@@ -143,48 +167,51 @@ const Header = (  ) => {
    const [loadCard, setloadCard] = useState(true);
 //    const [total, setTotal] = useState(0)
    const blockRef = useRef()
+
+   const [totalHeader, setTotalHeader] = useState(false)
 //    const [transition, setTransition] = useState(true)
 
    useEffect(
     () => {
         setloadCard(true)
+        
         // setIsLoading(true);
-        setBlockCard(true)
+        
       fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard')
         .then((res) => {
           return (res.json())
         }).then((data) => {
-         
+           
             setDataCard(data);
             // setIsData(!isData)
-            // setBlockCard(false)
             setloadCard(false)
-         
-            if(dataCard.length <= 0){
-                setBlockCard(true)
-                
+           
+            if(data.length < 0){
+                setBlockCard(true) 
             }
-
-            if(dataCard.length >= 0){
+            else{
                 setBlockCard(false)
             }
-        //   setIsLoading(false)
+           
         });
-       
+      
       
     }, [isData]
 
   )
-  useEffect(() => {
-    
-  },[])    
+  
+  
 
 
-
+  
    const handelSaveCard =() => {
+    setIsData(!isData)
     setCards(30)
     setRemoveCards(true)
     blockRef.current.style.visibility = 'visible'
+    
+    
+    
     
     
     
@@ -201,22 +228,26 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
 
    }
    const handelRemoveCard =(id) => {
-    console.log(id)
+   
     
     
     
     
-
-    fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/${id}` , {
+       
+       
+       fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/${id}` , {
         method: 'DELETE',
       })
       .then(res => res.text()) // or res.json()
       .then(res => {
-        setIsData(!isData)
+        // setIsData(arr)
         // setTotal(total)
+        setIsData(!isData)
         
       }
      )
+    //  const fakeDataCart = [...dataCard]
+    //  const arr = fakeDataCart.filter(item => !(item.id === id))
    }
    
    const handelViewCard = () => {
@@ -226,7 +257,16 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
     blockRef.current.style.visibility = 'hidden'
 
    }
-    
+  
+   const totalQuantity = dataCard.reduce((items, {quantity}) => {
+    // setIsData(!isData)
+    return items + quantity
+   }, 0)
+
+   
+
+ 
+
   return (
     
     <div className='header'  >
@@ -267,7 +307,7 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
             
 
         </div>
-        <div className='header_first'>
+        <div className='header_first' style={{position: `${position}`}}>
 
             <div className='title_header'>
                 <img width='119' height='50' src = "./images/logo-img-04.png" alt='Day la hinh anh' />
@@ -276,7 +316,7 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
                     <NavItem>
                         <Link className='text-color'
                         
-                        to="/crud"
+                        to="/"
                         >
                         Home
                         </Link>
@@ -287,9 +327,9 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
                         </a>
                     </NavItem>
                     <NavItem>
-                        <a href="/card">
+                        <Link to="/shop">
                         Shop
-                        </a>
+                        </Link>
                     </NavItem>
                     <NavItem>
                         <a
@@ -307,6 +347,15 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
                         Landing
                         </a>
                     </NavItem>
+                    {/* <NavItem>
+                        <Link
+                       
+                        to ='/profile'
+                        >
+                        Profile
+                        </Link>
+                    </NavItem> */}
+                        
                 </Nav>
                 <Nav className='header-right'>
                     <NavItem>
@@ -333,18 +382,12 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
                         <a href='#' ><i className='bx bx-heart'></i> </a>
                     </NavItem>
                     <NavItem>
-                       {avatarUser ? (<div ref={avartRef1}>
+                      <div ref={avartRef1}>
                         
                         <span  onClick={handelBlockLogin} href="#">
                              <i className="fa-regular fa-user"></i>
                         </span>
-                       </div>) : 
-                       (<div ref={avartRef} >
-                       <div  className='avatar'><img src='https://dvdn247.net/wp-content/uploads/2020/07/avatar-mac-dinh-1.png'></img></div>
-                       <span style={{fontSize:'14px'}}>{nameUser}</span> 
-                        
-                        
-                       <button type='button' onClick={handelLogout} className='logout'>Log out</button></div>)}
+                       </div>
 
                        
                        
@@ -353,11 +396,12 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
                        
                     </NavItem>
                     <NavItem>
-                        <a
+                        <a className='flex__quantity'
                         
                         href="#"
                         >
                         <i onClick={handelSaveCard} className="bx bx-shopping-bag"></i>
+                        <span className='quantity_sum1'>{totalQuantity}</span>
                         </a>
                     </NavItem>
                 </Nav>
@@ -370,7 +414,7 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
         <div className='card-products' style={{width:`${cards}rem`}}>
 
          {removeCards && <div className='header-card'>
-         <i className='bx bx-shopping-bag'></i>
+         <i className='bx bx-shopping-bag'></i><div className='quantity_sum'>{totalQuantity}</div>
          <h4>MY CARD</h4>
         
          <h5 onClick={handelRemoveBlock}>X</h5></div> }
@@ -385,13 +429,14 @@ const total = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
                         url={item.url}
                         name={item.name}
                         id={item.id}
+                        quantity={item.quantity}
                         onRemove ={handelRemoveCard}
                      />
 
                 ))}
-                {blockCard && 
+                {blockCard ?
                                     
-                                    <p>No products in the cart.</p>
+                                    <p>No products in the cart.</p> : ''
                                 }
             <div className='total_card'>TOTAL: <div>${total}.00</div></div> 
                   <button onClick={handelViewCard}> <Link to="/card">
@@ -451,7 +496,7 @@ const ListProducts = (props) => {
             
             <div className='information'>
                 <li style={{fontWeight:'600'}}>{props.name}</li>
-                <li>Quantity: 1</li>
+                <li>Quantity: {props.quantity}</li>
                 
                 <li>{props.url}</li>
             </div>
@@ -462,11 +507,17 @@ const ListProducts = (props) => {
 
 const Login = (props) => {
 
+   
+
+    const navigate = useNavigate()
+    const blockRef = useRef()
 
     const [loginApi, setLoginApi] = useState([])
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
-    props.onLogin(email, pass,)
+    const fakeEmail = email;
+    const fakePass = pass;
+    props.onLogin(props.fakeEmail, props.fakePass)
 
     const[loading, setLoading] = useState(true)
 
@@ -483,6 +534,8 @@ const Login = (props) => {
             
         })
     }, [])
+
+    
 
 
     const [validation, setValidation] = useState('')
@@ -505,11 +558,49 @@ const Login = (props) => {
         if(Object.keys(msg).length > 0) return false
         return true
     }
-    
-       
- 
+    const [loginSuccess, setLoginSuccess] = useState(null)
+
+
+
+    const [isUser, setIsUser] = useState(true)
+
+    // const [isData1,setIsData1] = useState(true)
+    useEffect(() => {
+         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login')
+         .then((response) => {
+             return response.json()
+         }).then((data) => {
+             setLoginSuccess(data)
+                 
+             
+             
+         })
+},[])    
     const handelLogin =() => {
-     
+       
+        
+        const user = {
+            email,
+            
+
+        }
+        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
+            method: 'POST',
+            headers: {
+                Acceps: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+          })
+          .then((res) => {
+            return (res.json())
+          }).then((data) => {
+              setIsUser(!isUser)
+            
+          
+            // setIsLoading(false)
+          });
+        
         const valid = validationAll()
         if(!valid) return
         let checkEmail = false;
@@ -527,7 +618,11 @@ const Login = (props) => {
                     setTimeout(() => {
                         setValidation1('')
                         setLoading(true)
-                    }, 5000);
+                    
+                        // blockRef.current.style.visibility = 'hidden';
+                        navigate('/profile')
+                       
+                    }, 3000);
                 }
             }
         };
@@ -541,12 +636,14 @@ const Login = (props) => {
 
         }
         
+       
+        
     };
    
     
 
     return (
-      <div className='all-login'>
+      <div  className='all-login'>
           <form>
          
             <div className='margin-login'>
@@ -589,6 +686,10 @@ const Login = (props) => {
            </form>   
       </div>
     )
+  }
+
+  const logOut = () => {
+
   }
 
 
@@ -786,5 +887,5 @@ const Login = (props) => {
     )
   }
 
-  export {Login, Register}
+  export {Login, Register, logOut}
 export default Header;

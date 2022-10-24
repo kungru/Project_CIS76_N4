@@ -5,6 +5,7 @@ import { Table, Container ,Row} from 'reactstrap';
 import './ViewCard.css'
 const ViewCard = () => {
   const [dataCard, setDataCard] = useState([])
+  const [returnShop, setReturnShop] = useState(true)
   useEffect(() => {
     fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard')
           .then((res) => {
@@ -12,13 +13,20 @@ const ViewCard = () => {
           }).then((data) => {
            
               setDataCard(data);
-             
-           
-             
-          //   setIsLoading(false)
-          });
+              if(data.length < 0){
+                setReturnShop(false)
+              }else{
+                setReturnShop(true)
+              }
+              
+              
+              
+              //   setIsLoading(false)
+            });
+            
          
   }, [])
+  
 
   
   const [count, setCount] = useState(0)
@@ -28,11 +36,51 @@ const ViewCard = () => {
   
   
   
+  
   const handelSetCouse= (id, url) => {
+    const checkId = dataCard.find(c => c.id === id) 
+    if(checkId){
+      if(checkId.quantity < 3){
+        const fakePrice = checkId.url *= 2
+        const fakeQuantity = checkId.quantity +=1
+
+
+      fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` +id,  {
+                            method: 'PUT',
+                            crossDomain: true,
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                              headers: {
+                                Accept: 'application/json',
+                                'Content-Type': 'application/json',
+                              },
+                              body: JSON.stringify({
+                                quantity: fakeQuantity,
+                                url: fakePrice 
+                                
+                              })
+                            })
+                            .then(res => {
+                              res.json().then((res) => {
+          
+                                
+                                setIsData1(!isData1) 
+                              })
+                            })
+                            .catch(err => {
+                              console.error(err)
+                            })
+    }
+      }
+     
+
+
+  
     // const fakeCard = dataCard.map((item) => (item.url * 2))
     // const fill = dataCard.filter(item => (item.id === id))
     
-   console.log(url + url)
+  
     // const fakeCart = newCart[fill].reduce((items,item) => items+item.url,0)
 
     // const arr = fill.forEach((item, index) => item[index].url)
@@ -51,10 +99,49 @@ const ViewCard = () => {
     const total1 = dataCard.reduce((items, item) => items + Math.floor(item.url) ,0)
     const handelSetCouse1= (id, url) => {
 
+      const checkId = dataCard.find(c => c.id === id) 
+      if(checkId){
+        if(checkId.quantity >1){
+         const fakePrice = checkId.url /= 2
+        const fakeQuantity = checkId.quantity -=1
+        
+              fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` +id,  {
+                                    method: 'PUT',
+                                    crossDomain: true,
+                                    xhrFields: {
+                                        withCredentials: true
+                                    },
+                                      headers: {
+                                        Accept: 'application/json',
+                                        'Content-Type': 'application/json',
+                                      },
+                                      body: JSON.stringify({
+                                        quantity: fakeQuantity,
+                                        url: fakePrice 
+                                        
+                                      })
+                                    })
+                                    .then(res => {
+                                      res.json().then((res) => {
+                  
+                                        
+                                        setIsData1(!isData1) 
+                                      })
+                                    })
+                                    .catch(err => {
+                                      console.error(err)
+                                    })
+            }
+       }
+      //  const fakePrice = checkId.url *= url 
+       
+      
+       
       
       
       
     }
+    
     const handelDeleteCart = (id) => {
       fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/${id}` , {
         method: 'DELETE',
@@ -75,7 +162,7 @@ const ViewCard = () => {
   return (
     <div className='viewcard'>
     <Container>
-    <div className='title_viewcard'><span>Home/</span>Card</div>
+    <div className='title_viewcard'><Link to='/'>Home/</Link>Card</div>
 
       <Table>
               <thead>
@@ -89,19 +176,19 @@ const ViewCard = () => {
               <th >
               QUANTITY
               </th>
-              <th style={{position: 'absolute',
-                right: '43rem',}}>
+              <th >
               SUBTOTAL
               </th>
             </tr>
           </thead>
-         
+         { !returnShop && <button>RETURN TO SHOP</button> }
           {dataCard .map(item => (
             <Productssss
                 id = {item.id}
                 name = {item.name}
                 price = {item.price}
                 url = {item.url}
+                quantity={item.quantity}
                 onSetCount ={handelSetCouse}
                 onSetCount1 ={handelSetCouse1}
                 sum = {count}
@@ -126,7 +213,7 @@ const ViewCard = () => {
                           <td style={{fontSize:'20px',position:'absolute',right:'70rem'}}>${total1}.00</td>
                       </tr>
                       <tr>
-                        <button className='btn1_viewcard'>PROCEE TO CHECKOUT</button>
+                        <button  className='btn1_viewcard'><Link to='/checkoutCart'>PROCEE TO CHECKOUT</Link></button>
                       </tr>
                 </Table>
 
@@ -162,7 +249,7 @@ const Productssss = (prop) => {
   const handelSetCouse = () => {
    
     prop.onSetCount(prop.id,prop.url)
-    setChange(change + 1)
+    
 
    
     
@@ -175,7 +262,7 @@ const Productssss = (prop) => {
  
   const handelSetCouse1 = () => {
     prop.onSetCount1(prop.id,prop.url)
-    setChange(change - 1)
+    
     
     
    
@@ -184,9 +271,7 @@ const Productssss = (prop) => {
   
 
 
-    if(change == 1) {
-      return setChange(1)
-    }
+    
 }
   
   const handelDeleteCart = () => {
@@ -202,23 +287,23 @@ const Productssss = (prop) => {
                 <td style={{
                       paddingLeft: '11px'
                   }}>
-                {prop.url}
+                ${prop.url}.00
                 </td>
                 <td>
                     <div style={{marginLeft:'2rem'}}>
                         <div className='quantity'>
                             <div onClick={handelSetCouse1} className='sum'>-</div>
-                            <input ref={inputRef}  value={change} className='sum' type='text' size='4' />
+                            <input ref={inputRef}  value={prop.quantity} className='sum' type='text' size='4' />
                             <div onClick={handelSetCouse}  className='sum'>+</div>
                         </div>
                     </div>
                 </td>
                 <td>
                   <div style={{marginLeft:'2rem',position: 'relative',
-                  right: '12rem',}}>  ${prop.url} </div>
+                  right: '12rem',}}>  ${prop.url}.00 </div>
                 </td>
                 <td>
-                  <button className='btn' onClick={handelDeleteCart}>X</button>
+                  <button className='btn1' onClick={handelDeleteCart}>X</button>
                 </td>
               </tr>
       )
