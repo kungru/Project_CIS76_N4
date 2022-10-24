@@ -10,8 +10,7 @@
     display: flex;
     /* flex-direction: column; */
     gap: 20px;
-    margin-left:-30px;
-    flex-wrap: wrap;
+    margin-left:-30px
     
 }
 .crud-all-flex input {
@@ -150,21 +149,10 @@ h5{
     background: black;
     color: white;
 }
-.check_url{
-    width: 70%;
-}
 .url{
 
     /* left: 63%; */
     top: 5rem;
     right: 454px;
-    width: 70%;
-}
-.images{
-    width: 20px;
-    height: 222px;
-    
-}
-.images img{
-    width: 20rem;
+    width: 45%;
 }

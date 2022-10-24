@@ -6,7 +6,7 @@ const Header = () => {
     const handelView = () => {
         setBlock(false)
     }
-    const hadelHome = () => {
+    const handelHome = () => {
         setBlock(true)
     }
     // setBlock(true)

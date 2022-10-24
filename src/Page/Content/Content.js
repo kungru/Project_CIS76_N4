@@ -2,6 +2,7 @@ import Container_card from '../Body/Container_card';
 import { Link, NavLink, parsePath, useParams } from 'react-router-dom';
 import React, {useEffect,useState} from 'react';
 import {Spinner} from 'reactstrap';
+import DetailPopup from '../detail_popup/detailPopup';
 import './Content.css';
 const Content = () => {
     const params = useParams()
@@ -19,9 +20,9 @@ const Content = () => {
             .then((res) => {
               return (res.json())
             }).then((data) => {
-              console.log(data);
+
               setCards(data);
-              console.log(cards);
+   
               setIsLoading(false)
             });
             
@@ -130,22 +131,36 @@ const Content = () => {
               setIsLoading(false)
             });
           }
-
-         
-          
-         
-            
-          
-         
-          
-          
         }
+  // const a=cards.filter((e)=>e.id==id)
+  const [popupInfo,setPopupInfo]=useState('')
+const handlePopup=(id,name,style,shape,url,price)=>{
+// const newCard1={id,name,style,shape,url,price}
+// newCard1={...cards}
 
+const a=cards.filter((e)=>e.id==id)
+
+setPopupInfo(a)
+
+
+console.log(popupInfo[0].name)
+}
+const [detail,setIsShowDetail]=useState(false)
+const setDetailPopup=()=>{
+setIsShowDetail(true)
+
+}
+const hideDetail=()=>{
+  setIsShowDetail(false)
+}
   return (
 
    
     <div  className='Content_container'>
       {params.id}
+      {detail ?<DetailPopup hideDetail={hideDetail}  name={popupInfo[0].name} price={popupInfo[0].price} url={popupInfo[0].url}/>:''}
+     
+   
        {
         IsLoading  ? 
         <div className='spinner_container'>
@@ -164,14 +179,17 @@ const Content = () => {
                     url={item.url}
                     price={item.price}
                     onAddtoCard ={handelAddtoCard}
+                    onDisplay={handlePopup}
                     id={item.id}
                     quantity={item.quantity}
+                    setIsShowDetail={setDetailPopup}
+
                   />
                 )
               })}
                 
             </div>
-            
+           
             <div className='Content_pagination'>
                 <NavLink to='01'>01</NavLink>
                 <NavLink to='02'>02</NavLink>

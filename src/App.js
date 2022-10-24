@@ -11,7 +11,7 @@ import Scrolltop from './Page/Body/Scrolltop';
 import DetailPopup from './Page/detail_popup/detailPopup';
 import ContentHung from './Page/Body/ContentHung';
 import React, { useState, useEffect,createContext } from 'react';
-import Crud from './Page/crud/crud';
+import Crud from './Page/Crud/crud';
 import ViewCard from './ViewCard/ViewCard';
 import Checkout from './Checkout/Checkout';
 import { Container, Row, Col, Navlink } from 'reactstrap';
@@ -41,7 +41,6 @@ function App() {
           
         })
     }, []
-
   )
 const MainPage=()=>{
   return(
@@ -54,7 +53,10 @@ const MainPage=()=>{
         <Row>
           <Example/>
         </Row> */}
-        
+
+              {/* <Row>
+        <Navigation/>
+      </Row> */}
 
         <Row>
         <Col>
@@ -78,6 +80,7 @@ const MainPage=()=>{
 }
 const Content_test = () => {
   return  <>
+
     <Row>
           <Col xs={3} id="sidebar-wrapper">
             <Header />
@@ -97,12 +100,18 @@ const Crud_test=()=>{
 }
 const ViewCard_test=()=>{
   return(
+    <>
+
     <ViewCard />
+    </>
   )
 }
 const ChecKout_test=()=>{
   return(
+    <>
+
       <Checkout />
+    </>
   )
 }
 const Profile_test = () => {
@@ -153,6 +162,9 @@ const [theme,setTheme] = useState()
           
       <Routes>
 				<Route path="/" element={<MainPage />} />
+ 
+
+                
 				<Route path="/crud" element={<Crud_test />} />
         <Route path='/card' element={ <ViewCard_test /> } />
         <Route path='/shop' element={ <Content_test />} />
