@@ -10,7 +10,7 @@ import './Carousel_zx.css';
 const items = [
   {
     src: './images/3.jpg',
-    objectfit:'cover',
+    objectfit: 'cover',
     // objectpos:'0% 0%',
     // altText: 'Slide 1',
     // caption: 'Slide 1',
@@ -21,16 +21,16 @@ const items = [
     // altText: 'Slide 2',
     // caption: 'Slide 2',
     key: 2,
-    objectfit:'cover',
-    objectpos:'0% 30%',
+    objectfit: 'cover',
+    objectpos: '0% 30%',
   },
   {
     src: 'https://img5.goodfon.com/wallpaper/nbig/b/47/girl-glasses-blue.jpg',
     // altText: 'Slide 3',
     // caption: 'Slide 3',
     key: 3,
-    objectfit:'cover',
-    objectpos:'0% 30%',
+    objectfit: 'cover',
+    objectpos: '0% 30%',
   },
 ];
 
@@ -62,23 +62,23 @@ function Example(args) {
         onExited={() => setAnimating(false)}
         key={item.src}
       >
-        <img src={item.src}  style={{objectFit:`${item.objectfit}`, objectPosition:`${item.objectpos}`}}/>
+        <img src={item.src} style={{ objectFit: `${item.objectfit}`, objectPosition: `${item.objectpos}` }} />
         <div className='anh'>
-            <div className='img-anh'>
-                  <img src= "https://neoocular.qodeinteractive.com/wp-content/uploads/2021/08/main-home-rev-img-19.png"/>
-                  <div className='btn-book'>
-                  BOOK NOW
-                  </div>
-                    <span className='btn-hover'></span>
+          <div className='img-anh'>
+            <img src="https://neoocular.qodeinteractive.com/wp-content/uploads/2021/08/main-home-rev-img-19.png" />
+            <div className='btn-book'>
+              BOOK NOW
             </div>
+            <span className='btn-hover'></span>
+          </div>
         </div>
-        
-            <div className='anh__h1'>
-                <h1>VISION YOU DESERVE</h1>
-                <p>Offering you the best service possible</p>
-                <button className='btn__viewmore'>VIEW MORE</button>
-            </div>
-        
+
+        <div className='anh__h1'>
+          <h1>VISION YOU DESERVE</h1>
+          <p>Offering you the best service possible</p>
+          <button className='btn__viewmore'>VIEW MORE</button>
+        </div>
+
         <CarouselCaption
           captionText={item.caption}
           captionHeader={item.caption}
@@ -89,7 +89,7 @@ function Example(args) {
 
   return (
 
-    
+
 
 
     <Carousel
@@ -98,7 +98,7 @@ function Example(args) {
       previous={previous}
       {...args}
 
-    
+
 
 
     >

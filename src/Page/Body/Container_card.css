@@ -37,6 +37,8 @@ h5{
 .card_div{
     position: relative;
     z-index: 0;
+    width: 22rem;
+    margin-top: 1rem;
 }
 .card-body{
     padding: 0;

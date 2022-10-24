@@ -1,175 +1,164 @@
 import Container_card from '../Body/Container_card';
 import { Link, NavLink, parsePath, useParams } from 'react-router-dom';
-import React, {useEffect,useState} from 'react';
-import {Spinner} from 'reactstrap';
+import React, { useEffect, useState } from 'react';
+import { Spinner } from 'reactstrap';
 import DetailPopup from '../detail_popup/detailPopup';
+import CatalogMagic from '../../Loading/CatalogMagic';
 import './Content.css';
 const Content = () => {
-    const params = useParams()
-        const [cards, setCards] = useState([]);
-        const [addtoCards, setAddtoCards] = useState([]);
-        const [IsLoading,setIsLoading]=useState(false);
-        const [popupCard,setPopupCard]=useState(false);
-        const [isData, setIsData] = useState(true)
-        const [total, setTotal] = useState(0)
-    useEffect(
-        () => {
-        setIsLoading(true);
-
-          fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card')
-            .then((res) => {
-              return (res.json())
-            }).then((data) => {
-
-              setCards(data);
-   
-              setIsLoading(false)
-            });
-            
-        }, []
-    
-      )
-      const [isData1, setIsData1] = useState(true)
-     // api addtocard
-     useEffect(
-      () => {
+  const params = useParams()
+  const [cards, setCards] = useState([]);
+  const [addtoCards, setAddtoCards] = useState([]);
+  const [IsLoading, setIsLoading] = useState(false);
+  const [popupCard, setPopupCard] = useState(false);
+  const [isData, setIsData] = useState(true)
+  const [total, setTotal] = useState(0)
+  useEffect(
+    () => {
       setIsLoading(true);
 
-        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard')
-          .then((res) => {
-            return (res.json())
-          }).then((data) => {
-           
-            setAddtoCards(data);
-            
-            setIsLoading(false)
-          });
-          
-      }, [isData1]
-  
-    )
-     
-      
+      fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card')
+        .then((res) => {
+          return (res.json())
+        }).then((data) => {
 
-      const handelAddtoCard = (id,name,style,shape,url,price) => {
-          
-         
-          const newCard = {
-            id,
-            name,
-            style,
-            shape,
+          setCards(data);
 
-            price,
-            url,
-            quantity : 1
-            
-            
+          setIsLoading(false)
+        });
 
-          }
-          
-          
-          const checkId = addtoCards.find(c => c.id === id) 
-          
-          
-          if(checkId){
-            
-            // parseInt(checkId.quantity)
-            
-            const checkQuantity = checkId.quantity += 1 ;
-            
-             const checkCart =   addtoCards.map(c => (c.id === id ? {...checkId, quantity: checkId.quantity + 1 }: c))
+    }, []
 
-            
-            
-            console.log(checkCart)
-            
+  )
+  const [isData1, setIsData1] = useState(true)
+  // api addtocard
+  useEffect(
+    () => {
+      setIsLoading(true);
 
-            // const string = JSON.stringify(checkQuantity)
-            
-           
-            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', + id, {
-              method: 'PUT',
-              crossDomain: true,
-              xhrFields: {
-                  withCredentials: true
-              },
-                headers: {
-                  Accept: 'application/json',
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  checkCart,
-                  
-                })
-              })
-          .then(res => {
-            res.json().then((res) => {
+      fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard')
+        .then((res) => {
+          return (res.json())
+        }).then((data) => {
 
-              
-              setIsData1(!isData1) 
-            })
+          setAddtoCards(data);
+
+          setIsLoading(false)
+        });
+
+    }, [isData1]
+
+  )
+
+  const handelAddtoCard = (id, name, style, shape, url, price) => {
+
+
+    const newCard = {
+      id,
+      name,
+      style,
+      shape,
+
+      price,
+      url,
+      quantity: 1
+    }
+
+    const checkId = addtoCards.find(c => c.id === id)
+
+    if (checkId) {
+
+      // parseInt(checkId.quantity)
+      const checkQuantity = checkId.quantity += 1;
+
+      fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
+        method: 'PUT',
+        crossDomain: true,
+        xhrFields: {
+          withCredentials: true
+        },
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          quantity: checkQuantity,
+        })
+      })
+        .then(res => {
+          res.json().then((res) => {
+
+            console.log("vao day")
+            setIsData1(!isData1)
           })
-            .catch(err => {
-              console.error(err)
-            })
-          }else{
-            
-            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
-              method: 'POST',
-              headers: {
-                  Acceps: 'application/json',
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(newCard)
-            })
-            .then((res) => {
-              return (res.json())
-            }).then((data) => {
-              setIsData1(!isData1)
-            
-              setIsLoading(false)
-            });
-          }
-        }
+        })
+        .catch(err => {
+          console.log("looix")
+          console.error(err)
+        })
+
+
+
+    } else {
+
+      fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
+        method: 'POST',
+        headers: {
+          Acceps: 'application/json',
+          'content-Type': 'application/json'
+        },
+        body: JSON.stringify(newCard)
+      })
+        .then((res) => {
+          return (res.json())
+        }).then((data) => {
+          setIsData1(!isData1)
+
+          setIsLoading(false)
+        });
+    }
+  }
   // const a=cards.filter((e)=>e.id==id)
-  const [popupInfo,setPopupInfo]=useState('')
-const handlePopup=(id,name,style,shape,url,price)=>{
-// const newCard1={id,name,style,shape,url,price}
-// newCard1={...cards}
+  const [popupInfo, setPopupInfo] = useState('')
+  const handlePopup = (id, name, style, shape, url, price) => {
+    // const newCard1={id,name,style,shape,url,price}
+    // newCard1={...cards}
 
-const a=cards.filter((e)=>e.id==id)
+    const a = cards.filter((e) => e.id == id)
 
-setPopupInfo(a)
+    setPopupInfo(a)
 
 
-console.log(popupInfo[0].name)
-}
-const [detail,setIsShowDetail]=useState(false)
-const setDetailPopup=()=>{
-setIsShowDetail(true)
+    console.log(popupInfo[0].name)
+  }
+  const [detail, setIsShowDetail] = useState(false)
+  const [stylePopup, setStylePopup] = useState('')
+  const setDetailPopup = () => {
+    setIsShowDetail(true)
+    setStylePopup('visible')
+  }
+  const hideDetail = () => {
+    setIsShowDetail(false)
+    setStylePopup('')
 
-}
-const hideDetail=()=>{
-  setIsShowDetail(false)
-}
+  }
   return (
 
-   
-    <div  className='Content_container'>
+
+    <div className='Content_container'>
+      <div style={{visibility:`${stylePopup}`}} className='dark_popup_1'></div>
       {params.id}
-      {detail ?<DetailPopup hideDetail={hideDetail}  name={popupInfo[0].name} price={popupInfo[0].price} url={popupInfo[0].url}/>:''}
-     
-   
-       {
-        IsLoading  ? 
-        <div className='spinner_container'>
-        <Spinner>
-        Loading...
-      </Spinner>    
-        </div>
-         : <>
-       <div className='container_card'>
+      {detail ? <DetailPopup hideDetail={hideDetail} name={popupInfo[0].name} price={popupInfo[0].price} url={popupInfo[0].url} /> : ''}
+
+
+      {
+        IsLoading ?
+          <div className='spinner_container'>
+            <CatalogMagic />
+
+          </div>
+          : <>
+            <div className='container_card'>
               {cards.map((item) => {
                 return (
                   <Container_card
@@ -178,7 +167,7 @@ const hideDetail=()=>{
                     shape={item.shape}
                     url={item.url}
                     price={item.price}
-                    onAddtoCard ={handelAddtoCard}
+                    onAddtoCard={handelAddtoCard}
                     onDisplay={handlePopup}
                     id={item.id}
                     quantity={item.quantity}
@@ -187,22 +176,22 @@ const hideDetail=()=>{
                   />
                 )
               })}
-                
+
             </div>
-           
+
             <div className='Content_pagination'>
-                <NavLink to='01'>01</NavLink>
-                <NavLink to='02'>02</NavLink>
-                <NavLink to='03'>03</NavLink>
-                <NavLink to='04'>04</NavLink>
-                <NavLink to='05'>05</NavLink>
-                <NavLink to='' style={{textDecoration:'none',fontSize:'bigger'}}><i class='bx bx-chevron-right'></i></NavLink>
+              <NavLink to='01'>01</NavLink>
+              <NavLink to='02'>02</NavLink>
+              <NavLink to='03'>03</NavLink>
+              <NavLink to='04'>04</NavLink>
+              <NavLink to='05'>05</NavLink>
+              <NavLink to='' style={{ textDecoration: 'none', fontSize: 'bigger' }}><i class='bx bx-chevron-right'></i></NavLink>
             </div>
-            </>
-       } 
-      
+          </>
+      }
+
     </div>
-  
+
   )
 }
 

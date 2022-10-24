@@ -523,7 +523,9 @@ form{
 .card__1 button:hover{
   background-color: black;
   color: #fff;
+  
 }
+
 .total_card{
     font-style: italic;
     font-size: 17px;
