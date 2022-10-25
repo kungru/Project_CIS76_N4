@@ -88,9 +88,13 @@ footer navlink{
   padding: 8px;
   align-items: center;
   font-weight: 600;
+  transition: color .3s ease-out,background-color .3s ease-out,border-color .3s ease-out;
   margin: 0;
 }
-
+.footer_p_subcribe:hover{
+  color: white;
+  background: #010101;
+}
 
 /* below */
 .footer_down{
@@ -108,4 +112,7 @@ footer navlink{
   text-decoration: underline;
   
 
+}
+@keyframes showup{
+  from {opacity: 0;} to{opacity: 1;}
 }

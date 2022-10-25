@@ -10,6 +10,7 @@ import Footer from './Page/Footer/Footer';
 import Scrolltop from './Page/Body/Scrolltop';
 import DetailPopup from './Page/detail_popup/detailPopup';
 import ContentHung from './Page/Body/ContentHung';
+import DetailPage from './Page/DetailPage/DetailPage';
 import React, { useState, useEffect, createContext } from 'react';
 import Crud from './Page/Crud/crud';
 import ViewCard from './ViewCard/ViewCard';
@@ -71,6 +72,7 @@ function App() {
 
     )
   }
+
   const Content_test = () => {
     return <>
 
@@ -157,7 +159,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
 
 
-
+          <Route path="/detail" element={<DetailPage/>}/>
           <Route path="/crud" element={<Crud_test />} />
           <Route path='/card' element={<ViewCard_test />} />
           <Route path='/shop' element={<Content_test />} />
