@@ -130,7 +130,7 @@ const Header = () => {
         setRemoveCards(true)
         blockRef.current.style.visibility = 'visible'
     }
-    const total = dataCard.reduce((items, item) => items + Math.floor(item.url), 0)
+    const total = dataCard.reduce((items, item) => items + Math.floor(item.price), 0)
     const handelRemoveBlock = () => {
         setCards(0)
         setRemoveCards(false)
@@ -328,6 +328,9 @@ const Header = () => {
                                 quantity={item.quantity}
                                 onRemove={handelRemoveCard}
                             />
+                          
+                            
+                             
 
                         ))}
                         {blockCard ?
@@ -388,13 +391,31 @@ const ListProducts = (props) => {
     }
     return (
         <ul>
-            <li className='url__card'><img src={props.price} /></li>
+            <li className='url__card'><img src={props.url} /></li>
 
             <div className='information'>
                 <li style={{ fontWeight: '600' }}>{props.name}</li>
                 <li>Quantity: {props.quantity}</li>
 
-                <li>{props.url}</li>
+                <li>{props.price}</li>
+            </div>
+            <div onClick={handelRemoveCard} style={{ cursor: 'pointer', position: 'absolute', right: '56px' }}>X</div>
+        </ul>
+    )
+}
+const ListProducts2 = (props) => {
+    const handelRemoveCard = () => {
+        props.onRemove(props.id)
+    }
+    return (
+        <ul>
+            <li className='url__card'><img src={props.url} /></li>
+
+            <div className='information'>
+                <li style={{ fontWeight: '600' }}>{props.name}</li>
+                <li>Quantity: {props.quantity}</li>
+
+                <li>{props.price}</li>
             </div>
             <div onClick={handelRemoveCard} style={{ cursor: 'pointer', position: 'absolute', right: '56px' }}>X</div>
         </ul>
