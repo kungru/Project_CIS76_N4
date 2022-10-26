@@ -37,10 +37,10 @@ const ViewCard = () => {
 
 
 
-  const handelSetCouse = (id, url) => {
+  const handelSetCouse = (id, price) => {
     const checkId = dataCard.find(c => c.id === id)
     if (checkId) {
-      if (checkId.quantity < 3) {
+      if (checkId.quantity < 10) {
         const fakePrice = checkId.price *= 2
         const fakeQuantity = checkId.quantity += 1
 
