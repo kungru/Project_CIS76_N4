@@ -1,28 +1,36 @@
-import React from 'react'
+import React from "react";
+import { useState,useEffect} from "react";
+import { useParams } from "react-router-dom";
 import { Container, Row, Col, Navlink } from 'reactstrap';
 import './DetailPage.css';
-import { useEffect,useState } from 'react';
+function ProductDetail(){
+    const [cards,setCards]=useState([])
+    const [IsLoading, setIsLoading] = useState(false);
+    useEffect(
+        () => {
+          setIsLoading(true);
+    
+          fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card')
+            .then((res) => {
+              return (res.json())
+            }).then((data) => {
+    
+              setCards(data);
+    
+              setIsLoading(false)
+            });
+    
+        }, []
+    
+      )
 
-import { Link } from 'react-router-dom';
-const DetailPage = () => {
-  const [cards,setCards]=useState([])
-  useEffect(
-    () => {
-
-      fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card')
-        .then((res) => {
-          return (res.json())
-        }).then((data) => {
-          setCards(data);
-        });
-
-    }, []
-
-  )
-
-  return (
-    <>
-      <div className='Detail_page'>
+    // const {productId}=useParams()
+    // const thisProducts = cards.find(prod=>prod.id===productId)
+   
+    return(
+        
+        <>
+{IsLoading ?   '' :<div className='Detail_page'>
         <Row>
           <Col>
           <div className='detail_line' style={{border:'5px solid black',backgroundColor:'black', width:'350px',marginBottom:'20px'}}></div>
@@ -32,7 +40,7 @@ const DetailPage = () => {
 
       </div>
       <div className='detail_grab_content'>
-        <h2 className='detail_grab_heading'>gold glasses</h2>
+        <h2 className='detail_grab_heading'>{cards.name}</h2>
         <div className='detail_star'>
         <i class='bx bxs-star'></i>
         <i class='bx bxs-star'></i>
@@ -40,7 +48,7 @@ const DetailPage = () => {
         <i class='bx bxs-star'></i>
         <i class='bx bxs-star-half'></i>
         </div>
-        <p className='detail_grab_price'>$199.00</p>
+        <p className='detail_grab_price'>${cards.price}</p>
         <p className='detail_grab_info'>Một chiếc kính xinh xinh</p>
         <div className='detail_grab_sm_con'>
          <input className='detail_grab_input' placeholder='Total'></input> 
@@ -58,9 +66,8 @@ const DetailPage = () => {
 
           </Col>
         </Row>
-      </div>
-    </>
-  )
+      </div>}
+        </>
+    )
 }
-
-export default DetailPage
+export default ProductDetail

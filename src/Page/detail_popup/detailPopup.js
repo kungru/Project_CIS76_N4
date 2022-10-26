@@ -50,8 +50,8 @@ const DetailPopup = (product) => {
           <div className='detail_img_popup'><img src={product.url} alt='r' /></div>
           <div className='detail_content_popup'>
             <h2 className='detail_name_popup'>{product.name}</h2>
-            <p className='detail_price_popup'>{product.price}</p>
-            <p className='detail_text_popup'>Sed viverra tellus in hac. Sagittis vitae et leo duis ut diam quam. Aliquet eget sit amet tellus cras adipiscing enim eu turpis. Orci ac auctor augue mauris augue.
+            <p className='detail_price_popup'>${product.price}</p>
+            <p className='detail_text_popup'>Sed viverra tellus in hac. Sagittis vitae et leo duis ut diam quam. Aliquet eget sit amet tellus cras adipiscing enim eu turpis.
 
             </p>
            

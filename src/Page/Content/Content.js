@@ -31,6 +31,7 @@ const Content = () => {
     }, []
 
   )
+  console.log(cards)
   const [isData1, setIsData1] = useState(true)
   const [isData2, setIsData2] = useState(true)
   // api addtocard

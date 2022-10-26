@@ -62,11 +62,13 @@ h5{
     text-align: center;
     color:#1c1c1c;
     font-weight: 600;
-
+    transition: color .3s ease-out,background-color .3s ease-out,border-color .3s ease-out;
     transition: .3 ease-out;
     width: 70%;
 }
-
+.card-title{
+    cursor: pointer;
+}
 .card_price{cursor: pointer;}
 
 .card-text:hover .card_invi{
@@ -82,17 +84,19 @@ h5{
         justify-content: center;
         align-items: center;
         gap: 3.5rem;
+        
         cursor: pointer;}
         .card-text .card_notinvi{
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 3.5rem;
-            animation: linear 1s hover_icon;
+            transition: color .3s ease-out,background-color .3s ease-out,border-color .3s ease-out;
+            /* animation: linear 1s hover_icon; */
             cursor: pointer;}
 .textcard_invi:hover .card_price{
     display: none;
-    animation: linear 1s hover_icon;
+    /* animation: linear 1s hover_icon; */
 }
 @keyframes hover_icon{
     from {opacity: 0;} to {opacity: 1;}

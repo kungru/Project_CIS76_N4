@@ -7,8 +7,14 @@
     border:1px solid black;
     display: flex;
     position: fixed;
-    top:20%;
-    left: 29rem;
+    /* top:20%;
+    left: 20%; */
+    left: 0;
+    right: 0;
+    top: 50%;
+    bottom: 50%;
+    margin: auto;
+    text-align: center;
     background-color: white;
 
   
@@ -39,6 +45,7 @@
     font-weight: bold;
     text-transform:uppercase;
 }
+
 .detail_price_popup{
     font-weight: bold;
     font-size: 30px;
@@ -58,6 +65,10 @@
     background-color: black;
     color: white;
 }
+.detail_text_popup{
+    height: 70px;
+    text-align:justify;
+}
 .detail_popup_view{
     margin-top: 30px;
     padding: 18px 35px;
@@ -67,6 +78,7 @@ text-transform: uppercase;
     background-color: #1c1c1c;
     width: 205.31px;
     border: 1px solid #1c1c1c;
+ 
 }
 @keyframes popup {
     from{opacity: 0;} to{opacity: 1;}
