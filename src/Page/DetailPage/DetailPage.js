@@ -1,7 +1,12 @@
 import React from 'react'
 import { Container, Row, Col, Navlink } from 'reactstrap';
 import './DetailPage.css';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 const DetailPage = () => {
+  useEffect(()=>{
+    
+  })
   return (
     <>
       <div className='Detail_page'>

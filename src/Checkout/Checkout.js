@@ -113,7 +113,7 @@ const Checkout = () => {
         if (!valid) return
     }
 
-    let total1 = dataCard.reduce((items, item) => items + Math.floor(item.url), 0)
+    let total1 = dataCard.reduce((items, item) => items + item.price, 0)
     const [discount, setDiscount] = useState('')
     const [discountProduct, setDiscountProduct] = useState()
     const [block, setBlock] = useState(false)
@@ -216,7 +216,7 @@ const Checkout = () => {
                                     {dataCard.map(item => (
                                         <tr>
                                             <td>{item.name}</td>
-                                            <td>${item.url}</td>
+                                            <td>${item.price}.00</td>
                                         </tr>
 
                                     ))}

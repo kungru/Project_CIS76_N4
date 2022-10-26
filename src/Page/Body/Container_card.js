@@ -13,19 +13,13 @@ const Container_card = (props) => {
   }
   const showPopup = () => {
     // props.onPopup(props.id);
-    props.onDisplay(props.id, props.name, props.style, props.shape, props.price, props.url);
+    props.onDisplay(props.id, props.name, props.style, props.shape, props.price, props.url, props.quantity);
     props.setIsShowDetail();
 
   }
-
-
   const handelAddtoCard = () => {
     props.onAddtoCard(props.id, props.name, props.style, props.shape, props.price, props.url, props.quantity);
   }
-
-
-
-
 
   return (
 
