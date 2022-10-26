@@ -12,6 +12,7 @@ import DetailPopup from './Page/detail_popup/detailPopup';
 import ContentHung from './Page/Body/ContentHung';
 import DetailPage from './Page/DetailPage/DetailPage';
 import React, { useState, useEffect, createContext } from 'react';
+import ProductDetail from './Page/DetailPage/ProductDetail';
 import Crud from './Page/Crud/crud';
 import ViewCard from './ViewCard/ViewCard';
 import Checkout from './Checkout/Checkout';
@@ -132,7 +133,7 @@ function App() {
   }, [])
   const navigate = useNavigate()
   const [theme, setTheme] = useState()
-  
+
   return (
 
 
@@ -164,6 +165,9 @@ function App() {
           <Route path="/crud" element={<Crud_test />} />
           <Route path='/card' element={<ViewCard_test />} />
           <Route path='/shop' element={<Content_test />} />
+            <Route path='/shop/:productId' element={<ProductDetail/>}>
+       
+          </Route>
           <Route path='/checkoutCart' element={<ChecKout_test />} />
           {/* <Route path='/profile' element={ profile.email ? <Profile_test /> : <p>checkout</p>  } /> */}
         </Routes>
