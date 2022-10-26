@@ -15,7 +15,7 @@ function ProductDetail(){
               return (res.json())
             }).then((data) => {
     
-              setCards(data);
+              setCards(data.find(prod=>prod.id===productId));
     
               setIsLoading(false)
             });
@@ -24,7 +24,7 @@ function ProductDetail(){
     
       )
 
-    // const {productId}=useParams()
+    const {productId}=useParams()
     // const thisProducts = cards.find(prod=>prod.id===productId)
    
     return(
