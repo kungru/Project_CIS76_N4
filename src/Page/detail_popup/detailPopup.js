@@ -24,7 +24,7 @@ const DetailPopup = (product) => {
 
   return (
     <>
-      {cards.filter((e) => e.id == product.id)}
+
       <div className='detail_popup' style={{ position: 'absolute', height: '100%', zIndex: '9' }}>
         <div className='detail_popup_grab'   >
           <div className='detail_popup_x' onClick={PopUpX}><i class='bx bx-x' ></i></div>
