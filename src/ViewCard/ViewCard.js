@@ -45,7 +45,7 @@ const ViewCard = () => {
     if (checkId) {
      
         // theme.setCount(theme.count + 1)
-        const fakePrice = checkId.price *= 2
+        const fakePrice = checkId.price += 2
         const fakeQuantity = checkId.quantity += 1
 
 
@@ -211,11 +211,11 @@ const ViewCard = () => {
             <Table>
               <tr>
                 <th className='border_view'>SUBTOTAL</th>
-                <td className='color'>${total1}</td>
+                <td className='color'>${total1}.00</td>
               </tr>
               <tr>
                 <th className='border_view'>TOTAL</th>
-                <td style={{ fontSize: '20px', position: 'absolute', right: '70rem' }}>${total1}</td>
+                <td style={{ fontSize: '20px', position: 'absolute', right: '70rem' }}>${total1}.00</td>
               </tr>
               <tr>
                 <button className='btn1_viewcard'><Link to='/checkoutCart'>PROCEE TO CHECKOUT</Link></button>
@@ -292,7 +292,7 @@ const Productssss = (prop) => {
       <td style={{
         paddingLeft: '11px'
       }}>
-        ${prop.price}.00
+        ${prop.price}
       </td>
       <td>
         <div style={{ marginLeft: '2rem' }}>
@@ -307,7 +307,7 @@ const Productssss = (prop) => {
         <div style={{
           marginLeft: '2rem', position: 'relative',
           right: '12rem',
-        }}>  ${prop.price}.00 </div>
+        }}>  ${prop.price} </div>
       </td>
       <td>
         <button className='btn1' onClick={handelDeleteCart}>X</button>

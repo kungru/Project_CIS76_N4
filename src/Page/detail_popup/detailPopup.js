@@ -40,9 +40,12 @@ const DetailPopup = (product, { count }) => {
     
 
   }
+  
   const handelSumUp = () => {
     product.onSumUp(product.id, product.url, product.name, product.price, product.quantity)
+    
     theme.setCount(prev => prev + 1)
+    
 
   }
   const handelSumDown = () => {

@@ -25,6 +25,7 @@ export const ThemeContext = createContext()
 function App() {
   const [cards, setCards] = useState([]);
   const [ count, setCount] = useState(1)
+  const [price, setPrice] = useState()
   
 
   useEffect(
@@ -140,7 +141,7 @@ function App() {
 
   return (
 
-    <ThemeContext.Provider value={{count:count, setCount:setCount}}>
+    <ThemeContext.Provider value={{count:count, setCount:setCount ,price: price, setPrice:setPrice}}>
     <div className='App'>
 
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>

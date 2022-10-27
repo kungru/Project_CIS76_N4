@@ -79,7 +79,7 @@ const Header = () => {
         for (let i = 0; i < apiUser.length; i++) {
 
 
-            if (apiUser[i].Email && apiUser[i].Password) {
+            if (apiUser[i].Email == email && apiUser[i].Password == pass) {
                 setTimeout(() => {
                     setBlockLogin(0)
                     divRef.current.style.visibility = 'hidden';
@@ -328,9 +328,9 @@ const Header = () => {
                                 quantity={item.quantity}
                                 onRemove={handelRemoveCard}
                             />
-                          
-                            
-                             
+
+
+
 
                         ))}
                         {blockCard ?
@@ -338,7 +338,7 @@ const Header = () => {
                             <p>No products in the cart.</p> : ''
                         }
                         <div className='total_card'>TOTAL: <div>${total}.00</div></div>
-                        <button onClick={handelViewCard}> 
+                        <button onClick={handelViewCard}>
                             CARD & CHECKOUT
                         </button>
                     </div>
@@ -403,24 +403,7 @@ const ListProducts = (props) => {
         </ul>
     )
 }
-const ListProducts2 = (props) => {
-    const handelRemoveCard = () => {
-        props.onRemove(props.id)
-    }
-    return (
-        <ul>
-            <li className='url__card'><img src={props.url} /></li>
 
-            <div className='information'>
-                <li style={{ fontWeight: '600' }}>{props.name}</li>
-                <li>Quantity: {props.quantity}</li>
-
-                <li>{props.price}</li>
-            </div>
-            <div onClick={handelRemoveCard} style={{ cursor: 'pointer', position: 'absolute', right: '56px' }}>X</div>
-        </ul>
-    )
-}
 
 const Login = (props) => {
 
@@ -532,17 +515,13 @@ const Login = (props) => {
                 checkEmail = true
                 if (pass === loginApi[i].Password) {
                     checkPass = true
-                    setLoading(false)
 
                     setEmail('')
                     setPass('')
                     setTimeout(() => {
                         setValidation1('')
-                        setLoading(true)
-
-
-                        // navigate('/profile')
-
+                        setLoading(false)
+                        
                     }, 3000);
                 }
             }

@@ -7,10 +7,10 @@ import CatalogMagic from '../../Loading/CatalogMagic';
 import './Content.css';
 import { useContext } from 'react';
 import { ThemeContext } from '../../App';
-const Content = ( ) => {
-    const theme = useContext(ThemeContext)
-    
-  
+const Content = () => {
+  const theme = useContext(ThemeContext)
+
+
   const params = useParams()
   const [cards, setCards] = useState([]);
   const [addtoCards, setAddtoCards] = useState([]);
@@ -32,7 +32,7 @@ const Content = ( ) => {
 
           setIsLoading(false)
         });
-      
+
     }, []
 
   )
@@ -152,10 +152,10 @@ const Content = ( ) => {
 
   }
 
-  
+
   const handelAddtoCart1 = (id, url, name, price, shape, style) => {
     console.log(id)
-    const newCard1 = { id, name, style, shape, url, price, quantity: theme.count }
+    const newCard1 = { id, name, style, shape, url, price: theme.price, quantity: theme.count }
     const checkIdCart = addtoCards1.find(c => c.id === id)
 
     // setIsData1(!isData1)
@@ -209,19 +209,19 @@ const Content = ( ) => {
 
     theme.setCount(1)
   }
-  
-  
-   
-  
+
+
+
+
   const handelSumUp = (id) => {
     // setCount(prev => prev + 1)
-    // const totalUp = addtoCards1.find(c => c.id === id)
+    const totalUp = addtoCards1.find(c => c.id === id)
     
-    
-      // theme.setCount(theme.count + 1)
-    
-    
-   
+
+    // theme.setCount(theme.count + 1)
+
+
+
   }
   const handelSumDown = (id) => {
     // setCount(prev => prev - 1)
@@ -229,8 +229,8 @@ const Content = ( ) => {
 
     //   theme.setCount(theme.count - 1)
     // }
-   
-    
+
+
 
   }
 
@@ -242,7 +242,7 @@ const Content = ( ) => {
       <div style={{ visibility: `${stylePopup}` }} className='dark_popup_1'></div>
       {params.id}
       {detail ?
-        <DetailPopup onSumUp={handelSumUp} onSumDown={handelSumDown} onDetailAtc={handelAddtoCart1} hideDetail={hideDetail} id={popupInfo[[0]].id} name={popupInfo[0].name} price={popupInfo[0].price} url={popupInfo[0].url} quantity={popupInfo[0].quantity} />
+        <DetailPopup onSumUp={handelSumUp} onSumDown={handelSumDown} onDetailAtc={handelAddtoCart1} hideDetail={hideDetail} id={popupInfo[[0]].id} name={popupInfo[0].name} price={popupInfo[0].price}  url={popupInfo[0].url} quantity={popupInfo[0].quantity} />
         : ''}
 
 
@@ -265,11 +265,11 @@ const Content = ( ) => {
                     onAddtoCard={handelAddtoCard}
                     onDisplay={handlePopup}
                     id={item.id}
-                    
+
                     quantity={item.quantity}
                     setIsShowDetail={setDetailPopup}
 
-                    // count={count}
+                  // count={count}
                   />
                 )
               })}
