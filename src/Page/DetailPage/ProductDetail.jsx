@@ -15,8 +15,7 @@ function ProductDetail(){
               return (res.json())
             }).then((data) => {
     
-              setCards(data
-              );
+              setCards(data.find(prod=>prod.id===productId));
     
               setIsLoading(false)
               const thisProducts = cards.find(prod=>prod.id===productId)
@@ -27,6 +26,7 @@ function ProductDetail(){
       )
 
     const {productId}=useParams()
+    // const thisProducts = cards.find(prod=>prod.id===productId)
    
     return(
         
@@ -37,7 +37,7 @@ function ProductDetail(){
           <div className='detail_line' style={{border:'5px solid black',backgroundColor:'black', width:'350px',marginBottom:'20px'}}></div>
     <div className='detail_grab'>
       <div className='detail_grab_allimg'>
-        <img src='https://neoocular.qodeinteractive.com/wp-content/uploads/2021/07/Shop-Single-01-img-01-768x552.jpg'/>
+        <img src={cards.url}/>
 
       </div>
       <div className='detail_grab_content'>

@@ -1,6 +1,6 @@
 
-.detail_popup{z-index: 9999;}
-.detail_popup_grab{z-index: 99999;}
+.detail_popup{z-index: 99;}
+.detail_popup_grab{z-index: 999;}
 .detail_popup_grab{
     width: 1000px;
     height: 470px;

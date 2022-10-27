@@ -1,0 +1,49 @@
+.profile_all {
+    margin: 34px 375px;
+    padding: 57px;
+    width: 19rem;
+    border: 1px solid;
+}
+.profile_all h1{
+    font-weight: bold;
+}
+
+.img_avatar{
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid #ccccccb3 ;
+    border-radius: 50%;
+}
+.img_avatar img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+
+}
+.btn_add_avatar{
+    background: white;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+.avatar_user input{
+    margin: 5px 0px 16px 0px;
+    font-size: 9px;
+}
+.avatar_user span{
+    font-size: 15px;
+    margin-top: 12px;
+    display: block;
+}
+.btn_logout1 button{
+    background: #fff;
+    border: 1px solid #ccccccb3;
+    padding: 2px;
+    letter-spacing: 0px;
+    margin-top: 15px;
+}
+
+.btn_logout1 button:hover{
+    background-color: black;
+    color: white;
+}

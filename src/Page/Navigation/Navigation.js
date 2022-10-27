@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef, useEffect, useContext } from 'react';
 import { ThemeContext } from '../../App';
 import { Routes, Route, Link, NavLink, useNavigate } from 'react-router-dom';
-
+// import ContextLanguage from '../Context/ContextLanguage';
 import isEmpty from 'validator/lib/isEmpty'
 import { Spinner } from 'reactstrap';
 import './index.css'
@@ -13,6 +13,8 @@ import {
 
 
 const Header = () => {
+    const theme = useContext(ThemeContext)
+
 
     const [position, setPosition] = useState('')
     // useEffect(() => {
@@ -33,8 +35,8 @@ const Header = () => {
     // Ân hiện input search
     const [blockSearch, setBlockSearch] = useState(0)
     const [removeblock, setRemoveblock] = useState(false)
-    const [avatarUser, setAvatarUser] = useState(true)
     const [apiUser, setApiUser] = useState([])
+    // const [visibility, setVisibility] = useState(false)
 
     useEffect(() => {
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
@@ -45,8 +47,8 @@ const Header = () => {
                 setApiUser(data)
 
             })
-    }, [])
-
+        }, [])
+        
     const handleBlock = (e) => {
         inputRef.current.focus()
         setRemoveblock(true)
@@ -59,20 +61,19 @@ const Header = () => {
     // Ân hiện Form Login
     const [blockLogin, setBlockLogin] = useState(0)
     const handelBlockLogin = () => {
-        setBlockLogin(1)
-        divRef.current.style.visibility = 'visible';
-        // document.body.style.background = 'rgb(0 0 0 / 63%)'
-        // document.body.style.transition = ' all 1s'
-        // document.body.style.visibility = 'visible'
+        // setBlockLogin(1)
+        theme.setVisibility(true)
+       
     }
     const handelRemoveLogin = () => {
-        setBlockLogin(0)
-        divRef.current.style.visibility = 'hidden';
+        // setBlockLogin(0)
+        // divRef.current.style.visibility = 'hidden';
+        theme.setVisibility(false)
+        // theme.display(false)
 
     }
     //set Backgroundcolor cho login-register
-    const [logOut, setLogOut] = useState(false)
-    const [nameUser, setNameUser] = useState()
+
     // loginSuccess
     const handelLogin = (email, pass) => {
         console.log(email, pass)
@@ -80,17 +81,18 @@ const Header = () => {
 
 
             if (apiUser[i].Email == email && apiUser[i].Password == pass) {
-                setTimeout(() => {
-                    setBlockLogin(0)
-                    divRef.current.style.visibility = 'hidden';
-                }, 3000)
+                // setTimeout(() => {
+                //     // setBlockLogin(0)
+                //     // divRef.current.style.visibility = 'hidden';
+                    
+                //     navigate('/profile')
+                // }, 3000)
             }
         };
     }
+    
     const avartRef = useRef()
     const avartRef1 = useRef()
-    const handelLogout = (e) => {
-    }
 
     //card
     const [cards, setCards] = useState('');
@@ -101,7 +103,9 @@ const Header = () => {
     const [loadCard, setloadCard] = useState(true);
     //    const [total, setTotal] = useState(0)
     const blockRef = useRef()
-    const [totalHeader, setTotalHeader] = useState(false)
+    const [totalHeader, setTotalHeader] = useState(false);
+    const [onFormLogin, setOnFormLogin] = useState(false);
+    const [onFormRegister, setOnFormRegister] = useState(true)
     //    const [transition, setTransition] = useState(true)
     useEffect(
         () => {
@@ -141,8 +145,8 @@ const Header = () => {
         fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/${id}`, {
             method: 'DELETE',
         })
-            .then(res => res.text()) // or res.json()
-            .then(res => {
+        .then(res => res.text()) // or res.json()
+        .then(res => {
                 // setIsData(arr)
                 // setTotal(total)
                 setIsData(!isData)
@@ -159,10 +163,22 @@ const Header = () => {
         blockRef.current.style.visibility = 'hidden'
 
     }
+
+
     const totalQuantity = dataCard.reduce((items, { quantity }) => {
         // setIsData(!isData)
         return items + quantity
     }, 0)
+    const toggleFormLogin = (e) => {
+        setOnFormLogin(false)
+        setOnFormRegister(true);
+        if (onFormLogin == false) { e.currentTarget.style.backgroundColor = 'white' } else { e.currentTarget.style.backgroundColor = '#cccccc24' }
+    }
+    const toggleFormRegister = () => {
+        setOnFormRegister(false); setOnFormLogin(true)
+    }
+
+
     return (
 
         <div className='header'  >
@@ -256,7 +272,7 @@ const Header = () => {
                 <Nav className='header-right'>
                     <NavItem>
                         <div className='header-input-search'>
-                            {removeblock && <span className='remove-block animate__animated animate__fadeIn' onClick={handelRemoveblock} >X</span>}
+                            {removeblock && <span className='remove-block2 animate__animated animate__fadeIn' onClick={handelRemoveblock} >X</span>}
                             <span><input
                                 ref={inputRef}
                                 className='header-input'
@@ -280,9 +296,12 @@ const Header = () => {
                     <NavItem>
                         <div ref={avartRef1}>
 
-                            <Link to='/login' onClick={handelBlockLogin} href="#">
+                            {theme.display ? <div><Link to='/profile'> {theme.onUser}</Link></div> : <div onClick={handelBlockLogin} href="#">
                                 <i className="fa-regular fa-user"></i>
-                            </Link>
+                            </div>}
+                            {/* <div onClick={handelBlockLogin} href="#">
+                                <i className="fa-regular fa-user"></i>
+                            </div> */}
                         </div>
 
 
@@ -292,13 +311,13 @@ const Header = () => {
 
                     </NavItem>
                     <NavItem>
-                        <a className='flex__quantity'
+                        <div className='flex__quantity'
 
                             href="#"
                         >
                             <i onClick={handelSaveCard} className="bx bx-shopping-bag"></i>
                             <span className='quantity_sum1'>{totalQuantity}</span>
-                        </a>
+                        </div>
                     </NavItem>
                 </Nav>
 
@@ -345,41 +364,37 @@ const Header = () => {
                 </div>
             </div>
 
-            <div ref={divRef} className='all-dark-login' style={{ opacity: `${blockLogin}` }}>
+            { theme.visibility ? <div ref={divRef} className='all-dark-login' >
                 <div className='form-login'  >
                     <div className='title-login-register'>
-                        <NavLink
+
+                        <div
                             activeClassName='active'
-                            className='title-login link-login '
+                            className='title-login link-login ' onClick={toggleFormLogin} style={{ backgroundColor: onFormLogin ? '#cccccc24' : 'white' }}>Login {onFormLogin ? '' : <Login onLogin={handelLogin} />}
 
-
-
-                            to='/login' >Login
-
-                        </NavLink>
-                        <NavLink
+                        </div>
+                        <div
                             className='title-register link-login'
-                            activeClassName='active'
+                            activeClassName='active' onClick={toggleFormRegister} style={{ backgroundColor: onFormRegister ? '#cccccc24' : 'white' }}
 
 
 
-
-                            to='/register' >Register</NavLink>
+                        >Register {onFormRegister ? '' : <Register />}</div>
 
                     </div>
-                    <Routes>
+                    {/* <Routes>
                         <Route path='/login' element={<Login onLogin={handelLogin} />} />
                         <Route path='/register' element={<Register />} />
                         <Route path='/' />
-                    </Routes>
+                    </Routes> */}
 
-                    <Link onClick={handelRemoveLogin} className='remove-block-login' to='/shop'>X</Link>
+                    <span onClick={handelRemoveLogin} className='remove-block-login' to='/shop'>X</span>
                 </div>
                 <div className='dark-login-body'>
 
                 </div>
 
-            </div>
+            </div> : ''}
         </div>
     )
 }
@@ -406,35 +421,21 @@ const ListProducts = (props) => {
 
 
 const Login = (props) => {
-
-
-
-
     const navigate = useNavigate()
     const blockRef = useRef()
-
     const [loginApi, setLoginApi] = useState([])
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
-    const fakeEmail = email;
-    const fakePass = pass;
-
+    const theme = useContext(ThemeContext)
     const [loading, setLoading] = useState(true)
-
-
-
     useEffect(() => {
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
             .then((response) => {
                 return response.json()
             }).then((data) => {
                 setLoginApi(data)
-
-
-
             })
     }, [])
-
 
 
 
@@ -443,41 +444,33 @@ const Login = (props) => {
 
     const validationAll = () => {
         const msg = {}
-
         if (isEmpty(email)) {
             msg.email = 'Please input your Email'
         }
         if (isEmpty(pass)) {
             msg.pass = 'Please input your Password'
         }
-
-
-
-
         setValidation(msg)
         if (Object.keys(msg).length > 0) return false
         return true
     }
     const [loginSuccess, setLoginSuccess] = useState(null)
-
-
-
     const [isUser, setIsUser] = useState(true)
 
     // const [isData1,setIsData1] = useState(true)
-    useEffect(() => {
-        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login')
-            .then((response) => {
-                return response.json()
-            }).then((data) => {
-                setLoginSuccess(data)
+    // useEffect(() => {
+    //     fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login')
+    //         .then((response) => {
+    //             return response.json()
+    //         }).then((data) => {
+    //             setLoginSuccess(data)
 
 
 
-            })
-    }, [])
+    //         })
+    // }, [])
     const handelLogin = () => {
-
+        console.log(theme.onUser)
         const user = {
             email,
             pass,
@@ -516,17 +509,37 @@ const Login = (props) => {
                 if (pass === loginApi[i].Password) {
                     checkPass = true
 
+
+
+                    setLoading(false)
+                    theme.setDisplay(true)
+                    console.log(loginApi[i])
+                    // lan.setOnuser(loginApi[i].Name)
+                    console.log(theme.onUser)
+                    localStorage.setItem('display', JSON.stringify(theme.display));
+                    localStorage.setItem('username', JSON.stringify(theme.onUser));
+
                     setEmail('')
                     setPass('')
                     setTimeout(() => {
-                        setValidation1('')
-                        setLoading(false)
                         
+                        setLoading(false)
+                        setValidation1('')
+
+
+                        theme.setOnuser(loginApi[i].Name)
+                        setLoading(true)
+
+                        theme.setVisibility(false)
+                        // navigate('/profile')
+
+
                     }, 3000);
                 }
             }
         };
-        if (checkEmail == false && checkPass == false) {
+
+        if (checkEmail == false || checkPass == false) {
             setLoading(false)
 
             setTimeout(() => {
@@ -535,13 +548,7 @@ const Login = (props) => {
             }, 3000);
 
         }
-
-
-
     };
-
-
-
     return (
         <div className='all-login'>
             <form>
@@ -587,11 +594,6 @@ const Login = (props) => {
         </div>
     )
 }
-
-const logOut = () => {
-
-}
-
 
 const Register = () => {
 
@@ -787,5 +789,5 @@ const Register = () => {
     )
 }
 
-export { Login, Register, logOut }
+export { Login, Register, }
 export default Header;
