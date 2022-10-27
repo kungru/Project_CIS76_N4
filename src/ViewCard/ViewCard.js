@@ -3,7 +3,10 @@ import { useState, useRef, useEffect } from 'react';
 import { Routes, Route, Link, NavLink, useNavigate } from 'react-router-dom';
 import { Table, Container, Row } from 'reactstrap';
 import './ViewCard.css'
+import { useContext } from 'react';
+import { ThemeContext } from '../App';
 const ViewCard = () => {
+  const theme = useContext(ThemeContext)
   const [dataCard, setDataCard] = useState([])
   const [returnShop, setReturnShop] = useState(true)
   useEffect(() => {
@@ -37,10 +40,11 @@ const ViewCard = () => {
 
 
 
-  const handelSetCouse = (id, price) => {
+  const handelSetCouse = (id, url) => {
     const checkId = dataCard.find(c => c.id === id)
     if (checkId) {
-      if (checkId.quantity < 10) {
+     
+        // theme.setCount(theme.count + 1)
         const fakePrice = checkId.price *= 2
         const fakeQuantity = checkId.quantity += 1
 
@@ -71,7 +75,7 @@ const ViewCard = () => {
           .catch(err => {
             console.error(err)
           })
-      }
+      
     }
 
 
@@ -102,6 +106,7 @@ const ViewCard = () => {
     const checkId = dataCard.find(c => c.id === id)
     if (checkId) {
       if (checkId.quantity > 1) {
+        // theme.setCount(theme.count + 1)
         const fakePrice = checkId.price /= 2
         const fakeQuantity = checkId.quantity -= 1
 
@@ -206,11 +211,11 @@ const ViewCard = () => {
             <Table>
               <tr>
                 <th className='border_view'>SUBTOTAL</th>
-                <td className='color'>${total1}.00</td>
+                <td className='color'>${total1}</td>
               </tr>
               <tr>
                 <th className='border_view'>TOTAL</th>
-                <td style={{ fontSize: '20px', position: 'absolute', right: '70rem' }}>${total1}.00</td>
+                <td style={{ fontSize: '20px', position: 'absolute', right: '70rem' }}>${total1}</td>
               </tr>
               <tr>
                 <button className='btn1_viewcard'><Link to='/checkoutCart'>PROCEE TO CHECKOUT</Link></button>

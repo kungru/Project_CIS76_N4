@@ -5,7 +5,12 @@ import { Spinner } from 'reactstrap';
 import DetailPopup from '../detail_popup/detailPopup';
 import CatalogMagic from '../../Loading/CatalogMagic';
 import './Content.css';
-const Content = () => {
+import { useContext } from 'react';
+import { ThemeContext } from '../../App';
+const Content = ( ) => {
+    const theme = useContext(ThemeContext)
+    
+  
   const params = useParams()
   const [cards, setCards] = useState([]);
   const [addtoCards, setAddtoCards] = useState([]);
@@ -27,11 +32,11 @@ const Content = () => {
 
           setIsLoading(false)
         });
-
+      
     }, []
 
   )
-  console.log(cards)
+
   const [isData1, setIsData1] = useState(true)
   const [isData2, setIsData2] = useState(true)
   // api addtocard
@@ -146,14 +151,16 @@ const Content = () => {
     setStylePopup('')
 
   }
+
+  
   const handelAddtoCart1 = (id, url, name, price, shape, style) => {
     console.log(id)
-    const newCard1 = { id, name, style, shape, url, price, quantity: 1 }
+    const newCard1 = { id, name, style, shape, url, price, quantity: theme.count }
     const checkIdCart = addtoCards1.find(c => c.id === id)
 
     // setIsData1(!isData1)
     if (checkIdCart) {
-      const checkQuantity1 = checkIdCart.quantity += 1;
+      const checkQuantity1 = checkIdCart.quantity += theme.count;
 
       fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
         method: 'PUT',
@@ -199,54 +206,31 @@ const Content = () => {
           setIsLoading(false)
         });
     }
+
+    theme.setCount(1)
   }
   
   
+   
   
   const handelSumUp = (id) => {
-
+    // setCount(prev => prev + 1)
     // const totalUp = addtoCards1.find(c => c.id === id)
-    // if (totalUp) {
-
-      
-    //   if (totalUp.quantity < 3) {
-    //     const checkDetailQuantity = totalUp.quantity += 1;
-    //     const checkDetailPrice = totalUp.price *= 2;
-    //     console.log(checkDetailQuantity)
-
-    //     fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
-    //       method: 'PUT',
-    //       crossDomain: true,
-    //       xhrFields: {
-    //         withCredentials: true
-    //       },
-    //       headers: {
-    //         Accept: 'application/json',
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({
-    //         quantity: checkDetailQuantity,
-    //         price: checkDetailPrice
-
-    //       })
-    //     })
-    //       .then(res => {
-    //         res.json().then((res) => {
-
-
-    //           setIsData1(!isData1)
-    //         })
-    //       })
-    //       .catch(err => {
-    //         console.error(err)
-    //       })
-
-    //   }
-    // }
-
+    
+    
+      // theme.setCount(theme.count + 1)
+    
+    
+   
   }
   const handelSumDown = (id) => {
+    // setCount(prev => prev - 1)
+    // if(theme.count > 1){
 
+    //   theme.setCount(theme.count - 1)
+    // }
+   
+    
 
   }
 
@@ -281,9 +265,11 @@ const Content = () => {
                     onAddtoCard={handelAddtoCard}
                     onDisplay={handlePopup}
                     id={item.id}
+                    
                     quantity={item.quantity}
                     setIsShowDetail={setDetailPopup}
 
+                    // count={count}
                   />
                 )
               })}

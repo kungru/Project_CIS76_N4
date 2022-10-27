@@ -15,17 +15,18 @@ function ProductDetail(){
               return (res.json())
             }).then((data) => {
     
-              setCards(data);
+              setCards(data
+              );
     
               setIsLoading(false)
+              const thisProducts = cards.find(prod=>prod.id===productId)
             });
     
         }, []
     
       )
 
-    // const {productId}=useParams()
-    // const thisProducts = cards.find(prod=>prod.id===productId)
+    const {productId}=useParams()
    
     return(
         

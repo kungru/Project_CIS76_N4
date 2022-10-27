@@ -24,6 +24,8 @@ export const ThemeContext = createContext()
 // import Container_card from './Page/Body/Container_card';
 function App() {
   const [cards, setCards] = useState([]);
+  const [ count, setCount] = useState(1)
+  
 
   useEffect(
     () => {
@@ -75,6 +77,8 @@ function App() {
   }
 
   const Content_test = () => {
+  // const [ count, setCount] = useState('1')
+
     return <>
 
       <Row>
@@ -136,7 +140,7 @@ function App() {
 
   return (
 
-
+    <ThemeContext.Provider value={{count:count, setCount:setCount}}>
     <div className='App'>
 
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
@@ -164,7 +168,7 @@ function App() {
           <Route path="/detail" element={<DetailPage/>}/>
           <Route path="/crud" element={<Crud_test />} />
           <Route path='/card' element={<ViewCard_test />} />
-          <Route path='/shop' element={<Content_test />} />
+          <Route path='/shop' element={<Content_test value = { { count: count, setCount: setCount } } />} />
             <Route path='/shop/:productId' element={<ProductDetail/>}>
        
           </Route>
@@ -181,6 +185,7 @@ function App() {
 
 
     </div>
+    </ThemeContext.Provider>
   );
 }
 
