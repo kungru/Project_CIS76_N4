@@ -2,10 +2,13 @@ import Container_card from '../Body/Container_card';
 import { Link, NavLink, parsePath, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Spinner } from 'reactstrap';
+import { useContext } from 'react';
 import DetailPopup from '../detail_popup/detailPopup';
 import CatalogMagic from '../../Loading/CatalogMagic';
+import ContextLanguage from '../Context/ContextLanguage';
 import './Content.css';
 const Content = () => {
+  const lan=useContext(ContextLanguage)
   const params = useParams()
   const [cards, setCards] = useState([]);
   const [addtoCards, setAddtoCards] = useState([]);
@@ -55,71 +58,141 @@ const Content = () => {
 
   const handelAddtoCard = (id, name, style, shape, price, url) => {
 
+if (lan.display==true){
+  const newCard = {
+    id,
+    name,
+    style,
+    shape,
 
-    const newCard = {
-      id,
-      name,
-      style,
-      shape,
+    url,
+    price,
+    quantity: 1
+  }
 
-      url,
-      price,
-      quantity: 1
-    }
+  const checkId = addtoCards.find(c => c.id === id)
 
-    const checkId = addtoCards.find(c => c.id === id)
+  if (checkId) {
 
-    if (checkId) {
+    // parseInt(checkId.quantity)
+    const checkQuantity = checkId.quantity += 1;
 
-      // parseInt(checkId.quantity)
-      const checkQuantity = checkId.quantity += 1;
-
-      fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
-        method: 'PUT',
-        crossDomain: true,
-        xhrFields: {
-          withCredentials: true
-        },
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          quantity: checkQuantity,
-        })
+    fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
+      method: 'PUT',
+      crossDomain: true,
+      xhrFields: {
+        withCredentials: true
+      },
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        quantity: checkQuantity,
       })
-        .then(res => {
-          res.json().then((res) => {
+    })
+      .then(res => {
+        res.json().then((res) => {
 
-            console.log("vao day")
-            setIsData1(!isData1)
-          })
-        })
-        .catch(err => {
-          console.log("looix")
-          console.error(err)
-        })
-
-
-
-    } else {
-
-      fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
-        method: 'POST',
-        headers: {
-          Acceps: 'application/json',
-          'content-Type': 'application/json'
-        },
-        body: JSON.stringify(newCard)
-      })
-        .then((res) => {
-          return (res.json())
-        }).then((data) => {
+          console.log("vao day")
           setIsData1(!isData1)
+        })
+      })
+      .catch(err => {
+        console.log("looix")
+        console.error(err)
+      })
 
-          setIsLoading(false)
-        });
-    }
+
+
+  } else {
+
+    fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
+      method: 'POST',
+      headers: {
+        Acceps: 'application/json',
+        'content-Type': 'application/json'
+      },
+      body: JSON.stringify(newCard)
+    })
+      .then((res) => {
+        return (res.json())
+      }).then((data) => {
+        setIsData1(!isData1)
+
+        setIsLoading(false)
+      });
+  }
+
+ } else{
+  window.alert('phai dang nhap')
+ }
+    // const newCard = {
+    //   id,
+    //   name,
+    //   style,
+    //   shape,
+
+    //   url,
+    //   price,
+    //   quantity: 1
+    // }
+
+    // const checkId = addtoCards.find(c => c.id === id)
+
+    // if (checkId) {
+
+    //   // parseInt(checkId.quantity)
+    //   const checkQuantity = checkId.quantity += 1;
+
+    //   fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
+    //     method: 'PUT',
+    //     crossDomain: true,
+    //     xhrFields: {
+    //       withCredentials: true
+    //     },
+    //     headers: {
+    //       Accept: 'application/json',
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       quantity: checkQuantity,
+    //     })
+    //   })
+    //     .then(res => {
+    //       res.json().then((res) => {
+
+    //         console.log("vao day")
+    //         setIsData1(!isData1)
+    //       })
+    //     })
+    //     .catch(err => {
+    //       console.log("looix")
+    //       console.error(err)
+    //     })
+
+
+
+    // } else {
+
+    //   fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
+    //     method: 'POST',
+    //     headers: {
+    //       Acceps: 'application/json',
+    //       'content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(newCard)
+    //   })
+    //     .then((res) => {
+    //       return (res.json())
+    //     }).then((data) => {
+    //       setIsData1(!isData1)
+
+    //       setIsLoading(false)
+    //     });
+    // }
+
+
   }
   // const a=cards.filter((e)=>e.id==id)
   const [popupInfo, setPopupInfo] = useState('')

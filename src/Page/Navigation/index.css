@@ -58,7 +58,7 @@ a{
 padding: 0;
 margin: 0;
     position: fixed;
-    z-index: 99999;
+    z-index: 8;
    
     
 }
@@ -232,6 +232,7 @@ header-firs
 
 .all-dark-login{
   visibility: hidden;
+  height: 100vh !important;
   background: #0000009e;
   /* z-index: 1000; */
   width: 100%;

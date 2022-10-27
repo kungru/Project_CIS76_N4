@@ -308,13 +308,13 @@ const Header = () => {
 
                     </NavItem>
                     <NavItem>
-                        <a className='flex__quantity'
+                        <div className='flex__quantity'
 
                             href="#"
                         >
                             <i onClick={handelSaveCard} className="bx bx-shopping-bag"></i>
                             <span className='quantity_sum1'>{totalQuantity}</span>
-                        </a>
+                        </div>
                     </NavItem>
                 </Nav>
 
@@ -527,7 +527,7 @@ const Login = (props) => {
                     setLoading(false)
                     lan.setDisplay(true)
                     console.log(loginApi[i])
-                    lan.setOnuser(loginApi[i].Name)
+                    // lan.setOnuser(loginApi[i].Name)
                     console.log(lan.onUser)
                     localStorage.setItem('display', JSON.stringify(lan.display));
                     localStorage.setItem('username', JSON.stringify(lan.onUser));
@@ -535,7 +535,7 @@ const Login = (props) => {
                     setPass('')
                     setTimeout(() => {
                         setValidation1('')
-
+                        lan.setOnuser(loginApi[i].Name)
                         setLoading(true)
 
 

@@ -2,9 +2,11 @@ import './Container_card.css';
 import { React, useEffect, useState } from 'react';
 import { Card, CardBody, CardTitle, CardSubtitle, CardText, } from 'reactstrap';
 import DetailPopup from '../detail_popup/detailPopup';
+import { useContext } from 'react';
+import ContextLanguage from '../Context/ContextLanguage';
 import { Link } from 'react-router-dom';
 const Container_card = (props) => {
-
+  const lan=useContext(ContextLanguage);
   const [heartActive, setHeartActive] = useState(true);
   const [invi, setinvi] = useState(true)
   // const [detail,setIsShowDetail]=useState(false)
