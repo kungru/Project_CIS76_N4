@@ -11,12 +11,14 @@ import Scrolltop from './Page/Body/Scrolltop';
 import DetailPopup from './Page/detail_popup/detailPopup';
 import ContentHung from './Page/Body/ContentHung';
 import DetailPage from './Page/DetailPage/DetailPage';
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import ProductDetail from './Page/DetailPage/ProductDetail';
 import Crud from './Page/Crud/crud';
 import ViewCard from './ViewCard/ViewCard';
+import ContextLanguage from './Page/Context/ContextLanguage';
 import Checkout from './Checkout/Checkout';
 import { Container, Row, Col, Navlink } from 'reactstrap';
+
 import { Routes, Route, NavLink, Link, useNavigate } from 'react-router-dom'
 // import { Login } from './Page/Navigation/Navigation';
 import Profile from './Profile/Profile';
@@ -24,7 +26,7 @@ export const ThemeContext = createContext()
 // import Container_card from './Page/Body/Container_card';
 function App() {
   const [cards, setCards] = useState([]);
-
+  
   useEffect(
     () => {
       fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card')
@@ -133,14 +135,15 @@ function App() {
   }, [])
   const navigate = useNavigate()
   const [theme, setTheme] = useState()
-
+const [onUser,setOnuser]=useState('')
+const [display,setDisplay]=useState(false)
   return (
 
 
     <div className='App'>
-
-      <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0' }}>
-        <Row>
+<ContextLanguage.Provider value={{onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}} >
+      <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0',position:'relative'}}>
+        <Row style={{marginBottom:'106px',}}>
           <Navigation />
         </Row>
         <Scrolltop />
@@ -178,7 +181,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-
+      </ContextLanguage.Provider>
 
     </div>
   );

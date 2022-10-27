@@ -57,7 +57,8 @@ a{
 .header{
 padding: 0;
 margin: 0;
-    
+    position: fixed;
+    z-index: 99999;
    
     
 }
@@ -87,11 +88,13 @@ margin: 0;
     justify-content: space-between;
     font-family: work sans,sans-serif;
     background-color: #fff;
-    padding: 0px 51px 29px 51px;
-    margin-top: 49px;
+    padding: 29px 51px 29px 51px;
+    /* margin-top: 49px; */
+    height: 90px;
+    align-items: center;
     transition: all 0.5s ease;
     /* position: fixed; */
-
+ border-bottom: 1px solid #dee2e6;
 
 
 }
@@ -103,7 +106,7 @@ margin: 0;
 }
 
 .title_header{
-     margin-top: -17px;
+     /* margin-top: -17px; */
     height: 48px;
   
 }
@@ -302,6 +305,12 @@ header-firs
   margin-bottom: 17px;
   height: 72px;
 }
+.all-login{
+  cursor:default;
+}
+.all-register{
+  cursor: default;
+}
 .title-login-register{
   width: 100%;
   /* height: 200px; */
@@ -365,9 +374,14 @@ form{
   color: red;
     font-size: 14px;
     font-style: italic;
+    text-align: left;
     position: absolute;
-    bottom: -80px;
+    bottom: -100px;
     left: -17px;
+    width: 150px;
+}
+.error1{
+  cursor:auto;
 }
 .success{
   color: green;

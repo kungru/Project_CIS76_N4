@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef, useEffect, useContext } from 'react';
 import { ThemeContext } from '../../App';
 import { Routes, Route, Link, NavLink, useNavigate } from 'react-router-dom';
-
+import ContextLanguage from '../Context/ContextLanguage';
 import isEmpty from 'validator/lib/isEmpty'
 import { Spinner } from 'reactstrap';
 import './index.css'
@@ -13,7 +13,7 @@ import {
 
 
 const Header = () => {
-
+    
     const [position, setPosition] = useState('')
     // useEffect(() => {
     //     window.addEventListener('scroll', (e) => {
@@ -82,7 +82,7 @@ const Header = () => {
             if (apiUser[i].Email && apiUser[i].Password) {
                 setTimeout(() => {
                     setBlockLogin(0)
-                    divRef.current.style.visibility = 'hidden';
+                    divRef.current.style.visibility = '';
                 }, 3000)
             }
         };
@@ -101,7 +101,9 @@ const Header = () => {
     const [loadCard, setloadCard] = useState(true);
     //    const [total, setTotal] = useState(0)
     const blockRef = useRef()
-    const [totalHeader, setTotalHeader] = useState(false)
+    const [totalHeader, setTotalHeader] = useState(false);
+    const [onFormLogin, setOnFormLogin] = useState(false);
+    const [onFormRegister, setOnFormRegister] = useState(true)
     //    const [transition, setTransition] = useState(true)
     useEffect(
         () => {
@@ -159,10 +161,21 @@ const Header = () => {
         blockRef.current.style.visibility = 'hidden'
 
     }
+
+
     const totalQuantity = dataCard.reduce((items, { quantity }) => {
         // setIsData(!isData)
         return items + quantity
     }, 0)
+    const toggleFormLogin = (e) => {
+        setOnFormLogin(false)
+        setOnFormRegister(true);
+        if (onFormLogin == false) { e.currentTarget.style.backgroundColor = 'white' } else { e.currentTarget.style.backgroundColor = '#cccccc24' }
+    }
+    const toggleFormRegister = () => {
+        setOnFormRegister(false); setOnFormLogin(true)
+    }
+    const lan=useContext(ContextLanguage)
     return (
 
         <div className='header'  >
@@ -280,9 +293,12 @@ const Header = () => {
                     <NavItem>
                         <div ref={avartRef1}>
 
-                            <div to='/login' onClick={handelBlockLogin} href="#">
+                {lan.display ? <div>{lan.onUser}</div>: <div onClick={handelBlockLogin} href="#">
                                 <i className="fa-regular fa-user"></i>
-                            </div>
+                            </div>}            
+                {/* <div onClick={handelBlockLogin} href="#">
+                                <i className="fa-regular fa-user"></i>
+                            </div> */}
                         </div>
 
 
@@ -328,9 +344,9 @@ const Header = () => {
                                 quantity={item.quantity}
                                 onRemove={handelRemoveCard}
                             />
-                          
-                            
-                             
+
+
+
 
                         ))}
                         {blockCard ?
@@ -338,7 +354,7 @@ const Header = () => {
                             <p>No products in the cart.</p> : ''
                         }
                         <div className='total_card'>TOTAL: <div>${total}.00</div></div>
-                        <button onClick={handelViewCard}> 
+                        <button onClick={handelViewCard}>
                             CARD & CHECKOUT
                         </button>
                     </div>
@@ -348,30 +364,26 @@ const Header = () => {
             <div ref={divRef} className='all-dark-login' style={{ opacity: `${blockLogin}` }}>
                 <div className='form-login'  >
                     <div className='title-login-register'>
-                        <NavLink
+
+                        <div
                             activeClassName='active'
-                            className='title-login link-login '
+                            className='title-login link-login ' onClick={toggleFormLogin} style={{ backgroundColor: onFormLogin ? '#cccccc24' : 'white' }}>Login {onFormLogin ? '' : <Login onLogin={handelLogin} />}
 
-
-
-                            >Login {<Login onLogin={handelLogin} />}
-
-                        </NavLink>
-                        <NavLink
+                        </div>
+                        <div
                             className='title-register link-login'
-                            activeClassName='active'
+                            activeClassName='active' onClick={toggleFormRegister} style={{ backgroundColor: onFormRegister ? '#cccccc24' : 'white' }}
 
 
 
-
-                         >Register</NavLink>
+                        >Register {onFormRegister ? '' : <Register />}</div>
 
                     </div>
-                    <Routes>
+                    {/* <Routes>
                         <Route path='/login' element={<Login onLogin={handelLogin} />} />
                         <Route path='/register' element={<Register />} />
                         <Route path='/' />
-                    </Routes>
+                    </Routes> */}
 
                     <Link onClick={handelRemoveLogin} className='remove-block-login' to='/shop'>X</Link>
                 </div>
@@ -423,35 +435,23 @@ const ListProducts2 = (props) => {
 }
 
 const Login = (props) => {
-
-
-
-
     const navigate = useNavigate()
     const blockRef = useRef()
-
     const [loginApi, setLoginApi] = useState([])
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     const fakeEmail = email;
     const fakePass = pass;
-
+    const lan = useContext(ContextLanguage)
     const [loading, setLoading] = useState(true)
-
-
-
     useEffect(() => {
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
             .then((response) => {
                 return response.json()
             }).then((data) => {
                 setLoginApi(data)
-
-
-
             })
     }, [])
-
 
 
 
@@ -460,25 +460,17 @@ const Login = (props) => {
 
     const validationAll = () => {
         const msg = {}
-
         if (isEmpty(email)) {
             msg.email = 'Please input your Email'
         }
         if (isEmpty(pass)) {
             msg.pass = 'Please input your Password'
         }
-
-
-
-
         setValidation(msg)
         if (Object.keys(msg).length > 0) return false
         return true
     }
     const [loginSuccess, setLoginSuccess] = useState(null)
-
-
-
     const [isUser, setIsUser] = useState(true)
 
     // const [isData1,setIsData1] = useState(true)
@@ -494,7 +486,7 @@ const Login = (props) => {
             })
     }, [])
     const handelLogin = () => {
-
+        console.log(lan.onUser)
         const user = {
             email,
             pass,
@@ -533,11 +525,17 @@ const Login = (props) => {
                 if (pass === loginApi[i].Password) {
                     checkPass = true
                     setLoading(false)
-
+                    lan.setDisplay(true)
+                    console.log(loginApi[i])
+                    lan.setOnuser(loginApi[i].Name)
+                    console.log(lan.onUser)
+                    localStorage.setItem('display', JSON.stringify(lan.display));
+                    localStorage.setItem('username', JSON.stringify(lan.onUser));
                     setEmail('')
                     setPass('')
                     setTimeout(() => {
                         setValidation1('')
+
                         setLoading(true)
 
 
