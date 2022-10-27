@@ -15,7 +15,7 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import ProductDetail from './Page/DetailPage/ProductDetail';
 import Crud from './Page/Crud/crud';
 import ViewCard from './ViewCard/ViewCard';
-import ContextLanguage from './Page/Context/ContextLanguage';
+// import ContextLanguage from './Page/Context/ContextLanguage';
 import Checkout from './Checkout/Checkout';
 import { Container, Row, Col, Navlink } from 'reactstrap';
 
@@ -27,6 +27,9 @@ export const ThemeContext = createContext()
 function App() {
   const [cards, setCards] = useState([]);
   
+  const [ count, setCount] = useState(1)
+  
+
   useEffect(
     () => {
       fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card')
@@ -77,6 +80,8 @@ function App() {
   }
 
   const Content_test = () => {
+  // const [ count, setCount] = useState('1')
+
     return <>
 
       <Row>
@@ -139,9 +144,9 @@ const [onUser,setOnuser]=useState('')
 const [display,setDisplay]=useState(false)
   return (
 
-
+    <ThemeContext.Provider value={{count:count, setCount:setCount,onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}}>
     <div className='App'>
-<ContextLanguage.Provider value={{onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}} >
+{/* <ContextLanguage.Provider value={{onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}} > */}
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0',position:'relative'}}>
         <Row style={{marginBottom:'106px',}}>
           <Navigation />
@@ -167,7 +172,7 @@ const [display,setDisplay]=useState(false)
           <Route path="/detail" element={<DetailPage/>}/>
           <Route path="/crud" element={<Crud_test />} />
           <Route path='/card' element={<ViewCard_test />} />
-          <Route path='/shop' element={<Content_test />} />
+          <Route path='/shop' element={<Content_test value = { { count: count, setCount: setCount } } />} />
             <Route path='/shop/:productId' element={<ProductDetail/>}>
        
           </Route>
@@ -181,9 +186,10 @@ const [display,setDisplay]=useState(false)
           </Col>
         </Row>
       </Container>
-      </ContextLanguage.Provider>
+      {/* </ContextLanguage.Provider> */}
 
     </div>
+    </ThemeContext.Provider>
   );
 }
 

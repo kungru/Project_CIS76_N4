@@ -3,10 +3,11 @@ import { React, useEffect, useState } from 'react';
 import { Card, CardBody, CardTitle, CardSubtitle, CardText, } from 'reactstrap';
 import DetailPopup from '../detail_popup/detailPopup';
 import { useContext } from 'react';
-import ContextLanguage from '../Context/ContextLanguage';
+// import ContextLanguage from '../Context/ContextLanguage';
+import { ThemeContext } from '../../App';
 import { Link } from 'react-router-dom';
 const Container_card = (props) => {
-  const lan=useContext(ContextLanguage);
+  const theme=useContext(ThemeContext);
   const [heartActive, setHeartActive] = useState(true);
   const [invi, setinvi] = useState(true)
   // const [detail,setIsShowDetail]=useState(false)
@@ -61,7 +62,8 @@ const Container_card = (props) => {
               <span className='card_price'>${props.price}</span>
 
 
-              <span>{props.quantity}</span></CardText>
+              {/* <span>{props.quantity}</span> */}
+              </CardText>
           }
         </CardBody>
       </Card>

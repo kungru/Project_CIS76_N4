@@ -5,10 +5,16 @@ import { Spinner } from 'reactstrap';
 import { useContext } from 'react';
 import DetailPopup from '../detail_popup/detailPopup';
 import CatalogMagic from '../../Loading/CatalogMagic';
-import ContextLanguage from '../Context/ContextLanguage';
+// import ContextLanguage from '../Context/ContextLanguage';
+import { ThemeContext } from '../../App';
+
 import './Content.css';
 const Content = () => {
-  const lan=useContext(ContextLanguage)
+ 
+
+    const theme = useContext(ThemeContext)
+    
+  
   const params = useParams()
   const [cards, setCards] = useState([]);
   const [addtoCards, setAddtoCards] = useState([]);
@@ -30,11 +36,11 @@ const Content = () => {
 
           setIsLoading(false)
         });
-
+      
     }, []
 
   )
-  console.log(cards)
+
   const [isData1, setIsData1] = useState(true)
   const [isData2, setIsData2] = useState(true)
   // api addtocard
@@ -58,7 +64,7 @@ const Content = () => {
 
   const handelAddtoCard = (id, name, style, shape, price, url) => {
 
-if (lan.display==true){
+if (theme.display==true){
   const newCard = {
     id,
     name,
@@ -219,14 +225,16 @@ if (lan.display==true){
     setStylePopup('')
 
   }
+
+  
   const handelAddtoCart1 = (id, url, name, price, shape, style,quantity) => {
     console.log(id)
-    const newCard1 = { id, name, style, shape, url, price, quantity }
+    const newCard1 = { id, name, style, shape, url, price, quantity: theme.count }
     const checkIdCart = addtoCards1.find(c => c.id === id)
 
     // setIsData1(!isData1)
     if (checkIdCart) {
-      const checkQuantity1 = checkIdCart.quantity += 1;
+      const checkQuantity1 = checkIdCart.quantity += theme.count;
 
       fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
         method: 'PUT',
@@ -272,54 +280,31 @@ if (lan.display==true){
           setIsLoading(false)
         });
     }
+
+    theme.setCount(1)
   }
   
   
+   
   
   const handelSumUp = (id) => {
-
+    // setCount(prev => prev + 1)
     // const totalUp = addtoCards1.find(c => c.id === id)
-    // if (totalUp) {
-
-      
-    //   if (totalUp.quantity < 3) {
-    //     const checkDetailQuantity = totalUp.quantity += 1;
-    //     const checkDetailPrice = totalUp.price *= 2;
-    //     console.log(checkDetailQuantity)
-
-    //     fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
-    //       method: 'PUT',
-    //       crossDomain: true,
-    //       xhrFields: {
-    //         withCredentials: true
-    //       },
-    //       headers: {
-    //         Accept: 'application/json',
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({
-    //         quantity: checkDetailQuantity,
-    //         price: checkDetailPrice
-
-    //       })
-    //     })
-    //       .then(res => {
-    //         res.json().then((res) => {
-
-
-    //           setIsData1(!isData1)
-    //         })
-    //       })
-    //       .catch(err => {
-    //         console.error(err)
-    //       })
-
-    //   }
-    // }
-
+    
+    
+      // theme.setCount(theme.count + 1)
+    
+    
+   
   }
   const handelSumDown = (id) => {
+    // setCount(prev => prev - 1)
+    // if(theme.count > 1){
 
+    //   theme.setCount(theme.count - 1)
+    // }
+   
+    
 
   }
 
@@ -354,9 +339,11 @@ if (lan.display==true){
                     onAddtoCard={handelAddtoCard}
                     onDisplay={handlePopup}
                     id={item.id}
+                    
                     quantity={item.quantity}
                     setIsShowDetail={setDetailPopup}
 
+                    // count={count}
                   />
                 )
               })}

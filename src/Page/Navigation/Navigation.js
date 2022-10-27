@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef, useEffect, useContext } from 'react';
 import { ThemeContext } from '../../App';
 import { Routes, Route, Link, NavLink, useNavigate } from 'react-router-dom';
-import ContextLanguage from '../Context/ContextLanguage';
+// import ContextLanguage from '../Context/ContextLanguage';
 import isEmpty from 'validator/lib/isEmpty'
 import { Spinner } from 'reactstrap';
 import './index.css'
@@ -84,7 +84,7 @@ const Header = () => {
                     setBlockLogin(0)
                     divRef.current.style.visibility = '';
                 }, 3000)
-            }
+            } else {setBlockLogin(1)}
         };
     }
     const avartRef = useRef()
@@ -175,7 +175,7 @@ const Header = () => {
     const toggleFormRegister = () => {
         setOnFormRegister(false); setOnFormLogin(true)
     }
-    const lan=useContext(ContextLanguage)
+    const theme=useContext(ThemeContext)
     return (
 
         <div className='header'  >
@@ -293,7 +293,7 @@ const Header = () => {
                     <NavItem>
                         <div ref={avartRef1}>
 
-                {lan.display ? <div>{lan.onUser}</div>: <div onClick={handelBlockLogin} href="#">
+                {theme.display ? <div>{theme.onUser}</div>: <div onClick={handelBlockLogin} href="#">
                                 <i className="fa-regular fa-user"></i>
                             </div>}            
                 {/* <div onClick={handelBlockLogin} href="#">
@@ -442,7 +442,7 @@ const Login = (props) => {
     const [pass, setPass] = useState('')
     const fakeEmail = email;
     const fakePass = pass;
-    const lan = useContext(ContextLanguage)
+    const theme = useContext(ThemeContext)
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
@@ -486,7 +486,7 @@ const Login = (props) => {
             })
     }, [])
     const handelLogin = () => {
-        console.log(lan.onUser)
+        console.log(theme.onUser)
         const user = {
             email,
             pass,
@@ -525,19 +525,19 @@ const Login = (props) => {
                 if (pass === loginApi[i].Password) {
                     checkPass = true
                     setLoading(false)
-                    lan.setDisplay(true)
+                    theme.setDisplay(true)
                     console.log(loginApi[i])
                     // lan.setOnuser(loginApi[i].Name)
-                    console.log(lan.onUser)
-                    localStorage.setItem('display', JSON.stringify(lan.display));
-                    localStorage.setItem('username', JSON.stringify(lan.onUser));
+                    console.log(theme.onUser)
+                    localStorage.setItem('display', JSON.stringify(theme.display));
+                    localStorage.setItem('username', JSON.stringify(theme.onUser));
                     setEmail('')
                     setPass('')
                     setTimeout(() => {
                         setValidation1('')
-                        lan.setOnuser(loginApi[i].Name)
+                        theme.setOnuser(loginApi[i].Name)
                         setLoading(true)
-
+                        
 
                         // navigate('/profile')
 
@@ -547,7 +547,7 @@ const Login = (props) => {
         };
         if (checkEmail == false && checkPass == false) {
             setLoading(false)
-
+       
             setTimeout(() => {
                 setValidation1('Email or Password is not valid')
                 setLoading(true)

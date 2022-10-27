@@ -18,6 +18,7 @@ function ProductDetail(){
               setCards(data.find(prod=>prod.id===productId));
     
               setIsLoading(false)
+              const thisProducts = cards.find(prod=>prod.id===productId)
             });
     
         }, []
