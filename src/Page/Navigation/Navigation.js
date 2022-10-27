@@ -280,9 +280,9 @@ const Header = () => {
                     <NavItem>
                         <div ref={avartRef1}>
 
-                            <Link to='/login' onClick={handelBlockLogin} href="#">
+                            <div to='/login' onClick={handelBlockLogin} href="#">
                                 <i className="fa-regular fa-user"></i>
-                            </Link>
+                            </div>
                         </div>
 
 
@@ -354,7 +354,7 @@ const Header = () => {
 
 
 
-                            to='/login' >Login
+                            >Login {<Login onLogin={handelLogin} />}
 
                         </NavLink>
                         <NavLink
@@ -364,7 +364,7 @@ const Header = () => {
 
 
 
-                            to='/register' >Register</NavLink>
+                         >Register</NavLink>
 
                     </div>
                     <Routes>

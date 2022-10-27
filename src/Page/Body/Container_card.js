@@ -50,7 +50,7 @@ const Container_card = (props) => {
                 <i class="fa-regular fa-eye" onClick={showPopup}></i>
               </div>
               <span className='card_price'>${props.price}</span>
-              <span>{props.quantity}</span>
+              {/* <span>{props.quantity}</span> */}
             </CardText> : <CardText className='textcard_notinvi'><div className='card_notinvi'>
               {heartActive ? <i class='bx bx-heart' onClick={changeHeart}></i> : <i class='bx bxs-heart' onClick={changeHeart} ></i>}
               <i onClick={handelAddtoCard} class='bx bx-shopping-bag' ></i>

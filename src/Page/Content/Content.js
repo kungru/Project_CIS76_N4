@@ -146,9 +146,9 @@ const Content = () => {
     setStylePopup('')
 
   }
-  const handelAddtoCart1 = (id, url, name, price, shape, style) => {
+  const handelAddtoCart1 = (id, url, name, price, shape, style,quantity) => {
     console.log(id)
-    const newCard1 = { id, name, style, shape, url, price, quantity: 1 }
+    const newCard1 = { id, name, style, shape, url, price, quantity }
     const checkIdCart = addtoCards1.find(c => c.id === id)
 
     // setIsData1(!isData1)
