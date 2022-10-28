@@ -177,7 +177,22 @@ const Header = () => {
     const toggleFormRegister = () => {
         setOnFormRegister(false); setOnFormLogin(true)
     }
+    const [local, setLocal] = useState([])
+    const [localDisplay, setLocalDisplay ] = useState(null)
+    useEffect(()=> {
+        const json = JSON.parse(localStorage.getItem('usename'))
+        
+        const jsonDisplay = JSON.parse(localStorage.getItem('display'))
+        setLocal(json)
+        setLocalDisplay(jsonDisplay)
 
+        console.log(local.email)
+
+        
+
+
+        
+    },[])
 
     return (
 
@@ -296,7 +311,7 @@ const Header = () => {
                     <NavItem>
                         <div ref={avartRef1}>
 
-                            {theme.display ? <div><Link to='/profile'> {theme.onUser}</Link></div> : <div onClick={handelBlockLogin} href="#">
+                            {theme.display == true ? <div><Link to='/profile'> {theme.onUser}</Link></div> : <div onClick={handelBlockLogin} href="#">
                                 <i className="fa-regular fa-user"></i>
                             </div>}
                             {/* <div onClick={handelBlockLogin} href="#">
@@ -438,6 +453,7 @@ const Login = (props) => {
     }, [])
 
 
+    
 
     const [validation, setValidation] = useState('')
     const [validation1, setValidation1] = useState('')
@@ -470,14 +486,9 @@ const Login = (props) => {
     //         })
     // }, [])
     const handelLogin = () => {
-        console.log(theme.onUser)
-        const user = {
-            email,
-            pass,
-
-
-        }
-        localStorage.setItem('key', JSON.stringify(user))
+       
+        
+      
         props.onLogin(props.email, props.pass)
 
         // fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
@@ -508,17 +519,22 @@ const Login = (props) => {
                 checkEmail = true
                 if (pass === loginApi[i].Password) {
                     checkPass = true
-
-
+                    const user = {
+                        email,
+                        pass,
+                       
+                        
+                        
+                    }
+                    localStorage.setItem('key', JSON.stringify(user))
 
                     setLoading(false)
                     theme.setDisplay(true)
-                    console.log(loginApi[i])
+                    // console.log(loginApi[i])
                     // lan.setOnuser(loginApi[i].Name)
                     console.log(theme.onUser)
                     localStorage.setItem('display', JSON.stringify(theme.display));
-                    localStorage.setItem('username', JSON.stringify(theme.onUser));
-
+                    
                     setEmail('')
                     setPass('')
                     setTimeout(() => {
@@ -526,15 +542,16 @@ const Login = (props) => {
                         setLoading(false)
                         setValidation1('')
 
-
+                        
                         theme.setOnuser(loginApi[i].Name)
                         setLoading(true)
-
+                        
                         theme.setVisibility(false)
                         // navigate('/profile')
-
-
+                        
+                        
                     }, 3000);
+                    localStorage.setItem('username', JSON.stringify(theme.onUser));
                 }
             }
         };
