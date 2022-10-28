@@ -101,6 +101,11 @@ const ViewCard = () => {
   }
 
   const total1 = dataCard.reduce((items, item) => items + Math.floor(item.price), 0)
+  const totalQuantity1 = dataCard.reduce((items, { quantity }) => {
+    // setIsData(!isData)
+    return items + quantity
+}, 0)
+const totalPrice1 = total1 * totalQuantity1
   const handelSetCouse1 = (id, price) => {
 
     const checkId = dataCard.find(c => c.id === id)
@@ -211,11 +216,11 @@ const ViewCard = () => {
             <Table>
               <tr>
                 <th className='border_view'>SUBTOTAL</th>
-                <td className='color'>${total1}.00</td>
+                <td className='color'>${totalPrice1}.00</td>
               </tr>
               <tr>
                 <th className='border_view'>TOTAL</th>
-                <td style={{ fontSize: '20px', position: 'absolute', right: '70rem' }}>${total1}.00</td>
+                <td style={{ fontSize: '20px', position: 'absolute', right: '70rem' }}>${totalPrice1}.00</td>
               </tr>
               <tr>
                 <button className='btn1_viewcard'><Link to='/checkoutCart'>PROCEE TO CHECKOUT</Link></button>

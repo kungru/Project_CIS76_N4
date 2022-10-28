@@ -4,7 +4,7 @@ import { ThemeContext } from '../../App';
 import { Routes, Route, Link, NavLink, useNavigate } from 'react-router-dom';
 // import ContextLanguage from '../Context/ContextLanguage';
 import isEmpty from 'validator/lib/isEmpty'
-import { Spinner } from 'reactstrap';
+import { Button, Spinner } from 'reactstrap';
 import './index.css'
 import {
     Nav,
@@ -47,8 +47,8 @@ const Header = () => {
                 setApiUser(data)
 
             })
-        }, [])
-        
+    }, [])
+
     const handleBlock = (e) => {
         inputRef.current.focus()
         setRemoveblock(true)
@@ -63,7 +63,7 @@ const Header = () => {
     const handelBlockLogin = () => {
         // setBlockLogin(1)
         theme.setVisibility(true)
-       
+
     }
     const handelRemoveLogin = () => {
         // setBlockLogin(0)
@@ -84,13 +84,13 @@ const Header = () => {
                 // setTimeout(() => {
                 //     // setBlockLogin(0)
                 //     // divRef.current.style.visibility = 'hidden';
-                    
+
                 //     navigate('/profile')
                 // }, 3000)
             }
         };
     }
-    
+
     const avartRef = useRef()
     const avartRef1 = useRef()
 
@@ -115,16 +115,18 @@ const Header = () => {
                 .then((res) => {
                     return (res.json())
                 }).then((data) => {
-                    
-                    if(theme.renderCart == true){
 
-                        setDataCard(data) 
-                    }else{
+                    if (theme.renderCart == true) {
+
+                        setDataCard(data)
+                    } else {
                         setDataCard([])
+                        theme.setClearCart(false)
+
                     }
-                    
-                   
-                    
+
+
+
                     // setIsData(!isData)
                     setloadCard(false)
 
@@ -135,15 +137,14 @@ const Header = () => {
                         setBlockCard(false)
                     }
                 });
-        }, [isData]
+        }, [theme.isDataApp]
     )
     const handelSaveCard = () => {
-        setIsData(!isData)
+        // theme.setIsDataApp(!theme.isDataApp)
         setCards(30)
         setRemoveCards(true)
         blockRef.current.style.visibility = 'visible'
     }
-    const total = dataCard.reduce((items, item) => items + Math.floor(item.price), 0)
     const handelRemoveBlock = () => {
         setCards(0)
         setRemoveCards(false)
@@ -154,8 +155,8 @@ const Header = () => {
         fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/${id}`, {
             method: 'DELETE',
         })
-        .then(res => res.text()) // or res.json()
-        .then(res => {
+            .then(res => res.text()) // or res.json()
+            .then(res => {
                 // setIsData(arr)
                 // setTotal(total)
                 setIsData(!isData)
@@ -174,10 +175,13 @@ const Header = () => {
     }
 
 
+    const total = dataCard.reduce((items, item) => items + Math.floor(item.price), 0)
     const totalQuantity = dataCard.reduce((items, { quantity }) => {
         // setIsData(!isData)
         return items + quantity
     }, 0)
+    const totalPrice = total * totalQuantity
+    // console.log(totalPrice)
     const toggleFormLogin = (e) => {
         setOnFormLogin(false)
         setOnFormRegister(true);
@@ -187,21 +191,25 @@ const Header = () => {
         setOnFormRegister(false); setOnFormLogin(true)
     }
     const [local, setLocal] = useState([])
-    const [localDisplay, setLocalDisplay ] = useState(null)
-    useEffect(()=> {
+    const [localDisplay, setLocalDisplay] = useState(null)
+    useEffect(() => {
         const json = JSON.parse(localStorage.getItem('usename'))
-        
+
         const jsonDisplay = JSON.parse(localStorage.getItem('display'))
         setLocal(json)
         setLocalDisplay(jsonDisplay)
 
-        console.log(local.email)
 
-        
-
-
-        
-    },[])
+    }, [])
+    const handelClearCart = () => {
+        // theme.setRenderCart(false)  
+        theme.setClearCart(false)
+    }
+    
+    const handelReturnToShop = () => {
+            navigate('/shop')
+            blockRef.current.style.visibility = 'hidden'
+    }
 
     return (
 
@@ -361,7 +369,7 @@ const Header = () => {
                     {loadCard && <Spinner className='loadcard'>Loading...</Spinner>}
                     <div className='card__1'>
 
-                        {   dataCard.map((item, index) => (
+                        {dataCard.map((item, index) => (
                             <ListProducts
                                 key={item.id}
                                 price={item.price}
@@ -370,25 +378,30 @@ const Header = () => {
                                 id={item.id}
                                 quantity={item.quantity}
                                 onRemove={handelRemoveCard}
-                            /> 
+                            />
 
 
 
 
-                        )) }
-                        {blockCard ?
+                        ))}
+                        {theme.textBlock ?
 
-                            <p>No products in the cart.</p> : ''
+                            <>
+                                <p>No products in the cart.</p>
+                                <button onClick={handelReturnToShop}>REATURN TO SHOP</button>
+                            </>
+                             : ''
                         }
-                        {theme.renderCart == true? <div className='total_card'>TOTAL: <div>${total}.00</div></div> : '' }
-                        <button onClick={handelViewCard}>
+                        {/* {theme.clearCart ? <button onClick={handelClearCart}>CLEAR CART  </button> : ''} */}
+                        {theme.renderCart == true ? <div className='total_card'>TOTAL: <div>${totalPrice}.00</div></div> : ''}
+                        {theme.renderCart == true ? <button onClick={handelViewCard}>
                             CARD & CHECKOUT
-                        </button>
+                        </button> : ''}
                     </div>
                 </div>
             </div>
 
-            { theme.visibility ? <div ref={divRef} className='all-dark-login' >
+            {theme.visibility ? <div ref={divRef} className='all-dark-login' >
                 <div className='form-login'  >
                     <div className='title-login-register'>
 
@@ -462,7 +475,7 @@ const Login = (props) => {
     }, [])
 
 
-    
+
 
     const [validation, setValidation] = useState('')
     const [validation1, setValidation1] = useState('')
@@ -495,9 +508,9 @@ const Login = (props) => {
     //         })
     // }, [])
     const handelLogin = () => {
-       
-        
-      
+
+
+
         props.onLogin(props.email, props.pass)
 
         // fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
@@ -531,9 +544,9 @@ const Login = (props) => {
                     const user = {
                         email,
                         pass,
-                       
-                        
-                        
+
+
+
                     }
                     localStorage.setItem('key', JSON.stringify(user))
 
@@ -543,22 +556,22 @@ const Login = (props) => {
                     // lan.setOnuser(loginApi[i].Name)
                     console.log(theme.onUser)
                     localStorage.setItem('display', JSON.stringify(theme.display));
-                    
+
                     setEmail('')
                     setPass('')
                     setTimeout(() => {
-                        
+
                         setLoading(false)
                         setValidation1('')
 
                         theme.setRenderCart(true)
                         theme.setOnuser(loginApi[i].Name)
                         setLoading(true)
-                        
+
                         theme.setVisibility(false)
                         // navigate('/profile')
-                        
-                        
+
+
                     }, 3000);
                     localStorage.setItem('username', JSON.stringify(theme.onUser));
                 }
@@ -622,7 +635,7 @@ const Login = (props) => {
 }
 
 const Register = () => {
-    
+
     const [registerApi, setRegisterApi] = useState(null)
     const [isRegister, setIsRegister] = useState(true)
 
@@ -674,7 +687,7 @@ const Register = () => {
         if (Object.keys(msg).length > 0) return false
         return true
     }
-   
+
     const handelRegister = () => {
 
 
@@ -701,55 +714,55 @@ const Register = () => {
         else if (pass.length < 5) {
             msg1.pass = "Minimum length 5 characters"
 
-        }else if(email){
+        } else if (email) {
 
         }
-         else {
-            
+        else {
+
             setLoading(false)
-           
-            
 
-          
-                const newUser = {
-                    Name: lastname,
-                    Email: email,
-                    Password: pass,
-                }
 
-                fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User', {
 
-                    method: 'POST',
-                    headers: {
-                        Acceps: 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(newUser)
+
+            const newUser = {
+                Name: lastname,
+                Email: email,
+                Password: pass,
+            }
+
+            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User', {
+
+                method: 'POST',
+                headers: {
+                    Acceps: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            })
+
+
+
+                .then((response) => {
+                    return response.json()
+                }).then((data) => {
+                    setRegisterApi(data)
+                    setIsRegister(!isRegister)
+
                 })
 
+            setTimeout(() => {
 
+                setLoading(true)
+                setRegisterUp('Sign Up Success')
 
-                    .then((response) => {
-                        return response.json()
-                    }).then((data) => {
-                        setRegisterApi(data)
-                        setIsRegister(!isRegister)
+                setLastName('')
+                setFirtName('')
+                setEmail('')
+                setPass('')
+                setRepeatPass('')
 
-                    })
+            }, 3000);
 
-                setTimeout(() => {
-
-                    setLoading(true)
-                    setRegisterUp('Sign Up Success')
-
-                    setLastName('')
-                    setFirtName('')
-                    setEmail('')
-                    setPass('')
-                    setRepeatPass('')
-
-                }, 3000);
-            
         }
 
         setValidation1(msg1)

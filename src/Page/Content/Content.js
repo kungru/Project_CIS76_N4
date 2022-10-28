@@ -73,6 +73,7 @@ const Content = () => {
 
   const handelAddtoCard = (id, name, style, shape, price, url) => {
    
+
     // const json = localStorage.getItem('key')
     if (theme.display == true) {
       if(json1){
@@ -87,11 +88,12 @@ const Content = () => {
           price,
           quantity: 1
         }
-  
+        
         const checkId = addtoCards.find(c => c.id === id)
   
         if (checkId) {
-  
+          
+          theme.setIsDataApp(!theme.isDataApp)
           // parseInt(checkId.quantity)
           const checkQuantity = checkId.quantity += 1;
   
@@ -124,7 +126,9 @@ const Content = () => {
 
 
       } else {
-
+        theme.setClearCart(true)
+        theme.setTextBlock(false)
+        theme.setIsDataApp(!theme.isDataApp)
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
           method: 'POST',
           headers: {
@@ -245,6 +249,7 @@ const Content = () => {
 
 
     const handelAddtoCart1 = (id, url, name, price, shape, style, quantity) => {
+    
       if (theme.display == true) {
         
         const newCard1 = { id, name, style, shape, url, price, quantity: theme.count }
@@ -252,6 +257,7 @@ const Content = () => {
   
         // setIsData1(!isData1)
         if (checkIdCart) {
+          theme.setIsDataApp(!theme.isDataApp)
           const checkQuantity1 = checkIdCart.quantity += theme.count;
   
           fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
@@ -282,6 +288,10 @@ const Content = () => {
   
   
         } else {
+          theme.setTextBlock(false)
+          theme.setClearCart(true)
+         
+          theme.setIsDataApp(!theme.isDataApp)
           fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
             method: 'POST',
             headers: {
