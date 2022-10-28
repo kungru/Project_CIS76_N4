@@ -528,16 +528,17 @@ form{
     justify-content: space-around;
 }
 .card__1 button{
-  background: #fff;
   padding: 10px 20px;
   border: 1px solid #cccccb61;
   font-size: 12px;
   margin-left: 11rem;
   margin-top: 1rem;
+  background: black;
+  color: white;
 }
 .card__1 button:hover{
-  background-color: black;
-  color: #fff;
+  background: #80808080;
+    color: black;
   
 }
 

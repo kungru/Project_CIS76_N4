@@ -119,25 +119,27 @@ const Header = () => {
                     if (theme.renderCart == true) {
 
                         setDataCard(data)
+                       
+                      
+
                     } else {
                         setDataCard([])
-                        theme.setClearCart(false)
+                        // theme.setTextBlock(false)
 
                     }
-
-
-
                     // setIsData(!isData)
                     setloadCard(false)
-
-                    if (data.length < 0) {
-                        setBlockCard(true)
-                    }
-                    else {
-                        setBlockCard(false)
-                    }
                 });
-        }, [theme.isDataApp]
+                if(dataCard.length > 0){
+                    theme.setTextBlock(false)   
+                    theme.setClearCart(false)
+                }else{
+                    theme.setTextBlock(true)
+                    theme.setClearCart(true)
+
+
+                }
+        }, [theme.isDataApp, isData]
     )
     const handelSaveCard = () => {
         // theme.setIsDataApp(!theme.isDataApp)
@@ -205,10 +207,10 @@ const Header = () => {
         // theme.setRenderCart(false)  
         theme.setClearCart(false)
     }
-    
+
     const handelReturnToShop = () => {
-            navigate('/shop')
-            blockRef.current.style.visibility = 'hidden'
+        navigate('/shop')
+        blockRef.current.style.visibility = 'hidden'
     }
 
     return (
@@ -390,7 +392,7 @@ const Header = () => {
                                 <p>No products in the cart.</p>
                                 <button onClick={handelReturnToShop}>REATURN TO SHOP</button>
                             </>
-                             : ''
+                            : ''
                         }
                         {/* {theme.clearCart ? <button onClick={handelClearCart}>CLEAR CART  </button> : ''} */}
                         {theme.renderCart == true ? <div className='total_card'>TOTAL: <div>${totalPrice}.00</div></div> : ''}
@@ -557,9 +559,9 @@ const Login = (props) => {
                     console.log(theme.onUser)
                     localStorage.setItem('display', JSON.stringify(theme.display));
 
-                    setEmail('')
-                    setPass('')
                     setTimeout(() => {
+                        setEmail('')
+                        setPass('')
 
                         setLoading(false)
                         setValidation1('')
