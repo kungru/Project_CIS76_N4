@@ -79,12 +79,14 @@ const Header = () => {
         for (let i = 0; i < apiUser.length; i++) {
 
 
-            if (apiUser[i].Email && apiUser[i].Password) {
+            if (apiUser[i].Email ==email && apiUser[i].Password ==pass) {
                 setTimeout(() => {
                     setBlockLogin(0)
-                    divRef.current.style.visibility = '';
+                    divRef.current.style.visibility = 'hidden';
                 }, 3000)
-            } else {setBlockLogin(1)}
+            } else {setBlockLogin(1)
+                divRef.current.style.visibility='visible'
+            }
         };
     }
     const avartRef = useRef()
@@ -385,7 +387,7 @@ const Header = () => {
                         <Route path='/' />
                     </Routes> */}
 
-                    <Link onClick={handelRemoveLogin} className='remove-block-login' to='/shop'>X</Link>
+                    <div onClick={handelRemoveLogin} className='remove-block-login' >X</div>
                 </div>
                 <div className='dark-login-body'>
 

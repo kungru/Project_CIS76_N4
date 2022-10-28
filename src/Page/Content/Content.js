@@ -307,13 +307,32 @@ if (theme.display==true){
     
 
   }
+  const [alpha,setAlpha]=useState(true);
+const testSort=()=>{
+  const a=[...cards];
+  const t=a.sort((a,b)=> a>b? 1:-1)
+  console.log(cards[0].price)
+  setCards(t)
+  setAlpha(!alpha)
+}
 
 
+const testPrice=()=>{
+  console.log(cards[1].price)
+  let test=[]
+  for (let i =0;i<cards.length;i++){
+    if((cards[i].price<200)){
+      test.push(cards[i])
+      console.log(test)
+    }
+  }
+  setCards(test);
+}
   return (
-
-
     <div className='Content_container'>
       <div style={{ visibility: `${stylePopup}` }} className='dark_popup_1'></div>
+    {alpha ? <div><button onClick={testSort}>A to Z</button></div>: <div><button onClick={testSort}>Z to A</button></div>}  
+    <div><button onClick={testPrice}>Price</button></div>
       {params.id}
       {detail ?
         <DetailPopup onSumUp={handelSumUp} onSumDown={handelSumDown} onDetailAtc={handelAddtoCart1} hideDetail={hideDetail} id={popupInfo[[0]].id} name={popupInfo[0].name} price={popupInfo[0].price} url={popupInfo[0].url} quantity={popupInfo[0].quantity} />
