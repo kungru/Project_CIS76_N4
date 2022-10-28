@@ -42,6 +42,7 @@ const Profile = () => {
 
   }
   const handelLogOut = () => {
+    theme.setRenderCart(false)
     theme.setDisplay(false)
     navigate('/')
     localStorage.removeItem('username')

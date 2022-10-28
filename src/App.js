@@ -29,6 +29,7 @@ function App() {
   
   const [ count, setCount] = useState(1)
   const [price, setPrice] = useState()
+  const [renderCart, setRenderCart] = useState(false)
   
 
   useEffect(
@@ -149,7 +150,7 @@ const [visibility, setVisibility] = useState(false)
 
     // <ThemeContext.Provider value={{count:count, setCount:setCount ,price: price, setPrice:setPrice}}>
 
-    <ThemeContext.Provider value={{visibility: visibility, setVisibility: setVisibility,count:count, setCount:setCount,onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}}>
+    <ThemeContext.Provider value={{renderCart:renderCart, setRenderCart:setRenderCart ,visibility: visibility, setVisibility: setVisibility,count:count, setCount:setCount,onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}}>
     <div className='App'>
 {/* <ContextLanguage.Provider value={{onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}} > */}
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0',position:'relative'}}>

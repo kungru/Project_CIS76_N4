@@ -115,7 +115,16 @@ const Header = () => {
                 .then((res) => {
                     return (res.json())
                 }).then((data) => {
-                    setDataCard(data);
+                    
+                    if(theme.renderCart == true){
+
+                        setDataCard(data) 
+                    }else{
+                        setDataCard([])
+                    }
+                    
+                   
+                    
                     // setIsData(!isData)
                     setloadCard(false)
 
@@ -352,7 +361,7 @@ const Header = () => {
                     {loadCard && <Spinner className='loadcard'>Loading...</Spinner>}
                     <div className='card__1'>
 
-                        {dataCard.map((item, index) => (
+                        {   dataCard.map((item, index) => (
                             <ListProducts
                                 key={item.id}
                                 price={item.price}
@@ -361,17 +370,17 @@ const Header = () => {
                                 id={item.id}
                                 quantity={item.quantity}
                                 onRemove={handelRemoveCard}
-                            />
+                            /> 
 
 
 
 
-                        ))}
+                        )) }
                         {blockCard ?
 
                             <p>No products in the cart.</p> : ''
                         }
-                        <div className='total_card'>TOTAL: <div>${total}.00</div></div>
+                        {theme.renderCart == true? <div className='total_card'>TOTAL: <div>${total}.00</div></div> : '' }
                         <button onClick={handelViewCard}>
                             CARD & CHECKOUT
                         </button>
@@ -542,7 +551,7 @@ const Login = (props) => {
                         setLoading(false)
                         setValidation1('')
 
-                        
+                        theme.setRenderCart(true)
                         theme.setOnuser(loginApi[i].Name)
                         setLoading(true)
                         
@@ -613,8 +622,9 @@ const Login = (props) => {
 }
 
 const Register = () => {
-
+    
     const [registerApi, setRegisterApi] = useState(null)
+    const [isRegister, setIsRegister] = useState(true)
 
     useEffect(() => {
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
@@ -624,7 +634,7 @@ const Register = () => {
                 setRegisterApi(data)
 
             })
-    }, [])
+    }, [isRegister])
 
     const [email, setEmail] = useState('')
     const [firtname, setFirtName] = useState('')
@@ -664,7 +674,7 @@ const Register = () => {
         if (Object.keys(msg).length > 0) return false
         return true
     }
-
+   
     const handelRegister = () => {
 
 
@@ -691,15 +701,22 @@ const Register = () => {
         else if (pass.length < 5) {
             msg1.pass = "Minimum length 5 characters"
 
-        } else {
+        }else if(email){
 
+        }
+         else {
+            
             setLoading(false)
-            if (email !== registerApi.Email) {
+           
+            
+
+          
                 const newUser = {
                     Name: lastname,
                     Email: email,
                     Password: pass,
                 }
+
                 fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User', {
 
                     method: 'POST',
@@ -716,6 +733,7 @@ const Register = () => {
                         return response.json()
                     }).then((data) => {
                         setRegisterApi(data)
+                        setIsRegister(!isRegister)
 
                     })
 
@@ -731,7 +749,7 @@ const Register = () => {
                     setRepeatPass('')
 
                 }, 3000);
-            }
+            
         }
 
         setValidation1(msg1)
