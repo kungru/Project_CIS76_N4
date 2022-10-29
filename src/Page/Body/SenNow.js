@@ -13,7 +13,7 @@ const SenNow = () => {
             setTimeout(() => {
                 setSendThank(true)
             }, 2000)
-        }
+        } else {alert('Please type in question')}
 
     }
     return (

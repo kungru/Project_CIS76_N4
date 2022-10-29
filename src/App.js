@@ -26,10 +26,11 @@ export const ThemeContext = createContext()
 // import Container_card from './Page/Body/Container_card';
 function App() {
   const [cards, setCards] = useState([]);
-  
-  const [ count, setCount] = useState(1)
+
+  const [count, setCount] = useState(1)
   const [price, setPrice] = useState()
-  
+  const [renderCart, setRenderCart] = useState(false)
+
 
   useEffect(
     () => {
@@ -81,7 +82,7 @@ function App() {
   }
 
   const Content_test = () => {
-  // const [ count, setCount] = useState('1')
+    // const [ count, setCount] = useState('1')
 
     return <>
 
@@ -141,60 +142,74 @@ function App() {
   }, [])
   const navigate = useNavigate()
   const [theme, setTheme] = useState()
-const [onUser,setOnuser]=useState('')
-const [display,setDisplay]=useState(false)
-const [visibility, setVisibility] = useState(false)
+  const [onUser, setOnuser] = useState('')
+  const [display, setDisplay] = useState(false)
+  const [visibility, setVisibility] = useState(false)
+  const [isDataApp, setIsDataApp] = useState(true)
+  const [clearCart, setClearCart] = useState(false)
+  const [textBlock, setTextBlock] = useState(true)
+
   return (
 
 
     // <ThemeContext.Provider value={{count:count, setCount:setCount ,price: price, setPrice:setPrice}}>
 
-    <ThemeContext.Provider value={{visibility: visibility, setVisibility: setVisibility,count:count, setCount:setCount,onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}}>
-    <div className='App'>
-{/* <ContextLanguage.Provider value={{onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}} > */}
-      <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0',position:'relative'}}>
-        <Row style={{marginBottom:'106px',}}>
-          <Navigation />
-        </Row>
-        <Scrolltop />
+    <ThemeContext.Provider value={{
+      isDataApp: isDataApp, setIsDataApp: setIsDataApp,
+      clearCart: clearCart, setClearCart: setClearCart,
+      renderCart: renderCart, setRenderCart: setRenderCart,
+      visibility: visibility, setVisibility: setVisibility,
+      count: count, setCount: setCount,
+      onUser: onUser, setOnuser: setOnuser,
+      display: display, setDisplay: setDisplay,
+      textBlock: textBlock,
+      setTextBlock: setTextBlock,
+    }}>
+      <div className='App'>
+        {/* <ContextLanguage.Provider value={{onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}} > */}
+        <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0', position: 'relative' }}>
+          <Row style={{ marginBottom: '106px', }}>
+            <Navigation />
+          </Row>
+          <Scrolltop />
 
-        <Row>
+          <Row>
 
-          <Example />
-        </Row>
-        {/* <Col xs={3} id="sidebar-wrapper">
+            <Example />
+          </Row>
+          {/* <Col xs={3} id="sidebar-wrapper">
             <Header />
           </Col> */}
-        {/* <Col xs={9} id="page-content-wrapper">
+          {/* <Col xs={9} id="page-content-wrapper">
             <Content/>
 
           </Col> */}
 
-        <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Routes>
+            <Route path="/" element={<MainPage />} />
 
 
-          <Route path="/detail" element={<DetailPage/>}/>
-          <Route path="/crud" element={<Crud_test />} />
-          <Route path='/card' element={<ViewCard_test />} />
-          <Route path='/shop' element={<Content_test  />} />
-            <Route path='/shop/:productId' element={<ProductDetail/>}>
-       
-          </Route>
-          <Route path='/checkoutCart' element={<ChecKout_test />} />
-          {display ? <Route path='/profile' element={<Profile_test /> } /> : <Route path="/" element={<MainPage />} />}
-          {/* <Route path='/profile' element={<Profile_test /> } /> */}
-        </Routes>
+            <Route path="/detail" element={<DetailPage />} />
+            <Route path="/crud" element={<Crud_test />} />
+            <Route path='/card' element={<ViewCard_test />} />
+            <Route path='/shop' element={<Content_test />} />
+            <Route path='/shop/:productId' element={<ProductDetail />}>
 
-        <Row>
-          <Col>
-            <Footer />
-          </Col>
-        </Row>
-      </Container>
-      {/* </ContextLanguage.Provider> */}
+            </Route>
+            <Route path='/checkoutCart' element={<ChecKout_test />} />
+            {display ? <Route path='/profile' element={<Profile_test />} /> : <Route path="/" element={<MainPage />} />}
+            {/* <Route path='/profile' element={<Profile_test /> } /> */}
+          </Routes>
 
-    </div>
+          <Row>
+            <Col>
+              <Footer />
+            </Col>
+          </Row>
+        </Container>
+        {/* </ContextLanguage.Provider> */}
+
+      </div>
     </ThemeContext.Provider>
   );
 }

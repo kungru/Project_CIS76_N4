@@ -19,6 +19,11 @@ const Profile = () => {
       avatar && URL.createObjectURL(avatar.preview)
     }
   }, [avatar])
+  // setProfile(localStorage.getItem('username'))
+  useEffect(() => {
+   const json =   JSON.parse(localStorage.getItem('username'))
+   setProfile(json)
+  },[])
   const handelPreview = (e) => {
     const file = e.target.files[0]
     file.preview = URL.createObjectURL(file)
@@ -27,16 +32,20 @@ const Profile = () => {
     setBlockAvatar(false)
     setRemoveBlockAvatar(false)
 
-
-
+    
+    
+    
   }
   const handelAddAvatar = () => {
+   
     setBlockAvatar(!blockAvatar)
 
   }
   const handelLogOut = () => {
+    theme.setRenderCart(false)
     theme.setDisplay(false)
     navigate('/')
+    localStorage.removeItem('username')
 
 
   }
@@ -56,7 +65,7 @@ const Profile = () => {
         {blockAvatar && <input onChange={handelPreview} type='file' placeholder='add avatar' />}
 
       </div>
-         <span className='avatar_user_span'>welcome : {theme.onUser}</span>
+         <span className='avatar_user_span'>welcome : {profile }</span>
       <div className='btn_logout1'>
         <button onClick={handelLogOut}>Logout</button>
       </div>
