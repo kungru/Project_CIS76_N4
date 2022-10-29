@@ -14,16 +14,20 @@ const Profile = () => {
   const [removeBlockAvatar, setRemoveBlockAvatar] = useState(true)
 
   const [profile, setProfile] = useState([])
+  const [profileDisplay, setProfileDisplay] = useState([])
+
   useEffect(() => {
     return () => {
       avatar && URL.createObjectURL(avatar.preview)
     }
   }, [avatar])
   // setProfile(localStorage.getItem('username'))
+
   useEffect(() => {
    const json =   JSON.parse(localStorage.getItem('username'))
    setProfile(json)
   },[])
+
   const handelPreview = (e) => {
     const file = e.target.files[0]
     file.preview = URL.createObjectURL(file)
@@ -42,10 +46,15 @@ const Profile = () => {
 
   }
   const handelLogOut = () => {
+   setTimeout(() => {
     theme.setRenderCart(false)
-    theme.setDisplay(false)
-    navigate('/')
+    // theme.setDisplay(false)
+    theme.textBlock(false)
     localStorage.removeItem('username')
+    localStorage.removeItem('display')
+    localStorage.removeItem('key')
+    navigate('/')
+   }, 3000);
 
 
   }
@@ -65,7 +74,7 @@ const Profile = () => {
         {blockAvatar && <input onChange={handelPreview} type='file' placeholder='add avatar' />}
 
       </div>
-         <span className='avatar_user_span'>welcome : {profile }</span>
+         <span className='avatar_user_span'>welcome : {theme.onUser}</span>
       <div className='btn_logout1'>
         <button onClick={handelLogOut}>Logout</button>
       </div>

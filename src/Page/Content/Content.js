@@ -62,14 +62,10 @@ const Content = () => {
           setIsLoading(false)
         });
 
-    }, [isData1, isData2]
+    }, [theme.isDataApp]
 
   )
-    const [json1, setJson1] = useState([])
-  useEffect(() => {
-    const json = localStorage.getItem('key')
-    setJson1(json)
-  },[])
+  
 
   const handelAddtoCard = (id, name, style, shape, price, url) => {
    
@@ -77,79 +73,81 @@ const Content = () => {
 theme.setTextBlock(false)
     // const json = localStorage.getItem('key')
     if (theme.display == true) {
-      if(json1){
-        JSON.parse(json1)
-        const newCard = {
-          id,
-          name,
-          style,
-          shape,
-  
-          url,
-          price,
-          quantity: 1
-        }
+        theme.setRenderCart(true)
+       if(theme.onUser !== {}){
+
+         const newCard = {
+           id,
+           name,
+           style,
+           shape,
+   
+           url,
+           price,
+           quantity: 1
+         }
+         
+         const checkId = addtoCards.find(c => c.id === id)
+         
+         if (checkId) {
+           
+           theme.setIsDataApp(!theme.isDataApp)
+           // parseInt(checkId.quantity)
+           const checkQuantity = checkId.quantity += 1;
+           const checkQuantityPrice = checkId.price * checkQuantity
+   
+           fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
+             method: 'PUT',
+             crossDomain: true,
+             xhrFields: {
+               withCredentials: true
+             },
+             headers: {
+               Accept: 'application/json',
+               'Content-Type': 'application/json',
+             },
+             body: JSON.stringify({
+               quantity: checkQuantity,
+               price: checkQuantityPrice,
+             })
+           })
+             .then(res => {
+               res.json().then((res) => {
+   
+                 console.log("vao day")
+                 theme.setIsDataApp(!theme.isDataApp)
+ 
+               })
+             })
+             .catch(err => {
+               console.log("looix")
+               console.error(err)
+             })
+ 
+ 
+ 
+       } else {
+     
         
-        const checkId = addtoCards.find(c => c.id === id)
-        
-        if (checkId) {
-          
-          theme.setIsDataApp(!theme.isDataApp)
-          // parseInt(checkId.quantity)
-          const checkQuantity = checkId.quantity += 1;
-          const checkQuantityPrice = checkId.price * checkQuantity
-  
-          fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
-            method: 'PUT',
-            crossDomain: true,
-            xhrFields: {
-              withCredentials: true
-            },
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              quantity: checkQuantity,
-              price: checkQuantityPrice,
-            })
-          })
-            .then(res => {
-              res.json().then((res) => {
-  
-                console.log("vao day")
-                setIsData1(!isData1)
-
-              })
-            })
-            .catch(err => {
-              console.log("looix")
-              console.error(err)
-            })
-
-
-
-      } else {
-    
-       
-        theme.setIsDataApp(!theme.isDataApp)
-        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
-          method: 'POST',
-          headers: {
-            Acceps: 'application/json',
-            'content-Type': 'application/json'
-          },
-          body: JSON.stringify(newCard)
-        })
-          .then((res) => {
-            return (res.json())
-          }).then((data) => {
-            setIsData1(!isData1)
-            theme.setTextBlock(false)
-            setIsLoading(false)
-          });
-      }
-      }
+        //  theme.setIsDataApp(!theme.isDataApp)
+         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
+           method: 'POST',
+           headers: {
+             Acceps: 'application/json',
+             'content-Type': 'application/json'
+           },
+           body: JSON.stringify(newCard)
+         })
+           .then((res) => {
+             return (res.json())
+           }).then((data) => {
+            theme.setIsDataApp(!theme.isDataApp)
+             theme.setTextBlock(false)
+             setIsLoading(false)
+           });
+       }
+       }
+      
 
     } else {
       theme.setVisibility(true)

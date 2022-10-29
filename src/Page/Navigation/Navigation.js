@@ -14,7 +14,17 @@ import {
 
 const Header = () => {
     const theme = useContext(ThemeContext)
-
+    useEffect(() => {
+        const data = window.localStorage.getItem('display')
+        const dataName = window.localStorage.getItem('username')
+       if(data !== null) theme.setDisplay(JSON.parse(data))
+       if(dataName !== null) theme.setOnuser(JSON.parse(dataName))
+       
+    }, [])
+    useEffect(()=> {
+        window.localStorage.setItem('display', JSON.stringify(theme.display));
+        window.localStorage.setItem('username', JSON.stringify(theme.onUser));
+    },[theme.display])
 
     const [position, setPosition] = useState('')
     // useEffect(() => {
@@ -76,23 +86,11 @@ const Header = () => {
 
     // loginSuccess
     const handelLogin = (email, pass) => {
-        console.log(email, pass)
-        for (let i = 0; i < apiUser.length; i++) {
 
 
-            if (apiUser[i].Email == email && apiUser[i].Password == pass) {
-                // setTimeout(() => {
-                //     // setBlockLogin(0)
-                //     // divRef.current.style.visibility = 'hidden';
-
-                //     navigate('/profile')
-                // }, 3000)
-            }
-        };
     }
 
-    const avartRef = useRef()
-    const avartRef1 = useRef()
+
 
     //card
     const [cards, setCards] = useState('');
@@ -116,11 +114,13 @@ const Header = () => {
                     return (res.json())
                 }).then((data) => {
 
-                    if (theme.renderCart == true) {
+                    if (theme.renderCart == true && theme.display == true && theme.onUser !== {}) {
 
-                        setDataCard(data)
                        
-                      
+                             setDataCard(data)
+                       
+
+
 
                     } else {
                         setDataCard([])
@@ -130,15 +130,15 @@ const Header = () => {
                     // setIsData(!isData)
                     setloadCard(false)
                 });
-                if(dataCard.length > 0){
-                    theme.setTextBlock(false)   
-                    theme.setClearCart(false)
-                }else{
-                    theme.setTextBlock(true)
-                    theme.setClearCart(true)
+            if (dataCard.length > 0) {
+                theme.setTextBlock(false)
+                theme.setClearCart(false)
+            } else {
+                theme.setTextBlock(true)
+                theme.setClearCart(true)
 
 
-                }
+            }
         }, [theme.isDataApp, isData]
     )
     const handelSaveCard = () => {
@@ -185,6 +185,7 @@ const Header = () => {
     const totalPrice = total * totalQuantity
     // console.log(totalPrice)
     const toggleFormLogin = (e) => {
+        theme.setIsLogin(!theme.isLogin)
         setOnFormLogin(false)
         setOnFormRegister(true);
         if (onFormLogin == false) { e.currentTarget.style.backgroundColor = 'white' } else { e.currentTarget.style.backgroundColor = '#cccccc24' }
@@ -195,11 +196,6 @@ const Header = () => {
     const [local, setLocal] = useState([])
     const [localDisplay, setLocalDisplay] = useState(null)
     useEffect(() => {
-        const json = JSON.parse(localStorage.getItem('usename'))
-
-        const jsonDisplay = JSON.parse(localStorage.getItem('display'))
-        setLocal(json)
-        setLocalDisplay(jsonDisplay)
 
 
     }, [])
@@ -212,6 +208,7 @@ const Header = () => {
         navigate('/shop')
         blockRef.current.style.visibility = 'hidden'
     }
+   
 
     return (
 
@@ -328,9 +325,9 @@ const Header = () => {
                         <a href='#' ><i className='bx bx-heart'></i> </a>
                     </NavItem>
                     <NavItem>
-                        <div ref={avartRef1}>
+                        <div >
 
-                            {theme.display == true ? <div><Link to='/profile'> {theme.onUser}</Link></div> : <div onClick={handelBlockLogin} href="#">
+                            {theme.display == true ? <div><Link to='/profile'>{theme.onUser}</Link></div> : <div onClick={handelBlockLogin} href="#">
                                 <i className="fa-regular fa-user"></i>
                             </div>}
                             {/* <div onClick={handelBlockLogin} href="#">
@@ -460,6 +457,7 @@ const ListProducts = (props) => {
 
 
 const Login = (props) => {
+  
     const navigate = useNavigate()
     const blockRef = useRef()
     const [loginApi, setLoginApi] = useState([])
@@ -509,8 +507,8 @@ const Login = (props) => {
 
     //         })
     // }, [])
-    const handelLogin = () => {
 
+    const handelLogin = () => {
 
 
         props.onLogin(props.email, props.pass)
@@ -546,36 +544,29 @@ const Login = (props) => {
                     const user = {
                         email,
                         pass,
-
-
-
                     }
+
                     localStorage.setItem('key', JSON.stringify(user))
-
+                    
+                    
+                    
                     setLoading(false)
-                    theme.setDisplay(true)
-                    // console.log(loginApi[i])
-                    // lan.setOnuser(loginApi[i].Name)
                     console.log(theme.onUser)
-                    localStorage.setItem('display', JSON.stringify(theme.display));
-
                     setTimeout(() => {
+                        
+                        theme.setDisplay(true)
+                        theme.setOnuser(loginApi[i].Name)
                         setEmail('')
                         setPass('')
-
                         setLoading(false)
                         setValidation1('')
-
                         theme.setRenderCart(true)
-                        theme.setOnuser(loginApi[i].Name)
                         setLoading(true)
-
                         theme.setVisibility(false)
                         // navigate('/profile')
 
 
                     }, 3000);
-                    localStorage.setItem('username', JSON.stringify(theme.onUser));
                 }
             }
         };
@@ -586,6 +577,7 @@ const Login = (props) => {
             setTimeout(() => {
                 setValidation1('Email or Password is not valid')
                 setLoading(true)
+
             }, 3000);
 
         }
@@ -637,9 +629,11 @@ const Login = (props) => {
 }
 
 const Register = () => {
+    const theme = useContext(ThemeContext)
+
 
     const [registerApi, setRegisterApi] = useState(null)
-    const [isRegister, setIsRegister] = useState(true)
+    // const [isRegister, setIsRegister] = useState(true)
 
     useEffect(() => {
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
@@ -649,7 +643,7 @@ const Register = () => {
                 setRegisterApi(data)
 
             })
-    }, [isRegister])
+    }, [theme.isLogin])
 
     const [email, setEmail] = useState('')
     const [firtname, setFirtName] = useState('')
@@ -689,10 +683,11 @@ const Register = () => {
         if (Object.keys(msg).length > 0) return false
         return true
     }
+    const pref = useRef()
 
     const handelRegister = () => {
 
-
+       
         const msg1 = {}
         const inclu = email.includes('@gmail.com')
         if (!isNaN(firtname)) {
@@ -716,54 +711,63 @@ const Register = () => {
         else if (pass.length < 5) {
             msg1.pass = "Minimum length 5 characters"
 
-        } else if (email) {
-
-        }
+        } 
         else {
 
             setLoading(false)
 
 
-
+            console.log('test')
 
             const newUser = {
                 Name: lastname,
                 Email: email,
                 Password: pass,
             }
+            const checkEmail = registerApi.find(c => c.Email == email)
+            if(checkEmail) {
+                setTimeout(() => {
+                    setLoading(true)
+                    setRegisterUp('Email already exists')
+                    pref.current.style.color = 'red'
+                }, 3000)
+            }else{
 
-            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User', {
-
-                method: 'POST',
-                headers: {
-                    Acceps: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newUser)
-            })
-
-
-
-                .then((response) => {
-                    return response.json()
-                }).then((data) => {
-                    setRegisterApi(data)
-                    setIsRegister(!isRegister)
-
+                fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User', {
+    
+                    method: 'POST',
+                    headers: {
+                        Acceps: 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
                 })
+    
+    
+    
+                    .then((response) => {
+                        return response.json()
+                    }).then((data) => {
+                        setRegisterApi(data)
+                        // setIsRegister(!isRegister)
+                        theme.setIsLogin(!theme.isLogin)
+    
+                    })
+    
+                setTimeout(() => {
+    
+                    setLoading(true)
+                    setRegisterUp('Sign Up Success')
+                    pref.current.style.color = ''
+                    setLastName('')
+                    setFirtName('')
+                    setEmail('')
+                    setPass('')
+                    setRepeatPass('')
+    
+                }, 3000);
+            }
 
-            setTimeout(() => {
-
-                setLoading(true)
-                setRegisterUp('Sign Up Success')
-
-                setLastName('')
-                setFirtName('')
-                setEmail('')
-                setPass('')
-                setRepeatPass('')
-
-            }, 3000);
 
         }
 
@@ -830,7 +834,7 @@ const Register = () => {
                         <p className='error'>{validation.repeatPass || validation1.repeatPass}</p>
                     </div>
 
-                    <p className='success'>{registerUp}</p>
+                    <p ref={pref} className='success'>{registerUp}</p>
                     {loading ? <button onClick={handelRegister} type='button' >Register</button> : <span className='loading1'><Spinner>Loading...</Spinner></span>}
 
                 </form>

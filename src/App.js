@@ -142,10 +142,11 @@ function App() {
   }, [])
   const navigate = useNavigate()
   const [theme, setTheme] = useState()
-  const [onUser, setOnuser] = useState('')
+  const [onUser, setOnuser] = useState({})
   const [display, setDisplay] = useState(false)
   const [visibility, setVisibility] = useState(false)
   const [isDataApp, setIsDataApp] = useState(true)
+  const [isLogin, setIsLogin] = useState(true)
   const [clearCart, setClearCart] = useState(false)
   const [textBlock, setTextBlock] = useState(true)
 
@@ -156,6 +157,7 @@ function App() {
 
     <ThemeContext.Provider value={{
       isDataApp: isDataApp, setIsDataApp: setIsDataApp,
+      isLogin: isLogin, setIsLogin: setIsLogin,
       clearCart: clearCart, setClearCart: setClearCart,
       renderCart: renderCart, setRenderCart: setRenderCart,
       visibility: visibility, setVisibility: setVisibility,
