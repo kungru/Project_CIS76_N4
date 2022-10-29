@@ -13,7 +13,9 @@ import {
 
 
 const Header = () => {
-    
+    const theme = useContext(ThemeContext)
+
+
     const [position, setPosition] = useState('')
     // useEffect(() => {
     //     window.addEventListener('scroll', (e) => {
@@ -33,8 +35,8 @@ const Header = () => {
     // Ân hiện input search
     const [blockSearch, setBlockSearch] = useState(0)
     const [removeblock, setRemoveblock] = useState(false)
-    const [avatarUser, setAvatarUser] = useState(true)
     const [apiUser, setApiUser] = useState([])
+    // const [visibility, setVisibility] = useState(false)
 
     useEffect(() => {
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
@@ -45,8 +47,8 @@ const Header = () => {
                 setApiUser(data)
 
             })
-    }, [])
-
+        }, [])
+        
     const handleBlock = (e) => {
         inputRef.current.focus()
         setRemoveblock(true)
@@ -59,40 +61,38 @@ const Header = () => {
     // Ân hiện Form Login
     const [blockLogin, setBlockLogin] = useState(0)
     const handelBlockLogin = () => {
-        setBlockLogin(1)
-        divRef.current.style.visibility = 'visible';
-        // document.body.style.background = 'rgb(0 0 0 / 63%)'
-        // document.body.style.transition = ' all 1s'
-        // document.body.style.visibility = 'visible'
+        // setBlockLogin(1)
+        theme.setVisibility(true)
+       
     }
     const handelRemoveLogin = () => {
-        setBlockLogin(0)
-        divRef.current.style.visibility = 'hidden';
+        // setBlockLogin(0)
+        // divRef.current.style.visibility = 'hidden';
+        theme.setVisibility(false)
+        // theme.display(false)
 
     }
     //set Backgroundcolor cho login-register
-    const [logOut, setLogOut] = useState(false)
-    const [nameUser, setNameUser] = useState()
+
     // loginSuccess
     const handelLogin = (email, pass) => {
         console.log(email, pass)
         for (let i = 0; i < apiUser.length; i++) {
 
 
-            if (apiUser[i].Email ==email && apiUser[i].Password ==pass) {
-                setTimeout(() => {
-                    setBlockLogin(0)
-                    divRef.current.style.visibility = 'hidden';
-                }, 3000)
-            } else {setBlockLogin(1)
-                divRef.current.style.visibility='visible'
+            if (apiUser[i].Email == email && apiUser[i].Password == pass) {
+                // setTimeout(() => {
+                //     // setBlockLogin(0)
+                //     // divRef.current.style.visibility = 'hidden';
+                    
+                //     navigate('/profile')
+                // }, 3000)
             }
         };
     }
+    
     const avartRef = useRef()
     const avartRef1 = useRef()
-    const handelLogout = (e) => {
-    }
 
     //card
     const [cards, setCards] = useState('');
@@ -145,8 +145,8 @@ const Header = () => {
         fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/${id}`, {
             method: 'DELETE',
         })
-            .then(res => res.text()) // or res.json()
-            .then(res => {
+        .then(res => res.text()) // or res.json()
+        .then(res => {
                 // setIsData(arr)
                 // setTotal(total)
                 setIsData(!isData)
@@ -177,7 +177,8 @@ const Header = () => {
     const toggleFormRegister = () => {
         setOnFormRegister(false); setOnFormLogin(true)
     }
-    const theme=useContext(ThemeContext)
+
+
     return (
 
         <div className='header'  >
@@ -271,7 +272,7 @@ const Header = () => {
                 <Nav className='header-right'>
                     <NavItem>
                         <div className='header-input-search'>
-                            {removeblock && <span className='remove-block animate__animated animate__fadeIn' onClick={handelRemoveblock} >X</span>}
+                            {removeblock && <span className='remove-block2 animate__animated animate__fadeIn' onClick={handelRemoveblock} >X</span>}
                             <span><input
                                 ref={inputRef}
                                 className='header-input'
@@ -295,10 +296,10 @@ const Header = () => {
                     <NavItem>
                         <div ref={avartRef1}>
 
-                {theme.display ? <div>{theme.onUser}</div>: <div onClick={handelBlockLogin} href="#">
+                            {theme.display ? <div><Link to='/profile'> {theme.onUser}</Link></div> : <div onClick={handelBlockLogin} >
                                 <i className="fa-regular fa-user"></i>
-                            </div>}            
-                {/* <div onClick={handelBlockLogin} href="#">
+                            </div>}
+                            {/* <div onClick={handelBlockLogin} href="#">
                                 <i className="fa-regular fa-user"></i>
                             </div> */}
                         </div>
@@ -363,7 +364,7 @@ const Header = () => {
                 </div>
             </div>
 
-            <div ref={divRef} className='all-dark-login' style={{ opacity: `${blockLogin}` }}>
+            { theme.visibility ? <div ref={divRef} className='all-dark-login' >
                 <div className='form-login'  >
                     <div className='title-login-register'>
 
@@ -387,13 +388,13 @@ const Header = () => {
                         <Route path='/' />
                     </Routes> */}
 
-                    <div onClick={handelRemoveLogin} className='remove-block-login' >X</div>
+                    <span onClick={handelRemoveLogin} className='remove-block-login' to='/shop'>X</span>
                 </div>
                 <div className='dark-login-body'>
 
                 </div>
 
-            </div>
+            </div> : ''}
         </div>
     )
 }
@@ -417,24 +418,7 @@ const ListProducts = (props) => {
         </ul>
     )
 }
-const ListProducts2 = (props) => {
-    const handelRemoveCard = () => {
-        props.onRemove(props.id)
-    }
-    return (
-        <ul>
-            <li className='url__card'><img src={props.url} /></li>
 
-            <div className='information'>
-                <li style={{ fontWeight: '600' }}>{props.name}</li>
-                <li>Quantity: {props.quantity}</li>
-
-                <li>{props.price}</li>
-            </div>
-            <div onClick={handelRemoveCard} style={{ cursor: 'pointer', position: 'absolute', right: '56px' }}>X</div>
-        </ul>
-    )
-}
 
 const Login = (props) => {
     const navigate = useNavigate()
@@ -442,8 +426,6 @@ const Login = (props) => {
     const [loginApi, setLoginApi] = useState([])
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
-    const fakeEmail = email;
-    const fakePass = pass;
     const theme = useContext(ThemeContext)
     const [loading, setLoading] = useState(true)
     useEffect(() => {
@@ -476,17 +458,17 @@ const Login = (props) => {
     const [isUser, setIsUser] = useState(true)
 
     // const [isData1,setIsData1] = useState(true)
-    useEffect(() => {
-        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login')
-            .then((response) => {
-                return response.json()
-            }).then((data) => {
-                setLoginSuccess(data)
+    // useEffect(() => {
+    //     fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login')
+    //         .then((response) => {
+    //             return response.json()
+    //         }).then((data) => {
+    //             setLoginSuccess(data)
 
 
 
-            })
-    }, [])
+    //         })
+    // }, [])
     const handelLogin = () => {
         console.log(theme.onUser)
         const user = {
@@ -526,6 +508,9 @@ const Login = (props) => {
                 checkEmail = true
                 if (pass === loginApi[i].Password) {
                     checkPass = true
+
+
+
                     setLoading(false)
                     theme.setDisplay(true)
                     console.log(loginApi[i])
@@ -533,36 +518,37 @@ const Login = (props) => {
                     console.log(theme.onUser)
                     localStorage.setItem('display', JSON.stringify(theme.display));
                     localStorage.setItem('username', JSON.stringify(theme.onUser));
+
                     setEmail('')
                     setPass('')
                     setTimeout(() => {
+                        
+                        setLoading(false)
                         setValidation1('')
+
+
                         theme.setOnuser(loginApi[i].Name)
                         setLoading(true)
-                        
 
+                        theme.setVisibility(false)
                         // navigate('/profile')
+
 
                     }, 3000);
                 }
             }
         };
-        if (checkEmail == false && checkPass == false) {
+
+        if (checkEmail == false || checkPass == false) {
             setLoading(false)
-       
+
             setTimeout(() => {
                 setValidation1('Email or Password is not valid')
                 setLoading(true)
             }, 3000);
 
         }
-
-
-
     };
-
-
-
     return (
         <div className='all-login'>
             <form>
@@ -608,11 +594,6 @@ const Login = (props) => {
         </div>
     )
 }
-
-const logOut = () => {
-
-}
-
 
 const Register = () => {
 
@@ -808,5 +789,5 @@ const Register = () => {
     )
 }
 
-export { Login, Register, logOut }
+export { Login, Register, }
 export default Header;

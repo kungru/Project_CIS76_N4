@@ -28,6 +28,7 @@ function App() {
   const [cards, setCards] = useState([]);
   
   const [ count, setCount] = useState(1)
+  const [price, setPrice] = useState()
   
 
   useEffect(
@@ -142,9 +143,13 @@ function App() {
   const [theme, setTheme] = useState()
 const [onUser,setOnuser]=useState('')
 const [display,setDisplay]=useState(false)
+const [visibility, setVisibility] = useState(false)
   return (
 
-    <ThemeContext.Provider value={{count:count, setCount:setCount,onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}}>
+
+    // <ThemeContext.Provider value={{count:count, setCount:setCount ,price: price, setPrice:setPrice}}>
+
+    <ThemeContext.Provider value={{visibility: visibility, setVisibility: setVisibility,count:count, setCount:setCount,onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}}>
     <div className='App'>
 {/* <ContextLanguage.Provider value={{onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}} > */}
       <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0',position:'relative'}}>
@@ -172,12 +177,13 @@ const [display,setDisplay]=useState(false)
           <Route path="/detail" element={<DetailPage/>}/>
           <Route path="/crud" element={<Crud_test />} />
           <Route path='/card' element={<ViewCard_test />} />
-          <Route path='/shop' element={<Content_test value = { { count: count, setCount: setCount } } />} />
+          <Route path='/shop' element={<Content_test  />} />
             <Route path='/shop/:productId' element={<ProductDetail/>}>
        
           </Route>
           <Route path='/checkoutCart' element={<ChecKout_test />} />
-          {/* <Route path='/profile' element={ profile.email ? <Profile_test /> : <p>checkout</p>  } /> */}
+          {display ? <Route path='/profile' element={<Profile_test /> } /> : <Route path="/" element={<MainPage />} />}
+          {/* <Route path='/profile' element={<Profile_test /> } /> */}
         </Routes>
 
         <Row>

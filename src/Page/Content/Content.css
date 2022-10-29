@@ -35,5 +35,23 @@
     visibility: hidden;
 }
 .container_card{
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
+}
+.container_card_sort{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:20px;
+    width: 80%;
+    height: 100px;
+    margin-left: 15px;
+}
+.container_card_name{
+    padding:8px
+}
+.container_cart_sort div{
+    margin: 10px;
+}
+.btn_container_price{
+    padding: 8px;
 }

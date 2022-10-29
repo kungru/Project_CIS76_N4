@@ -28,13 +28,13 @@ a{
     
 
 }
-.remove-block{
-  position: absolute;
-  right: 28%;
-  z-index: 100;
-  color: #c7c6c6;
-  font-size: 19px;
-  cursor: pointer;
+.remove-block2{
+     z-index: 100;
+     color: #c7c6c6;
+     font-size: 19px;
+     cursor: pointer;
+     position: relative;
+     left: 33px;
 }
 
 
@@ -137,10 +137,10 @@ margin: 0;
     position: absolute;
     padding-bottom: 7px;
     margin-left: 36px;
-    margin-right: 17px; 
+    margin-right: -4px;
 
     
-    right: 220px;
+    right: 338px;
     transition:  all 1s  ease-out;
 }
 .header-input-search{
@@ -231,7 +231,7 @@ header-firs
 }
 
 .all-dark-login{
-  visibility: hidden;
+  /* visibility: hidden; */
   height: 100vh !important;
   background: #0000009e;
   /* z-index: 1000; */
@@ -366,7 +366,7 @@ form{
 
 .error{
   color: red;
-  font-size: .75rem;
+  font-size: 0.7rem;
   font-style: italic;
   
 }
