@@ -6,6 +6,7 @@ import {
   CarouselIndicators,
   CarouselCaption,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import './Carousel_zx.css';
 const items = [
   {
@@ -76,7 +77,7 @@ function Example(args) {
         <div className='anh__h1'>
           <h1>VISION YOU DESERVE</h1>
           <p>Offering you the best service possible</p>
-          <button className='btn__viewmore'>VIEW MORE</button>
+    <Link href='/shop'>    <button className='btn__viewmore' >VIEW MORE</button></Link>
         </div>
 
         <CarouselCaption

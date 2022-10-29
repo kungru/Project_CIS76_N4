@@ -55,10 +55,13 @@ h5{
     display: flex;
     justify-content: space-between;
    
-    width: 107rem;
+    width: 100%;
     
     margin: auto;
     
+}
+.cart1 img{
+    width: 100%;
 }
 .card-body1{
     /* padding: 0; */

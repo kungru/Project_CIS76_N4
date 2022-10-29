@@ -5,6 +5,7 @@ import Container_card from '../Body/Container_card';
 import { useContext } from 'react';
 import { ThemeContext } from '../../App';
 import { memo } from 'react'
+import { Link } from 'react-router-dom';
 const DetailPopup = (product, { count }) => {
 
   const theme = useContext(ThemeContext)
@@ -81,9 +82,9 @@ const DetailPopup = (product, { count }) => {
                 Add to cart
               </button>
             </div>
-            <div className='detail_popup_view'>
-              View detail
-            </div>
+            <Link className='detail_popup_view' to={`/shop/${product.id}`} >   View detail
+          
+            </Link>
           </div>
         </div>
       </div>

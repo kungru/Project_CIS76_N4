@@ -70,10 +70,13 @@
     text-align:justify;
 }
 .detail_popup_view{
-    margin-top: 30px;
+    position: absolute;
+    bottom: 10%;
+    left: 57%;
     padding: 18px 35px;
-    color: white;
+    color: white !important;
     text-align: center;
+    cursor: pointer;
 text-transform: uppercase;
     background-color: #1c1c1c;
     width: 205.31px;
