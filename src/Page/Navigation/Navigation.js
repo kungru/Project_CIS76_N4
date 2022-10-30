@@ -19,7 +19,7 @@ const Header = () => {
         const dataName = window.localStorage.getItem('username')
        if(data !== null) theme.setDisplay(JSON.parse(data))
        if(dataName !== null) theme.setOnuser(JSON.parse(dataName))
-       
+
     }, [])
     useEffect(()=> {
         window.localStorage.setItem('display', JSON.stringify(theme.display));
@@ -114,11 +114,11 @@ const Header = () => {
                     return (res.json())
                 }).then((data) => {
 
-                    if (theme.renderCart == true && theme.display == true && theme.onUser !== {}) {
+                    if (theme.display == true) {
 
-                       
-                             setDataCard(data)
-                       
+
+                        setDataCard(data)
+
 
 
 
@@ -139,7 +139,7 @@ const Header = () => {
 
 
             }
-        }, [theme.isDataApp, isData]
+        }, [theme.isDataApp, theme.display]
     )
     const handelSaveCard = () => {
         // theme.setIsDataApp(!theme.isDataApp)
@@ -161,7 +161,7 @@ const Header = () => {
             .then(res => {
                 // setIsData(arr)
                 // setTotal(total)
-                setIsData(!isData)
+                theme.setIsDataApp(!theme.isDataApp)
 
             }
             )
@@ -208,7 +208,9 @@ const Header = () => {
         navigate('/shop')
         blockRef.current.style.visibility = 'hidden'
     }
-   
+
+    
+
 
     return (
 
@@ -457,7 +459,7 @@ const ListProducts = (props) => {
 
 
 const Login = (props) => {
-  
+
     const navigate = useNavigate()
     const blockRef = useRef()
     const [loginApi, setLoginApi] = useState([])
@@ -473,7 +475,10 @@ const Login = (props) => {
                 setLoginApi(data)
             })
     }, [])
+   
 
+
+    const [isData1, setIsData1] = useState(true)
 
 
 
@@ -493,42 +498,38 @@ const Login = (props) => {
         return true
     }
     const [loginSuccess, setLoginSuccess] = useState(null)
-    const [isUser, setIsUser] = useState(true)
+    // const [isUser, setIsUser] = useState(true)
 
-    // const [isData1,setIsData1] = useState(true)
-    // useEffect(() => {
-    //     fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login')
-    //         .then((response) => {
-    //             return response.json()
-    //         }).then((data) => {
-    //             setLoginSuccess(data)
-
-
-
-    //         })
-    // }, [])
 
     const handelLogin = () => {
 
 
         props.onLogin(props.email, props.pass)
 
-        // fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
-        //     method: 'POST',
-        //     headers: {
-        //         Acceps: 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(user)
-        //   })
-        //   .then((res) => {
-        //     return (res.json())
-        //   }).then((data) => {
-        //       setIsUser(!isUser)
+        const user = {
+            Email: email,
+            Password: pass,
+            
+        }
 
+        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
+            method: 'POST',
+            headers: {
+              Acceps: 'application/json',
+              'content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+          })
+            .then((res) => {
+              return (res.json())
+            }).then((data) => {
+             
+                theme.setIsLogin2(!theme.isLogin2)
+            });
+        
+        
+           
 
-        //     // setIsLoading(false)
-        //   });
 
         const valid = validationAll()
         if (!valid) return
@@ -541,20 +542,16 @@ const Login = (props) => {
                 checkEmail = true
                 if (pass === loginApi[i].Password) {
                     checkPass = true
-                    const user = {
-                        email,
-                        pass,
-                    }
 
                     localStorage.setItem('key', JSON.stringify(user))
-                    
-                    
-                    
+
+
+
                     setLoading(false)
                     console.log(theme.onUser)
                     setTimeout(() => {
-                        
                         theme.setDisplay(true)
+
                         theme.setOnuser(loginApi[i].Name)
                         setEmail('')
                         setPass('')
@@ -570,6 +567,8 @@ const Login = (props) => {
                 }
             }
         };
+       
+
 
         if (checkEmail == false || checkPass == false) {
             setLoading(false)
@@ -687,7 +686,7 @@ const Register = () => {
 
     const handelRegister = () => {
 
-       
+
         const msg1 = {}
         const inclu = email.includes('@gmail.com')
         if (!isNaN(firtname)) {
@@ -711,7 +710,7 @@ const Register = () => {
         else if (pass.length < 5) {
             msg1.pass = "Minimum length 5 characters"
 
-        } 
+        }
         else {
 
             setLoading(false)
@@ -725,16 +724,16 @@ const Register = () => {
                 Password: pass,
             }
             const checkEmail = registerApi.find(c => c.Email == email)
-            if(checkEmail) {
+            if (checkEmail) {
                 setTimeout(() => {
                     setLoading(true)
                     setRegisterUp('Email already exists')
                     pref.current.style.color = 'red'
                 }, 3000)
-            }else{
+            } else {
 
                 fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User', {
-    
+
                     method: 'POST',
                     headers: {
                         Acceps: 'application/json',
@@ -742,20 +741,20 @@ const Register = () => {
                     },
                     body: JSON.stringify(newUser)
                 })
-    
-    
-    
+
+
+
                     .then((response) => {
                         return response.json()
                     }).then((data) => {
                         setRegisterApi(data)
                         // setIsRegister(!isRegister)
                         theme.setIsLogin(!theme.isLogin)
-    
+
                     })
-    
+
                 setTimeout(() => {
-    
+
                     setLoading(true)
                     setRegisterUp('Sign Up Success')
                     pref.current.style.color = ''
@@ -764,7 +763,7 @@ const Register = () => {
                     setEmail('')
                     setPass('')
                     setRepeatPass('')
-    
+
                 }, 3000);
             }
 

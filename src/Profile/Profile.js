@@ -46,15 +46,26 @@ const Profile = () => {
 
   }
   const handelLogOut = () => {
-   setTimeout(() => {
+    theme.setIsDataApp(!theme.isDataApp)
+  //   fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/`, {
+  //     method: 'DELETE',
+  // })
+  //     .then(res => res.text()) // or res.json()
+  //     .then(res => {
+         
+          
+
+  //     })
     theme.setRenderCart(false)
-    // theme.setDisplay(false)
-    theme.textBlock(false)
+    // theme.textBlock(false)
     localStorage.removeItem('username')
     localStorage.removeItem('display')
     localStorage.removeItem('key')
-    navigate('/')
-   }, 3000);
+    setTimeout(() =>{
+      theme.setDisplay(false)
+      navigate('/')
+    },1000)
+   
 
 
   }
