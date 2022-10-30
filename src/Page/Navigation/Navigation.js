@@ -12,7 +12,7 @@ import {
 } from 'reactstrap';
 
 
-const Header = () => {
+const Header = (props) => {
     const theme = useContext(ThemeContext)
 
 
@@ -212,7 +212,11 @@ const Header = () => {
         navigate('/shop')
         blockRef.current.style.visibility = 'hidden'
     }
-
+    const [search,setSearch]=useState('')
+    const searchCom=(e)=>{
+       setSearch(e.target.value)
+       props.testSearch()
+    }
     return (
 
         <div className='header'  >
@@ -312,8 +316,8 @@ const Header = () => {
                                 className='header-input'
                                 placeholder='Search'
                                 style={{ width: `${blockSearch}px` }}
-
-                            /></span>
+                                onChange={searchCom}
+                           /></span>
                             <a
                                 onClick={handleBlock}
                                 className='header-search'
