@@ -386,11 +386,10 @@ form{
 }
 .success{
   color: green;
-  font-size: 14px;
-  font-style: italic;
-  position: absolute;
-  right: 41%;
-  bottom: 109px;
+    font-size: 14px;
+    font-style: italic;
+    margin-top: -21px;
+    margin-bottom: -2px;
 
     
 }
@@ -435,9 +434,9 @@ form{
 }
 .input-name{
   display: flex;
-    width: 30rem;
-    justify-content: center;
-    gap: 44px;
+  justify-content: center;
+  gap: 21px;
+  gap: 13px;
 }
 .input-name input{
   width: 10rem;

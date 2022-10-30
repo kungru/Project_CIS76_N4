@@ -25,9 +25,7 @@ const Content = () => {
   const [addtoCards1, setAddtoCards1] = useState([]);
   const [IsLoading, setIsLoading] = useState(false);
   const [popupCard, setPopupCard] = useState(false);
-  const [isData, setIsData] = useState(true)
-  const [total, setTotal] = useState(0)
-  const [cardsTemp,setCardsTemp]=useState([])
+  const [cardsTemp, setCardsTemp] = useState([])
   useEffect(
     () => {
       setIsLoading(true);
@@ -46,7 +44,7 @@ const Content = () => {
 
   )
 
-  const [isData1, setIsData1] = useState(true)
+  // const [dataLogin, setDataLogin] = useState([])
   const [isData2, setIsData2] = useState(true)
   // api addtocard
   useEffect(
@@ -63,43 +61,56 @@ const Content = () => {
           setIsLoading(false)
         });
 
-    }, [isData1, isData2]
+    }, [theme.isDataApp, theme.display]
 
   )
-    const [json1, setJson1] = useState([])
-  useEffect(() => {
-    const json = localStorage.getItem('key')
-    setJson1(json)
-  },[])
+  // useEffect(
+  //   () => {
+  //     setIsLoading(true);
+
+  //     fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login')
+  //       .then((res) => {
+  //         return (res.json())
+  //       }).then((data) => {
+  //         setDataLogin(data)
+
+  //       });
+
+  //   }, [theme.isLogin2]
+
+  // )
+
 
   const handelAddtoCard = (id, name, style, shape, price, url) => {
-   
+
+
     // theme.setClearCart(true)
-theme.setTextBlock(false)
+    theme.setTextBlock(false)
     // const json = localStorage.getItem('key')
     if (theme.display == true) {
-      if(json1){
-        JSON.parse(json1)
+      theme.setRenderCart(true)
+      if (theme.onUser !== {}) {
+
         const newCard = {
           id,
           name,
           style,
           shape,
-  
+
           url,
           price,
           quantity: 1
         }
-        
+
         const checkId = addtoCards.find(c => c.id === id)
-        
+
         if (checkId) {
-          
-          theme.setIsDataApp(!theme.isDataApp)
+
+        
           // parseInt(checkId.quantity)
           const checkQuantity = checkId.quantity += 1;
           const checkQuantityPrice = checkId.price * checkQuantity
-  
+
           fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
             method: 'PUT',
             crossDomain: true,
@@ -117,9 +128,9 @@ theme.setTextBlock(false)
           })
             .then(res => {
               res.json().then((res) => {
-  
+
                 console.log("vao day")
-                setIsData1(!isData1)
+                theme.setIsDataApp(!theme.isDataApp)
 
               })
             })
@@ -130,95 +141,33 @@ theme.setTextBlock(false)
 
 
 
-      } else {
-    
-       
-        theme.setIsDataApp(!theme.isDataApp)
-        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
-          method: 'POST',
-          headers: {
-            Acceps: 'application/json',
-            'content-Type': 'application/json'
-          },
-          body: JSON.stringify(newCard)
-        })
-          .then((res) => {
-            return (res.json())
-          }).then((data) => {
-            setIsData1(!isData1)
-            theme.setTextBlock(false)
-            setIsLoading(false)
-          });
+        } else {
+
+
+          //  theme.setIsDataApp(!theme.isDataApp)
+          fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
+            method: 'POST',
+            headers: {
+              Acceps: 'application/json',
+              'content-Type': 'application/json'
+            },
+            body: JSON.stringify(newCard)
+          })
+            .then((res) => {
+              return (res.json())
+            }).then((data) => {
+              theme.setIsDataApp(!theme.isDataApp)
+              theme.setTextBlock(false)
+              setIsLoading(false)
+            });
+        }
       }
-      }
+
 
     } else {
       theme.setVisibility(true)
     }
-    // const newCard = {
-    //   id,
-    //   name,
-    //   style,
-    //   shape,
-
-    //   url,
-    //   price,
-    //   quantity: 1
-    // }
-
-    // const checkId = addtoCards.find(c => c.id === id)
-
-    // if (checkId) {
-
-    //   // parseInt(checkId.quantity)
-    //   const checkQuantity = checkId.quantity += 1;
-
-    //   fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
-    //     method: 'PUT',
-    //     crossDomain: true,
-    //     xhrFields: {
-    //       withCredentials: true
-    //     },
-    //     headers: {
-    //       Accept: 'application/json',
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       quantity: checkQuantity,
-    //     })
-    //   })
-    //     .then(res => {
-    //       res.json().then((res) => {
-
-    //         console.log("vao day")
-    //         setIsData1(!isData1)
-    //       })
-    //     })
-    //     .catch(err => {
-    //       console.log("looix")
-    //       console.error(err)
-    //     })
-
-
-
-    // } else {
-
-    //   fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
-    //     method: 'POST',
-    //     headers: {
-    //       Acceps: 'application/json',
-    //       'content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(newCard)
-    //   })
-    //     .then((res) => {
-    //       return (res.json())
-    //     }).then((data) => {
-    //       setIsData1(!isData1)
-
-    //       setIsLoading(false)
-    //     });
-    // }
+    
 
 
   }
@@ -253,230 +202,230 @@ theme.setTextBlock(false)
   // const handelAddtoCart1 = (id, url, name, price, shape, style) => {
 
 
-    const handelAddtoCart1 = (id, url, name, price, shape, style, quantity) => {
-      theme.setClearCart(true)
-      if (theme.display == true) {
+  const handelAddtoCart1 = (id, url, name, price, shape, style, quantity) => {
+    theme.setClearCart(true)
+    if (theme.display == true) {
+
+      const newCard1 = { id, name, style, shape, url, price, quantity: theme.count }
+      const checkIdCart = addtoCards1.find(c => c.id === id)
+
+      // setIsData1(!isData1)
+      if (checkIdCart) {
         
-        const newCard1 = { id, name, style, shape, url, price, quantity: theme.count }
-        const checkIdCart = addtoCards1.find(c => c.id === id)
-  
-        // setIsData1(!isData1)
-        if (checkIdCart) {
-          theme.setIsDataApp(!theme.isDataApp)
-          const checkQuantity1 = checkIdCart.quantity += theme.count;
-  
-          fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
-            method: 'PUT',
-            crossDomain: true,
-            xhrFields: {
-              withCredentials: true
-            },
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              quantity: checkQuantity1,
+        const checkQuantity1 = checkIdCart.quantity += theme.count;
+
+        fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
+          method: 'PUT',
+          crossDomain: true,
+          xhrFields: {
+            withCredentials: true
+          },
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            quantity: checkQuantity1,
+          })
+        })
+          .then(res => {
+            res.json().then((res) => {
+
+              console.log("vao day")
+              theme.setIsDataApp(!theme.isDataApp)
             })
           })
-            .then(res => {
-              res.json().then((res) => {
-  
-                console.log("vao day")
-                setIsData2(!isData2)
-              })
-            })
-            .catch(err => {
-              console.log("looix")
-              console.error(err)
-            })
-  
-  
-        } else {
-          
-          
-         
-          theme.setIsDataApp(!theme.isDataApp)
-          fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
-            method: 'POST',
-            headers: {
-              Acceps: 'application/json',
-              'content-Type': 'application/json'
-            },
-            body: JSON.stringify(newCard1)
+          .catch(err => {
+            console.log("looix")
+            console.error(err)
           })
-            .then((res) => {
-              return (res.json())
-            }).then((data) => {
-              setIsData2(!isData2)
-  
-              setIsLoading(false)
-            });
-        }
-  
-        theme.setCount(1)
-      }else{
-        theme.setVisibility(true)
+
+
+      } else {
+
+
+
+     
+        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
+          method: 'POST',
+          headers: {
+            Acceps: 'application/json',
+            'content-Type': 'application/json'
+          },
+          body: JSON.stringify(newCard1)
+        })
+          .then((res) => {
+            return (res.json())
+          }).then((data) => {
+            theme.setIsDataApp(!theme.isDataApp)
+
+            setIsLoading(false)
+          });
       }
+
+      theme.setCount(1)
+    } else {
+      theme.setVisibility(true)
     }
-      
+  }
 
 
 
 
-    const handelSumUp = (id) => {
-      // setCount(prev => prev + 1)
-      const totalUp = addtoCards1.find(c => c.id === id)
+
+  const handelSumUp = (id) => {
+    // setCount(prev => prev + 1)
+    const totalUp = addtoCards1.find(c => c.id === id)
 
 
-      // theme.setCount(theme.count + 1)
-
-
-
-    }
-    const handelSumDown = (id) => {
-      // setCount(prev => prev - 1)
-      // if(theme.count > 1){
-
-      //   theme.setCount(theme.count - 1)
-      // }
+    // theme.setCount(theme.count + 1)
 
 
 
-    }
-
+  }
+  const handelSumDown = (id) => {
+    // setCount(prev => prev - 1)
+    // if(theme.count > 1){
 
     //   theme.setCount(theme.count - 1)
     // }
-   
-    
 
-  
-  const [alpha,setAlpha]=useState(true);
-const testSort=()=>{
-  const a=[...cards];
-  const t=a.sort((a,b)=> a>b? 1:-1)
-  console.log(cards[0].price)
-  setCards(t)
-  setAlpha(!alpha)
-  setIsActiveSort(!isActiveSort)
-}
 
-const [isActiveSort,setIsActiveSort]=useState(false)
-const [colorPrice,setColorPrice]=useState(false)
-const testPrice1=(event)=>{
-  
-  let test=[]
-  const a=[...cardsTemp]
 
-  for (let i =0;i<a.length;i++){
-    if((a[i].price<200)){
-      test.push(a[i])
-    }
   }
-  setCards(test);
-}
-const testPrice2=(event)=>{
-  let test=[];
-  const a=[...cardsTemp]
+
+
+  //   theme.setCount(theme.count - 1)
+  // }
 
 
 
-  for (let i =0;i<a.length;i++){
-    if((a[i].price<300 && a[i].price>=200)){
-      test.push(a[i])
-    }
+
+  const [alpha, setAlpha] = useState(true);
+  const testSort = () => {
+    const a = [...cards];
+    const t = a.sort((a, b) => a > b ? 1 : -1)
+    console.log(cards[0].price)
+    setCards(t)
+    setAlpha(!alpha)
+    setIsActiveSort(!isActiveSort)
   }
-  setCards(test)
-}
-const testPrice3=()=>{
-  let test=[];
-  const a=[...cardsTemp]
+
+  const [isActiveSort, setIsActiveSort] = useState(false)
+  const [colorPrice, setColorPrice] = useState(false)
+  const testPrice1 = (event) => {
+
+    let test = []
+    const a = [...cardsTemp]
+
+    for (let i = 0; i < a.length; i++) {
+      if ((a[i].price < 200)) {
+        test.push(a[i])
+      }
+    }
+    setCards(test);
+  }
+  const testPrice2 = (event) => {
+    let test = [];
+    const a = [...cardsTemp]
 
 
-  for (let i =0;i<a.length;i++){
-    if((a[i].price<=400 && a[i].price>=300)){
-      test.push(a[i])
+
+    for (let i = 0; i < a.length; i++) {
+      if ((a[i].price < 300 && a[i].price >= 200)) {
+        test.push(a[i])
+      }
     }
+    setCards(test)
   }
-  setCards(test)
-}
-const testPrice4=()=>{
-  
-  let test=[]
-  const a=[...cardsTemp]
- 
-  for (let i =0;i<a.length;i++){
-    if((a[i].price>400)){
-      test.push(a[i])
+  const testPrice3 = () => {
+    let test = [];
+    const a = [...cardsTemp]
+
+
+    for (let i = 0; i < a.length; i++) {
+      if ((a[i].price <= 400 && a[i].price >= 300)) {
+        test.push(a[i])
+      }
     }
+    setCards(test)
   }
-  setCards(test);
-}
-const testAll=()=>{
-  setCards(cardsTemp)
-}
+  const testPrice4 = () => {
+
+    let test = []
+    const a = [...cardsTemp]
+
+    for (let i = 0; i < a.length; i++) {
+      if ((a[i].price > 400)) {
+        test.push(a[i])
+      }
+    }
+    setCards(test);
+  }
+  const testAll = () => {
+    setCards(cardsTemp)
+  }
 
   return (
     <div className='Content_container'>
       <div style={{ visibility: `${stylePopup}` }} className='dark_popup_1'></div>
       <div className='container_card_sort' >
-    {alpha ? <div><button className='container_card_name' onClick={testSort} >A to Z</button></div>: <div><button onClick={testSort} className='container_card_name active' style={{color:'white',background:'black'}}>Z to A</button></div>}  
-    <div><button onClick={testPrice1} className='btn_container_price'>Price {'<'} 200$</button></div>
-    <div><button onClick={testPrice2}className='btn_container_price'>Price  200$-300$</button></div>
-    <div><button onClick={testPrice3}className='btn_container_price'>Price 300$-400$</button></div>
-    <div><button onClick={testPrice4}className='btn_container_price'>Price {'>'} 400$</button></div>
-    <div><button onClick={testAll}className='btn_container_price'>All Product</button></div>
-    </div>
-    <div style={{display:'flex',flexDirection:'flex-end',width:'91%',marginLeft:'15px'}} ><span style={{border:'1px solid black',width:'100%',}}></span></div>
+        {alpha ? <div><button className='container_card_name' onClick={testSort} >A to Z</button></div> : <div><button onClick={testSort} className='container_card_name active' style={{ color: 'white', background: 'black' }}>Z to A</button></div>}
+        <div><button onClick={testPrice1} className='btn_container_price'>Price {'<'} 200$</button></div>
+        <div><button onClick={testPrice2} className='btn_container_price'>Price  200$-300$</button></div>
+        <div><button onClick={testPrice3} className='btn_container_price'>Price 300$-400$</button></div>
+        <div><button onClick={testPrice4} className='btn_container_price'>Price {'>'} 400$</button></div>
+        <div><button onClick={testAll} className='btn_container_price'>All Product</button></div>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'flex-end', width: '91%', marginLeft: '15px' }} ><span style={{ border: '1px solid black', width: '100%', }}></span></div>
       {params.id}
       {detail ?
         <DetailPopup onSumUp={handelSumUp} onSumDown={handelSumDown} onDetailAtc={handelAddtoCart1} hideDetail={hideDetail} id={popupInfo[[0]].id} name={popupInfo[0].name} price={popupInfo[0].price} url={popupInfo[0].url} quantity={popupInfo[0].quantity} />
         : ''}
-    {
-          IsLoading ?
-            <div className='spinner_container' style={{marginTop:'250px'}}>
-              <CatalogMagic />
+      {
+        IsLoading ?
+          <div className='spinner_container' style={{ marginTop: '250px' }}>
+            <CatalogMagic />
+          </div>
+          : <>
+            <div className='container_card'>
+              {cards.map((item) => {
+                return (
+                  <Container_card
+                    name={item.name}
+                    style={item.style}
+                    shape={item.shape}
+                    url={item.url}
+                    price={item.price}
+                    onAddtoCard={handelAddtoCard}
+                    onDisplay={handlePopup}
+                    id={item.id}
+
+                    quantity={item.quantity}
+                    setIsShowDetail={setDetailPopup}
+
+                  // count={count}
+                  />
+                )
+              })}
+
             </div>
-            : <>
-              <div className='container_card'>
-                {cards.map((item) => {
-                  return (
-                    <Container_card
-                      name={item.name}
-                      style={item.style}
-                      shape={item.shape}
-                      url={item.url}
-                      price={item.price}
-                      onAddtoCard={handelAddtoCard}
-                      onDisplay={handlePopup}
-                      id={item.id}
 
-                      quantity={item.quantity}
-                      setIsShowDetail={setDetailPopup}
-
-                    // count={count}
-                    />
-                  )
-                })}
-
-              </div>
-
-              <div className='Content_pagination'>
-                <NavLink to='/shop'>01</NavLink>
-                <NavLink to='/02'>02</NavLink>
-                <NavLink to='03'>03</NavLink>
-                <NavLink to='04'>04</NavLink>
-                <NavLink to='05'>05</NavLink>
-                <NavLink to='/02' style={{ textDecoration: 'none', fontSize: 'bigger' }}><i class='bx bx-chevron-right'></i></NavLink>
-              </div>
-            </>
-        }
-
-      </div>
-
-    )
+            <div className='Content_pagination'>
+              <NavLink to='/shop'>01</NavLink>
+              <NavLink to='/02'>02</NavLink>
+              <NavLink to='03'>03</NavLink>
+              <NavLink to='04'>04</NavLink>
+              <NavLink to='05'>05</NavLink>
+              <NavLink to='/02' style={{ textDecoration: 'none', fontSize: 'bigger' }}><i class='bx bx-chevron-right'></i></NavLink>
+            </div>
+          </>
       }
 
+    </div>
 
-  export default Content
+  )
+}
+
+
+export default Content
