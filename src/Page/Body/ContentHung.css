@@ -1,26 +1,32 @@
-.content{
+.content-hung {
     width: 100%;
     position: relative;
     margin-bottom: 10rem;
-    
+
 }
-.content-img{
-    
+
+.content-img {
+
     width: 59rem;
-    
-    
+
+
 }
-.content-img img{
+
+.content-img img {
     width: 100%;
 }
-.content-img1 img{
+
+
+
+.content-img1 img {
     width: 54%;
     position: absolute;
     top: -18px;
     right: 53rem;
     z-index: 1;
 }
-.content-title{
+
+.content-title-hung {
     position: absolute;
     right: 0;
     top: 29px;
@@ -30,46 +36,72 @@
     z-index: 0;
     padding: 245px 238px
 }
-.firt-title-content h2{
+
+.firt-title-content h2 {
     font-weight: 600;
     font-size: 31px;
 }
-.firt-title-content p{
+
+.firt-title-content p {
     font-size: 19px;
 }
-.ct-title-content{
+
+.ct-title-content {
     border-bottom: 1px solid #cccccb59;
     /* margin-bottom: 14px; */
     padding-bottom: 12px;
     /* margin-top: 13px; */
     padding-top: 19px;
 }
-.ct-title-content h4{
+
+.ct-title-content h4 {
     font-size: 16px;
     font-weight: 600;
 
 }
-.last-title-content{
+
+.last-title-content {
     border-bottom: none;
 }
-.btn-view{
+
+.btn-view {
     padding: 19px 43px;
     /* background: white; */
     background: #cccccc29;
-    
+
     border: 1px solid #cccccb80;
     letter-spacing: 2px;
     font-size: 12px;
 }
-.btn-view:hover{
+
+.btn-view:hover {
     background: black;
     color: white;
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+    
+    .content-img {
+        width: 47rem;
+    }
 
+    .content-hung {
+        margin-left: 2px;
+        height: 75rem;
+        background-color: white;
+        margin-bottom: 4rem;
+    }
 
+    .content-title-hung {
+        height: 16rem;
+        top: 49rem;
 
+        padding: 190px 238px;
+        width: 56rem;
+    }
 
-
-
-
+    .ctnt-hung {
+        position: absolute;
+        top: 11px;
+    }
+}

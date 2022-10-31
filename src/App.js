@@ -149,6 +149,7 @@ function App() {
   const [isLogin, setIsLogin] = useState(true)
   const [clearCart, setClearCart] = useState(false)
   const [textBlock, setTextBlock] = useState(true)
+  const [discountSub, setDiscountSub] = useState('')
 
   return (
 
@@ -165,11 +166,12 @@ function App() {
       count: count, setCount: setCount,
       onUser: onUser, setOnuser: setOnuser,
       display: display, setDisplay: setDisplay,
-      textBlock: textBlock,
-      setTextBlock: setTextBlock,
+      textBlock: textBlock,setTextBlock: setTextBlock,
+      discountSub: discountSub,setDiscountSub: setDiscountSub,
     }}>
       <div className='App'>
         {/* <ContextLanguage.Provider value={{onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}} > */}
+         {/* {display == true ? <Sub /> : ''} */}
         <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0', position: 'relative' }}>
           <Row style={{ marginBottom: '106px', }}>
             <Navigation />

@@ -66,7 +66,7 @@ function Example(args) {
         <img src={item.src} style={{ objectFit: `${item.objectfit}`, objectPosition: `${item.objectpos}` }} />
         <div className='anh'>
           <div className='img-anh'>
-            <img src="https://neoocular.qodeinteractive.com/wp-content/uploads/2021/08/main-home-rev-img-19.png" />
+            <img className='img_anh1' src="https://neoocular.qodeinteractive.com/wp-content/uploads/2021/08/main-home-rev-img-19.png" />
             <div className='btn-book'>
               BOOK NOW
             </div>

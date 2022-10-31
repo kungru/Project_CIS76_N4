@@ -26,7 +26,7 @@ const Scrolltop = () => {
     <>
       {display && <button
         onClick={backToTop}
-        style={{ width: '35px', height: '35px', background: 'inherit', position: 'fixed', bottom: '30px', right: '15px', borderRadius: '50%', border: '2px solid black', fontSize: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        style={{ width: '35px', height: '35px', background: 'inherit', position: 'fixed', bottom: '30px', right: '15px', borderRadius: '50%', border: '2px solid black', fontSize: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center',    zIndex: '1' }}>
         <i class='bx bx-up-arrow-alt'></i>
       </button>}
     </>

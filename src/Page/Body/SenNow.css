@@ -72,3 +72,18 @@
 .thank_sendnow span{
     color: #646060;
 }
+@media (min-width: 768px) and (max-width: 1023px) {
+    .block_sendnow_1{
+        width: 43rem;
+        height: 16rem;
+        background-color: white;
+        margin: auto;
+        text-align: center;
+        /* margin-top: 3px; */
+        padding-top: 26px
+
+    }
+    .type_sendnow label{
+        margin-top: 10px;
+    }
+ }

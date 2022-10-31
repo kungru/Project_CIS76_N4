@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useRef, useEffect, useContext } from 'react';
 import { ThemeContext } from '../../App';
 import { Routes, Route, Link, NavLink, useNavigate } from 'react-router-dom';
+import Sub from '../Body/Sub';
 // import ContextLanguage from '../Context/ContextLanguage';
 import isEmpty from 'validator/lib/isEmpty'
 import { Button, Spinner } from 'reactstrap';
@@ -113,32 +114,32 @@ const Header = () => {
                 .then((res) => {
                     return (res.json())
                 }).then((data) => {
+                    
 
                     if (theme.display == true) {
 
 
                         setDataCard(data)
-
+                        theme.setTextBlock(false)
+                        theme.setRenderCart(true)
+                        // if(dataCard.length == 0){
+                        //     theme.setTextBlock(true)    
+                        //     theme.setRenderCart(false) 
+                        // }
 
 
 
                     } else {
                         setDataCard([])
+                        theme.setTextBlock(true)
+                        theme.setRenderCart(false)
                         // theme.setTextBlock(false)
 
                     }
                     // setIsData(!isData)
                     setloadCard(false)
                 });
-            if (dataCard.length > 0) {
-                theme.setTextBlock(false)
-                theme.setClearCart(false)
-            } else {
-                theme.setTextBlock(true)
-                theme.setClearCart(true)
-
-
-            }
+            
         }, [theme.isDataApp, theme.display]
     )
     const handelSaveCard = () => {
@@ -177,12 +178,11 @@ const Header = () => {
     }
 
 
-    const total = dataCard.reduce((items, item) => items + Math.floor(item.price), 0)
+    const total = dataCard.reduce((items, item) => items + item.quantity*item.price, 0)
     const totalQuantity = dataCard.reduce((items, { quantity }) => {
         // setIsData(!isData)
         return items + quantity
     }, 0)
-    const totalPrice = total * totalQuantity
     // console.log(totalPrice)
     const toggleFormLogin = (e) => {
         theme.setIsLogin(!theme.isLogin)
@@ -213,8 +213,8 @@ const Header = () => {
 
 
     return (
-
         <div className='header'  >
+        
             <div className='address'>
                 <div>
                     <ul className='list-icon'>
@@ -385,19 +385,19 @@ const Header = () => {
 
 
                         ))}
-                        {theme.textBlock ?
+                        {dataCard.length === 0  &&
 
                             <>
                                 <p>No products in the cart.</p>
                                 <button onClick={handelReturnToShop}>REATURN TO SHOP</button>
                             </>
-                            : ''
+                            
                         }
                         {/* {theme.clearCart ? <button onClick={handelClearCart}>CLEAR CART  </button> : ''} */}
-                        {theme.renderCart == true ? <div className='total_card'>TOTAL: <div>${totalPrice}.00</div></div> : ''}
-                        {theme.renderCart == true ? <button onClick={handelViewCard}>
+                        {dataCard.length &&  <div className='total_card'>TOTAL: <div>${total}.00</div></div>}
+                        {dataCard.length && <button onClick={handelViewCard}>
                             CARD & CHECKOUT
-                        </button> : ''}
+                        </button>}
                     </div>
                 </div>
             </div>

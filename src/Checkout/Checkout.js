@@ -1,10 +1,12 @@
 import React from 'react';
 import { Table, Container, Row, Form, FormGroup, Label, Col, Input, Spinner } from 'reactstrap';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect,useContext } from 'react'
+import { ThemeContext } from '../App';
 
 import './Checkout.css'
 
 const Checkout = () => {
+    const theme = useContext(ThemeContext)
     const [height, setHeight] = useState(16)
     const [transition, setTransition] = useState(-267)
     const [height1, setHeight1] = useState(false)
@@ -82,6 +84,9 @@ const Checkout = () => {
         else if (isNaN(phone)) {
             hoder1.phone = "Wrong phone Number"
         }
+        else if(phoneValid){
+            hoder1.phone = "Wrong phone Number"
+        }
         else if (address.length < 4) {
             hoder1.address = "The home address is incorrect"
         }
@@ -113,13 +118,13 @@ const Checkout = () => {
         if (!valid) return
     }
 
-    let total1 = dataCard.reduce((items, item) => items + item.price, 0)
+    let total1 = dataCard.reduce((items, item) => items + item.quantity* item.price, 0)
     const [discount, setDiscount] = useState('')
     const [discountProduct, setDiscountProduct] = useState()
     const [block, setBlock] = useState(false)
     const tdRef = useRef()
     const handelApplyDiscount = () => {
-        if (discount === 'HTDZ') {
+        if (discount === theme.discountSub) {
             setDiscountProduct(total1 - 100)
             tdRef.current.style.textDecoration = 'line-through'
             tdRef.current.style.fontSize = '14px'
@@ -212,17 +217,19 @@ const Checkout = () => {
                                     <tr>
                                         <th>PRODUCT</th>
                                         <th>SUBTOTAL</th>
+                                        <th>QUANTITY</th>
                                     </tr>
                                     {dataCard.map(item => (
                                         <tr>
                                             <td>{item.name}</td>
-                                            <td>${item.price}.00</td>
+                                            <td>${item.price}</td>
+                                            <td>x{item.quantity}</td>
                                         </tr>
 
                                     ))}
                                     <tr>
                                         <th>TOTAL</th>
-                                        <td ref={tdRef}>${total1}.00</td>{block && <span style={{ position: 'relative', left: '-12vh' }}>${discountProduct}.00</span>}
+                                        <td ref={tdRef}>${total1}.00</td>{block && <span style={{ position: 'relative', left: '-12vh' }}>${discountProduct}</span>}
                                     </tr>
                                 </Table>
                             </div>

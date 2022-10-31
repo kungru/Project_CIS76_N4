@@ -2,7 +2,8 @@
     position: fixed;
     z-index: 200;
     background: #00000073;
-    visibility: visible;
+    /* visibility: visible; */
+    display: none;
     width: 100%;
     right: 0;
     height: 100vh;

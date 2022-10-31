@@ -1,37 +1,43 @@
-.viewcard{
+.viewcard {
     margin-top: 77px;
 }
+
 .view-card {
     display: flex;
     height: 10rem;
     /* margin: auto; */
     justify-content: center;
 }
-.view-card img{
+
+.view-card img {
     width: 8rem;
     margin-top: 36px;
 
 }
-.durgs{
-    
+
+.durgs {
+
     margin-top: 68px;
-    
-        display: flex;
-        
-        margin-left: 30px;
-        width: 50%;
-        gap: 83px;
-    }
-    .view-card-list{
+
+    display: flex;
+
+    margin-left: 30px;
+    width: 50%;
+    gap: 83px;
+}
+
+.view-card-list {
     border: 1px solid #cccccb45;
 
 }
-.table_card img{
+
+.table_card img {
     width: 11rem;
     margin-left: 20px;
-    
+
 }
-.quantity{
+
+.quantity {
     width: 12rem;
     height: 4rem;
     border: 1px solid #cccccc3b;
@@ -40,33 +46,38 @@
     margin-left: -74px;
 }
 
-.quantity input{
+.quantity input {
     border: none;
     outline: none;
     text-align: center;
     margin-top: 2px;
 
 }
-.sum{
+
+.sum {
     margin-top: 18px;
     cursor: pointer;
 }
-.checkout{
+
+.checkout {
     line-height: 69px;
     margin-top: 113px;
 }
-.color{
+
+.color {
     font-size: 20px;
     color: #cccccb;
     position: absolute;
-    
+
     right: 70rem;
 }
-.btn1{
+
+.btn1 {
     position: relative;
     right: 14rem;
 }
-.btn1_viewcard{
+
+.btn1_viewcard {
     padding: 1px 20px;
     border: 1px solid black;
     background: white;
@@ -74,21 +85,35 @@
     margin-top: 43px;
     letter-spacing: 2px;
 }
-.btn1_viewcard:hover{
+
+.btn1_viewcard:hover {
     background-color: black;
     color: white;
 }
-.border_view{
-             border-bottom: 1px solid #cccc;
-             width: 84rem;
-            
-}
-.return_shop_view{
-    margin-top: 66px;
-}
-.return_shop_view p{
+
+.border_view {
+    border-bottom: 1px solid #cccc;
+    width: 84rem;
 
 }
+.total_view {
+    position: absolute;
+    right: 70rem;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.quantity_price_view {
+    font-size: 20px;
+    position: 'absolute';
+    right: 70rem;
+}
+
+.return_shop_view {
+    margin-top: 66px;
+}
+
+.return_shop_view p {}
 
 .return_shop_view button {
     padding: 9px;
@@ -96,7 +121,15 @@
     color: white;
     font-size: 12px;
 }
-.return_shop_view button:hover{
+
+.return_shop_view button:hover {
     background: #80808080;
     color: black;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .quantity {
+        margin-left: -36px;
+    }
+
 }

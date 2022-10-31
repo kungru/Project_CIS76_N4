@@ -10,30 +10,42 @@ const ViewCard = () => {
   const theme = useContext(ThemeContext)
   const [dataCard, setDataCard] = useState([])
   const [returnShop, setReturnShop] = useState(true)
-  useEffect(() => {
-    fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard')
-      .then((res) => {
-        return (res.json())
-      }).then((data) => {
+  useEffect(
+    () => {
+        // setloadCard(true)
+        // setIsLoading(true);
+        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard')
+            .then((res) => {
+                return (res.json())
+            }).then((data) => {
+                
+
+                if (window.localStorage.getItem('display')) {
 
 
-        if (theme.renderCart == true) {
-
-          setDataCard(data)
-        } else {
-          setDataCard([])
-          theme.setClearCart(false)
-
-
-        }
+                    setDataCard(data)
+                    theme.setTextBlock(false)
+                    theme.setRenderCart(true)
+                    // if(dataCard.length == 0){
+                    //     theme.setTextBlock(true)    
+                    //     theme.setRenderCart(false) 
+                    // }
 
 
 
-        //   setIsLoading(false)
-      });
+                } else {
+                    setDataCard([])
+                    theme.setTextBlock(true)
+                    theme.setRenderCart(false)
+                    // theme.setTextBlock(false)
 
-
-  }, [])
+                }
+                // setIsData(!isData)
+                // setloadCard(false)
+            });
+        
+    }, [theme.isDataApp, theme.display]
+)
 
 
 
@@ -44,14 +56,18 @@ const ViewCard = () => {
 
 
 
+  const checkQuantityPrice = dataCard.reduce((a,b) => a + b.price * b.quantity, 0)
 
   const handelSetCouse = (id, url) => {
     const checkId = dataCard.find(c => c.id === id)
+    // const couseUpPrice = checkId.reduce((a,c) => a + c.quantity * c.price, 0)
     if (checkId) {
 
       // theme.setCount(theme.count + 1)
       const fakeQuantity = checkId.quantity += 1
-      const fakePrice = checkId.price * fakeQuantity
+
+
+      // const fakePrice = checkId.price * fakeQuantity
 
 
       fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
@@ -66,15 +82,15 @@ const ViewCard = () => {
         },
         body: JSON.stringify({
           quantity: fakeQuantity,
-          price: fakePrice
+          // price: couseUpPrice
 
         })
       })
         .then(res => {
           res.json().then((res) => {
 
-
-            setIsData1(!isData1)
+            theme.setIsDataApp(!theme.isDataApp)  
+            
           })
         })
         .catch(err => {
@@ -139,8 +155,8 @@ const ViewCard = () => {
           .then(res => {
             res.json().then((res) => {
 
+              theme.setIsDataApp(!theme.isDataApp)  
 
-              setIsData1(!isData1)
             })
           })
           .catch(err => {
@@ -166,6 +182,7 @@ const ViewCard = () => {
 
         // setTotal(total)
         setDataCard(removeCart)
+        theme.setIsDataApp(!theme.isDataApp) 
 
       }
       )
@@ -199,13 +216,13 @@ const ViewCard = () => {
               </th>
             </tr>
           </thead>
-          {theme.textBlock ?
+          {dataCard.length === 0 &&
 
             <div className='return_shop_view'>
               <p>No products in the cart.</p>
               <button onClick={handelReturnToShop}>REATURN TO SHOP</button>
             </div>
-            : ''
+            
           }
           {dataCard.map(item => (
             <Productssss
@@ -225,17 +242,17 @@ const ViewCard = () => {
           ))}
 
         </Table>
-        <div className='checkout'>
+       {dataCard.length &&  <div className='checkout'>
           <h1>CART TOTALS</h1>
           <Row>
             <Table>
               <tr>
                 <th className='border_view'>SUBTOTAL</th>
-                <td className='color'>${totalPrice1}.00</td>
+                <td className='color'>${checkQuantityPrice }.00</td>
               </tr>
               <tr>
                 <th className='border_view'>TOTAL</th>
-                <td style={{ fontSize: '20px', position: 'absolute', right: '70rem' }}>${totalPrice1}.00</td>
+                <td className='total_view'>${checkQuantityPrice}.00</td>
               </tr>
               <tr>
                 <button className='btn1_viewcard'><Link to='/checkoutCart'>PROCEE TO CHECKOUT</Link></button>
@@ -243,9 +260,9 @@ const ViewCard = () => {
             </Table>
 
           </Row>
-        </div>
+        </div> }
       </Container>
-    </div>
+    </div> 
   )
 }
 
@@ -324,13 +341,10 @@ const Productssss = (prop) => {
         </div>
       </td>
       <td>
-        <div style={{
-          marginLeft: '2rem', position: 'relative',
-          right: '12rem',
-        }}>  ${prop.price} </div>
+        <div className='quantit'>  ${prop.price} </div>
       </td>
       <td>
-        <button className='btn1' onClick={handelDeleteCart}>X</button>
+            <button  onClick={handelDeleteCart}>X</button>
       </td>
     </tr>
   )

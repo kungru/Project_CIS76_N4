@@ -1,15 +1,19 @@
 import React from 'react'
 import './Sub.css'
 import { Form, FormGroup, Label, Input, Button, Container, Row } from 'reactstrap'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect,useContext } from 'react'
+import { ThemeContext } from '../../App'
 
 
 const Sub = () => {
+  const theme = useContext(ThemeContext)
 
-  const [block, setBlock] = useState(0)
+  const [block, setBlock] = useState('block')
   const divRef = useRef()
-  const [timeAll, setTimeAll] = useState(null)
-  const [timeAll1, setTimeAll1] = useState(null)
+  const [firtName, setFirtName] = useState('')
+  const [email, setEmail] = useState('')
+  const [user, setUser] = useState([])
+
 
 
 
@@ -17,29 +21,42 @@ const Sub = () => {
 
     let timer = setTimeout(() => {
 
-      setBlock(1)
-      divRef.current.style.visibility = "visible"
+      setBlock('block')
+
+
     }, 2000)
 
-
-
-
-
-
-
-
-
-    return () => {
-      clearTimeout(timer)
+    if(theme !== ''){
+        clearTimeout(timer)
     }
+
+
+
+
+
+
+
+
+
+   
 
   }
     , [])
+    useEffect(() => {
+      fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
+          .then((response) => {
+              return response.json()
+          }).then((data) => {
+
+            setUser(data)
+
+          })
+  }, [])
 
   const handelRemoveBlock = (e) => {
 
-    setBlock(0)
-    divRef.current.style.visibility = "hidden";
+    setBlock('none')
+    
 
 
 
@@ -47,14 +64,21 @@ const Sub = () => {
 
   }
   const handelSubmit = () => {
+    for(let i = 0; i < user.length;i++){
+          if(firtName === user[i].Email){
+              theme.setDiscountSub('HTDZ')
+          }
+    }
 
-    setBlock(0)
-    divRef.current.style.visibility = "hidden";
+    
+
+    setBlock('none')
+
   }
 
 
   return (
-    <div ref={divRef} className='sub' style={{ opacity: `${block}` }}>
+    <div  className='sub' style={{ display: `${block}` }}>
       <div className='sub-all'>
         <div className='sub-img'>
           <img src="https://cdn.elly.vn/uploads/2021/06/17120620/tong-hop-10-thuong-hieu-kinh-mat-nu-duoc-ua-chuong-nhat-hien-nay.3.jpg" />
@@ -72,28 +96,33 @@ const Sub = () => {
                       for="exampleEmail"
                       hidden
                     >
-                      Email
+                      Firt Name *
                     </Label>
                     <Input
                       id="exampleEmail"
                       name="email"
-                      placeholder="Email"
+                      value={firtName}
+                      onChange={(e) => setFirtName(e.target.value)}
+                      placeholder="Firt Name *"
                       type="email"
                     />
                   </FormGroup>
                   {' '}
                   <FormGroup>
                     <Label
-                      for="examplePassword"
+                     for="exampleEmail"
                       hidden
                     >
-                      Password
+                      Email
                     </Label>
                     <Input
-                      id="examplePassword"
-                      name="password"
-                      placeholder="Password"
-                      type="password"
+                    value={email}
+                     id="exampleEmail"
+                     onChange={(e) => setEmail(e.target.value)}
+
+                     name="email"
+                     placeholder="Email *"
+                      type="email"
                     />
                   </FormGroup>
                   {' '}
