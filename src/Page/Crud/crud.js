@@ -30,7 +30,7 @@ const Crud = () => {
 
   useEffect(
     () => {
-      fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/CRUD')
+      fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card')
         .then((res) => {
           return (res.json())
         }).then((data) => {
@@ -62,7 +62,7 @@ const Crud = () => {
 
     }
 
-    fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/CRUD', {
+    fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card', {
       method: 'POST',
       crossDomain: true,
       xhrFields: {
@@ -96,7 +96,7 @@ const Crud = () => {
 
   const handelRemove = (id) => {
     setLoading(!loading)
-    fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/CRUD/' + id, {
+    fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card' + id, {
       method: 'DELETE',
     })
       .then(res => res.text()) // or res.json()
@@ -145,7 +145,7 @@ const Crud = () => {
 
     setIsAdd(!isAdd)
 
-    fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/CRUD/` + expenseUpdate, {
+    fetch(`https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card` + expenseUpdate, {
       method: 'PUT',
       crossDomain: true,
       xhrFields: {
