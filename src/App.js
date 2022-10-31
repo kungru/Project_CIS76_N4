@@ -149,7 +149,8 @@ function App() {
   const [isLogin, setIsLogin] = useState(true)
   const [clearCart, setClearCart] = useState(false)
   const [textBlock, setTextBlock] = useState(true)
-
+const [searchBlock,setSearchBlock]=useState('')
+const [linhtinh,setLinhTinh]=useState(false)
   return (
 
 
@@ -167,6 +168,8 @@ function App() {
       display: display, setDisplay: setDisplay,
       textBlock: textBlock,
       setTextBlock: setTextBlock,
+      searchBlock:searchBlock,setSearchBlock,
+      linhtinh:linhtinh,setLinhTinh:setLinhTinh,
     }}>
       <div className='App'>
         {/* <ContextLanguage.Provider value={{onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}} > */}

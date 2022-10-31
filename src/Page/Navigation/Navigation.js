@@ -60,13 +60,16 @@ const Header = (props) => {
     }, [])
 
     const handleBlock = (e) => {
+   
         inputRef.current.focus()
         setRemoveblock(true)
         setBlockSearch(250);
+        setOnClickSearch(false)
     }
     const handelRemoveblock = () => {
         setRemoveblock(false);
         setBlockSearch(0);
+        setOnClickSearch(true)
     }
     // Ân hiện Form Login
     const [blockLogin, setBlockLogin] = useState(0)
@@ -208,11 +211,21 @@ const Header = (props) => {
         navigate('/shop')
         blockRef.current.style.visibility = 'hidden'
     }
-    const [search,setSearch]=useState('')
-    const searchCom=(e)=>{
-       setSearch(e.target.value)
-       props.testSearch()
-    }
+    // const [search,setSearch]=useState('')
+    // const searchCom=(e)=>{
+    //    setSearch(e.target.value)
+    //    props.testSearch()
+    // }
+    const [onClickinput,setOnClickinput]=useState('')
+const [onClickSearch,setOnClickSearch]=useState(true)
+const newHandleBlock=()=>{
+   theme.setLinhTinh(true)
+   setOnClickSearch(false);
+    theme.setSearchBlock(onClickinput)
+    console.log(theme.searchBlock)
+
+}
+
     return (
 
         <div className='header'  >
@@ -312,16 +325,19 @@ const Header = (props) => {
                                 className='header-input'
                                 placeholder='Search'
                                 style={{ width: `${blockSearch}px` }}
-                                onChange={searchCom}
+                                onChange={(e)=>{setOnClickinput(e.target.value)}}
                            /></span>
-                            <a
-                                onClick={handleBlock}
-                                className='header-search'
-
-                                href="#"
-                            >
+               {onClickSearch?                <span onClick={handleBlock}
+                                className='header-search '>
                                 <i className="fa-solid fa-magnifying-glass"></i>
-                            </a>
+                            </span>:               <span onClick={newHandleBlock}
+                                className='header-search active'>
+                                <i className="fa-solid fa-magnifying-glass"></i>
+                            </span>}             
+               {/* <span onClick={handleBlock}
+                                className='header-search'>
+                                <i className="fa-solid fa-magnifying-glass"></i>
+                            </span> */}
                         </div>
                     </NavItem>
                     <NavItem>

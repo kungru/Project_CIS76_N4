@@ -38,12 +38,22 @@ const Content = () => {
           setCards(data);
           setCardsTemp(data)
           setIsLoading(false)
+          
+   
         });
 
     }, []
 
   )
-
+useEffect(()=>{
+  const b=theme.searchBlock;
+ 
+  const a=[...cardsTemp]
+  const c=a.filter((e)=>{return(
+    e.name.toLowerCase().includes(b.toLowerCase())
+  )})
+  if(theme.linhtinh){setCards(c)}
+})
   // const [dataLogin, setDataLogin] = useState([])
   const [isData2, setIsData2] = useState(true)
   // api addtocard
@@ -366,6 +376,13 @@ const Content = () => {
     setCards(cardsTemp)
   }
 
+    const b=theme.searchBlock;
+ 
+    const a=[...cardsTemp]
+    const c=a.filter((e)=>{return(
+      e.name.toLowerCase().includes(b.toLowerCase())
+    )})
+
   return (
     <div className='Content_container'>
       <div style={{ visibility: `${stylePopup}` }} className='dark_popup_1'></div>
@@ -389,7 +406,7 @@ const Content = () => {
           </div>
           : <>
             <div className='container_card'>
-              {cards.map((item) => {
+           {cards.map((item) => {
                 return (
                   <Container_card
                     name={item.name}
@@ -404,7 +421,7 @@ const Content = () => {
                     quantity={item.quantity}
                     setIsShowDetail={setDetailPopup}
 
-                  // count={count}
+                 
                   />
                 )
               })}
