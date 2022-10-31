@@ -124,7 +124,7 @@ const Checkout = () => {
     const [block, setBlock] = useState(false)
     const tdRef = useRef()
     const handelApplyDiscount = () => {
-        if (discount === theme.discountSub) {
+        if (discount === 'HTDZ') {
             setDiscountProduct(total1 - 100)
             tdRef.current.style.textDecoration = 'line-through'
             tdRef.current.style.fontSize = '14px'

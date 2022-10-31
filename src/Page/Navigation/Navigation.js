@@ -414,7 +414,6 @@ const testTung=()=>{
                             </>
                             
                         }
-                        {/* {theme.clearCart ? <button onClick={handelClearCart}>CLEAR CART  </button> : ''} */}
                         {dataCard.length &&  <div className='total_card'>TOTAL: <div>${total}.00</div></div>}
                         {dataCard.length && <button onClick={handelViewCard}>
                             CARD & CHECKOUT
