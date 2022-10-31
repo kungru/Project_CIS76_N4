@@ -149,8 +149,14 @@ function App() {
   const [isLogin, setIsLogin] = useState(true)
   const [clearCart, setClearCart] = useState(false)
   const [textBlock, setTextBlock] = useState(true)
+<<<<<<< HEAD
   const [discountSub, setDiscountSub] = useState('')
 
+=======
+const [searchBlock,setSearchBlock]=useState('')
+const [linhtinh,setLinhTinh]=useState(false);
+const [linhtinh2,setLinhTinh2]=useState(false)
+>>>>>>> 2964d566efa10a972719890e1199cffcda16c1f4
   return (
 
 
@@ -166,8 +172,16 @@ function App() {
       count: count, setCount: setCount,
       onUser: onUser, setOnuser: setOnuser,
       display: display, setDisplay: setDisplay,
+<<<<<<< HEAD
       textBlock: textBlock,setTextBlock: setTextBlock,
       discountSub: discountSub,setDiscountSub: setDiscountSub,
+=======
+      textBlock: textBlock,
+      setTextBlock: setTextBlock,
+      searchBlock:searchBlock,setSearchBlock,
+      linhtinh:linhtinh,setLinhTinh:setLinhTinh,
+      linhtinh2:linhtinh2,setLinhTinh2:setLinhTinh2,
+>>>>>>> 2964d566efa10a972719890e1199cffcda16c1f4
     }}>
       <div className='App'>
         {/* <ContextLanguage.Provider value={{onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}} > */}

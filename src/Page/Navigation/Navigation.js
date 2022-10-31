@@ -13,7 +13,7 @@ import {
 } from 'reactstrap';
 
 
-const Header = () => {
+const Header = (props) => {
     const theme = useContext(ThemeContext)
     useEffect(() => {
         const data = window.localStorage.getItem('display')
@@ -61,13 +61,17 @@ const Header = () => {
     }, [])
 
     const handleBlock = (e) => {
+   
         inputRef.current.focus()
         setRemoveblock(true)
         setBlockSearch(250);
+        setOnClickSearch(false)
     }
     const handelRemoveblock = () => {
         setRemoveblock(false);
         setBlockSearch(0);
+        setOnClickSearch(true)
+        // inputRef.current=''
     }
     // Ân hiện Form Login
     const [blockLogin, setBlockLogin] = useState(0)
@@ -208,9 +212,22 @@ const Header = () => {
         navigate('/shop')
         blockRef.current.style.visibility = 'hidden'
     }
+    // const [search,setSearch]=useState('')
+    // const searchCom=(e)=>{
+    //    setSearch(e.target.value)
+    //    props.testSearch()
+    // }
+    const [onClickinput,setOnClickinput]=useState('')
+const [onClickSearch,setOnClickSearch]=useState(true)
+const newHandleBlock=()=>{
+//    theme.setLinhTinh(true)
+//    setOnClickSearch(false);
+//     theme.setSearchBlock(onClickinput)
+}
 
-    
-
+const testTung=()=>{
+//    theme.setLinhTinh2(!theme.linhtinh2)
+}
 
     return (
         <div className='header'  >
@@ -304,23 +321,27 @@ const Header = () => {
                 </Nav>
                 <Nav className='header-right'>
                     <NavItem>
-                        <div className='header-input-search'>
+                        <div className='header-input-search' onClick={testTung}>
                             {removeblock && <span className='remove-block2 animate__animated animate__fadeIn' onClick={handelRemoveblock} >X</span>}
                             <span><input
                                 ref={inputRef}
                                 className='header-input'
                                 placeholder='Search'
                                 style={{ width: `${blockSearch}px` }}
-
-                            /></span>
-                            <a
-                                onClick={handleBlock}
-                                className='header-search'
-
-                                href="#"
-                            >
+                             
+                                onChange={(e)=>{setOnClickinput(e.target.value)}}
+                           /></span>
+               {onClickSearch?                <span onClick={handleBlock}
+                                className='header-search '>
                                 <i className="fa-solid fa-magnifying-glass"></i>
-                            </a>
+                            </span>:               <span onClick={newHandleBlock}
+                                className='header-search active'>
+                                <i className="fa-solid fa-magnifying-glass"></i>
+                            </span>}             
+               {/* <span onClick={handleBlock}
+                                className='header-search'>
+                                <i className="fa-solid fa-magnifying-glass"></i>
+                            </span> */}
                         </div>
                     </NavItem>
                     <NavItem>
