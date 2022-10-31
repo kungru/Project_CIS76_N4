@@ -229,7 +229,7 @@ const Checkout = () => {
                                     ))}
                                     <tr>
                                         <th>TOTAL</th>
-                                        <td ref={tdRef}>${total1}.00</td>{block && <span style={{ position: 'relative', left: '-12vh' }}>${discountProduct}</span>}
+                                        <td ref={tdRef}>${total1}.00</td>{block && <span style={{ position: 'relative', left: '-12vh' }}>${discountProduct}.00</span>}
                                     </tr>
                                 </Table>
                             </div>
