@@ -8,7 +8,7 @@ import CatalogMagic from '../../Loading/CatalogMagic';
 // import ContextLanguage from '../Context/ContextLanguage';
 import { ThemeContext } from '../../App';
 import './Content.css';
-const Content = () => {
+const Content = (props,{}) => {
   const theme = useContext(ThemeContext)
 
 
@@ -45,15 +45,10 @@ const Content = () => {
     }, []
 
   )
-useEffect(()=>{
-  const b=theme.searchBlock;
- 
-  const a=[...cardsTemp]
-  const c=a.filter((e)=>{return(
-    e.name.toLowerCase().includes(b.toLowerCase())
-  )})
-  if(theme.linhtinh){setCards(c)}
-})
+
+
+
+
   // const [dataLogin, setDataLogin] = useState([])
   const [isData2, setIsData2] = useState(true)
   // api addtocard
@@ -376,12 +371,18 @@ useEffect(()=>{
     setCards(cardsTemp)
   }
 
-    const b=theme.searchBlock;
- 
-    const a=[...cardsTemp]
-    const c=a.filter((e)=>{return(
-      e.name.toLowerCase().includes(b.toLowerCase())
-    )})
+ const [searchTest,setSearchTest]=useState('')
+const handleForSearch=()=>{
+
+  
+  
+  const a=[...cardsTemp]
+  const c=a.filter((e)=>{return(
+    e.name.toLowerCase().includes(searchTest.toLowerCase())
+  )})
+  console.log(c)
+  setCards(c)
+}
 
   return (
     <div className='Content_container'>
@@ -393,6 +394,7 @@ useEffect(()=>{
         <div><button onClick={testPrice3} className='btn_container_price'>Price 300$-400$</button></div>
         <div><button onClick={testPrice4} className='btn_container_price'>Price {'>'} 400$</button></div>
         <div><button onClick={testAll} className='btn_container_price'>All Product</button></div>
+        <div ><input placeholder='Search...' onChange={(e)=>setSearchTest(e.target.value)} value={searchTest}/><button style={{marginTop:'5px'}} onClick={handleForSearch} className='btn_search_test'>Find</button></div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'flex-end', width: '91%', marginLeft: '15px' }} ><span style={{ border: '1px solid black', width: '100%', }}></span></div>
       {params.id}

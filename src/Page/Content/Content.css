@@ -24,6 +24,14 @@
     align-items: center;
     
 }
+.btn_search_test{
+    padding: 0px 5px;
+}
+.btn_search_test:hover{
+color: white;
+background-color: #1c1c1c;
+
+}
 .dark_popup_1{
     position: fixed;
     top: 0;
@@ -54,4 +62,8 @@
 }
 .btn_container_price{
     padding: 8px;
+}
+.btn_container_price:hover{
+    color: white;
+    background-color: #1c1c1c;
 }

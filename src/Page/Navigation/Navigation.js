@@ -70,6 +70,7 @@ const Header = (props) => {
         setRemoveblock(false);
         setBlockSearch(0);
         setOnClickSearch(true)
+        // inputRef.current=''
     }
     // Ân hiện Form Login
     const [blockLogin, setBlockLogin] = useState(0)
@@ -219,11 +220,13 @@ const Header = (props) => {
     const [onClickinput,setOnClickinput]=useState('')
 const [onClickSearch,setOnClickSearch]=useState(true)
 const newHandleBlock=()=>{
-   theme.setLinhTinh(true)
-   setOnClickSearch(false);
-    theme.setSearchBlock(onClickinput)
-    console.log(theme.searchBlock)
+//    theme.setLinhTinh(true)
+//    setOnClickSearch(false);
+//     theme.setSearchBlock(onClickinput)
+}
 
+const testTung=()=>{
+//    theme.setLinhTinh2(!theme.linhtinh2)
 }
 
     return (
@@ -318,13 +321,14 @@ const newHandleBlock=()=>{
                 </Nav>
                 <Nav className='header-right'>
                     <NavItem>
-                        <div className='header-input-search'>
+                        <div className='header-input-search' onClick={testTung}>
                             {removeblock && <span className='remove-block2 animate__animated animate__fadeIn' onClick={handelRemoveblock} >X</span>}
                             <span><input
                                 ref={inputRef}
                                 className='header-input'
                                 placeholder='Search'
                                 style={{ width: `${blockSearch}px` }}
+                             
                                 onChange={(e)=>{setOnClickinput(e.target.value)}}
                            /></span>
                {onClickSearch?                <span onClick={handleBlock}
