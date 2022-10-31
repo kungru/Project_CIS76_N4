@@ -84,9 +84,7 @@ const Checkout = () => {
         else if (isNaN(phone)) {
             hoder1.phone = "Wrong phone Number"
         }
-        else if(phoneValid){
-            hoder1.phone = "Wrong phone Number"
-        }
+        
         else if (address.length < 4) {
             hoder1.address = "The home address is incorrect"
         }
