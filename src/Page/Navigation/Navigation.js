@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useRef, useEffect, useContext } from 'react';
 import { ThemeContext } from '../../App';
-import { Routes, Route, Link, NavLink, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, NavLink, useNavigate,useParams } from 'react-router-dom';
 import Sub from '../Body/Sub';
 import DataSearch from '../../DataSearch/DataSearch';
 // import ContextLanguage from '../Context/ContextLanguage';
@@ -220,8 +220,10 @@ const Header = (props) => {
     // }
     const [searchCart, setSearchCart] = useState([])
     const [searchCart1, setSearchCart1] = useState([])
+    const [searchCart2, setSearchCart2] = useState([])
     const [onClickinput, setOnClickinput] = useState('')
     const [showResult, setShowResult] = useState(true)
+    
     useEffect(
         () => {
             // if(!onClickinput.trim()){
@@ -233,17 +235,18 @@ const Header = (props) => {
             //      return
             // }
 
-           
+
             fetch(`https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card`)
                 .then((res) => {
-                    
+
                     return (res.json())
-                    
+
                 }).then((data) => {
                     setSearchCart(data)
                     setSearchCart1(data)
+                    setSearchCart2(data)
                     // console.log(q)
-                    
+
 
 
 
@@ -255,24 +258,31 @@ const Header = (props) => {
     )
     const [onClickSearch, setOnClickSearch] = useState(true)
     const newHandleBlock = () => {
-       
+
         //    theme.setLinhTinh(true)
         //    setOnClickSearch(false);
         //     theme.setSearchBlock(onClickinput)
     }
+    const params = useParams()
+    const [popupInfoSearch, setPopupInfoSearch] = useState('')
+    const handelClickSearch = (id,name) => {
 
-    const handelClickSearch = () => {
-        //    theme.setLinhTinh2(!theme.linhtinh2)
-        console.log('test')
+      
+       
+        
+        
+        
     }
     const handelChangeCart = (e) => {
-        if(e.target.value === ''){
+        if (onClickinput.length == 0) {
             setSearchCart(searchCart1)
-        }else{
-            const searchFillData =  searchCart1.filter(n => n.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        } else {
+            const searchFillData = searchCart1.filter(n => n.name.toLowerCase().includes(e.target.value.toLowerCase()))
             setSearchCart(searchFillData)
+
         }
         setOnClickinput(e.target.value)
+
         // const fakeSearchCart = [...searchCart]
         // const searchFillData = fakeSearchCart.filter(e => e.name.toLowerCase().includes(onClickinput.toLowerCase()  ))
         // // console.log(searchFillData)
@@ -282,13 +292,13 @@ const Header = (props) => {
         // //     setSearchCart('No results found')
 
         // // }
-      
-        
+
+
 
     }
-    const handelHideResult =() => {
+    const handelHideResult = () => {
         setShowResult(false)
-       }
+    }
 
     return (
         <div className='header'  >
@@ -392,7 +402,7 @@ const Header = (props) => {
                                 value={onClickinput}
                                 onFocus={() => setShowResult(true)}
                                 // onBlur = {() => setShowResult(false)}
-                                onChange ={(e) => handelChangeCart(e)}
+                                onChange={handelChangeCart}
                             /></span>
                             {onClickSearch ? <span onClick={handleBlock}
                                 className='header-search '>
@@ -403,14 +413,17 @@ const Header = (props) => {
                                     <i className="fa-solid fa-magnifying-glass"></i>
 
                                 </span>
-                                
-                                { showResult && onClickinput.length > 0 ? <div className='popup_search'>
+                                {showResult && onClickinput.length > 0 ? <div className='popup_search'>
+                                    {params.id}
                                     {searchCart.map(item => (
 
                                         <DataSearch
+                                            // id={popupInfoSearch[[0]].id}
                                             key={item.id}
+                                            id={item.id}
                                             url={item.url}
                                             name={item.name}
+                                            onClickSearch={handelClickSearch}
 
                                         />
                                     ))}
