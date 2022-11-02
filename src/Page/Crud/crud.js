@@ -96,7 +96,7 @@ const Crud = () => {
 
   const handelRemove = (id) => {
     setLoading(!loading)
-    fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card' + id, {
+    fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card/' + id, {
       method: 'DELETE',
     })
       .then(res => res.text()) // or res.json()
@@ -117,35 +117,14 @@ const Crud = () => {
     setPrice(index.price)
     setUrl(index.url)
     setExpenseUpdate(index.id)
-    // fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/CRUD/', + id, {
-    //           method: 'PUT',
-    //           headers: {
-    //             Accept: 'application/json',
-    //             'Content-Type': 'application/json',
-    //           },
-    //           body: JSON.stringify({
-    //             name: 'Update',
-    //             style: 'Update',
-    //             shape: 'Update',
-    //             price: 'Update',
-    //           })
-    //         })
-    //         .then(res => {
-    //           res.json().then((res) => {
-
-    //             setIsAdd(!isAdd)  
-    //           })
-    //         })
-    //         .catch(err => {
-    //           console.error(err)
-    //         })
+    
   }
 
   const handelUpdateNew = () => {
 
     setIsAdd(!isAdd)
 
-    fetch(`https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card` + expenseUpdate, {
+    fetch(`https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card/` + expenseUpdate, {
       method: 'PUT',
       crossDomain: true,
       xhrFields: {

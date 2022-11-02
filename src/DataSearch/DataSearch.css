@@ -1,0 +1,15 @@
+.data_search {
+  /* position: relative; */
+  margin-bottom: 10px;
+
+}
+.cart_product_search{
+    display: flex;
+}
+.url_cart_search{
+    width: 8rem;
+    margin-right: 10px;
+}
+.url_cart_search img{
+    width: 100%;
+}

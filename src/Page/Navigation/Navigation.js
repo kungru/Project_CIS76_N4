@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useContext } from 'react';
 import { ThemeContext } from '../../App';
 import { Routes, Route, Link, NavLink, useNavigate } from 'react-router-dom';
 import Sub from '../Body/Sub';
+import DataSearch from '../../DataSearch/DataSearch';
 // import ContextLanguage from '../Context/ContextLanguage';
 import isEmpty from 'validator/lib/isEmpty'
 import { Button, Spinner } from 'reactstrap';
@@ -18,14 +19,14 @@ const Header = (props) => {
     useEffect(() => {
         const data = window.localStorage.getItem('display')
         const dataName = window.localStorage.getItem('username')
-       if(data !== null) theme.setDisplay(JSON.parse(data))
-       if(dataName !== null) theme.setOnuser(JSON.parse(dataName))
+        if (data !== null) theme.setDisplay(JSON.parse(data))
+        if (dataName !== null) theme.setOnuser(JSON.parse(dataName))
 
     }, [])
-    useEffect(()=> {
+    useEffect(() => {
         window.localStorage.setItem('display', JSON.stringify(theme.display));
         window.localStorage.setItem('username', JSON.stringify(theme.onUser));
-    },[theme.display])
+    }, [theme.display])
 
     const [position, setPosition] = useState('')
     // useEffect(() => {
@@ -61,7 +62,7 @@ const Header = (props) => {
     }, [])
 
     const handleBlock = (e) => {
-   
+
         inputRef.current.focus()
         setRemoveblock(true)
         setBlockSearch(250);
@@ -118,7 +119,7 @@ const Header = (props) => {
                 .then((res) => {
                     return (res.json())
                 }).then((data) => {
-                    
+
 
                     if (theme.display == true) {
 
@@ -143,7 +144,7 @@ const Header = (props) => {
                     // setIsData(!isData)
                     setloadCard(false)
                 });
-            
+
         }, [theme.isDataApp, theme.display]
     )
     const handelSaveCard = () => {
@@ -182,7 +183,7 @@ const Header = (props) => {
     }
 
 
-    const total = dataCard.reduce((items, item) => items + item.quantity*item.price, 0)
+    const total = dataCard.reduce((items, item) => items + item.quantity * item.price, 0)
     const totalQuantity = dataCard.reduce((items, { quantity }) => {
         // setIsData(!isData)
         return items + quantity
@@ -217,21 +218,81 @@ const Header = (props) => {
     //    setSearch(e.target.value)
     //    props.testSearch()
     // }
-    const [onClickinput,setOnClickinput]=useState('')
-const [onClickSearch,setOnClickSearch]=useState(true)
-const newHandleBlock=()=>{
-//    theme.setLinhTinh(true)
-//    setOnClickSearch(false);
-//     theme.setSearchBlock(onClickinput)
-}
+    const [searchCart, setSearchCart] = useState([])
+    const [searchCart1, setSearchCart1] = useState([])
+    const [onClickinput, setOnClickinput] = useState('')
+    const [showResult, setShowResult] = useState(true)
+    useEffect(
+        () => {
+            // if(!onClickinput.trim()){
+            //     setSearchCart([])
+            //     return
+            // }
+            // if(!onClickinput.trim()){
+            //      setSearchCart([])
+            //      return
+            // }
 
-const testTung=()=>{
-//    theme.setLinhTinh2(!theme.linhtinh2)
-}
+           
+            fetch(`https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card`)
+                .then((res) => {
+                    
+                    return (res.json())
+                    
+                }).then((data) => {
+                    setSearchCart(data)
+                    setSearchCart1(data)
+                    // console.log(q)
+                    
+
+
+
+
+                });
+
+        }, []
+
+    )
+    const [onClickSearch, setOnClickSearch] = useState(true)
+    const newHandleBlock = () => {
+       
+        //    theme.setLinhTinh(true)
+        //    setOnClickSearch(false);
+        //     theme.setSearchBlock(onClickinput)
+    }
+
+    const handelClickSearch = () => {
+        //    theme.setLinhTinh2(!theme.linhtinh2)
+        console.log('test')
+    }
+    const handelChangeCart = (e) => {
+        if(e.target.value === ''){
+            setSearchCart(searchCart1)
+        }else{
+            const searchFillData =  searchCart1.filter(n => n.name.toLowerCase().includes(e.target.value.toLowerCase()))
+            setSearchCart(searchFillData)
+        }
+        setOnClickinput(e.target.value)
+        // const fakeSearchCart = [...searchCart]
+        // const searchFillData = fakeSearchCart.filter(e => e.name.toLowerCase().includes(onClickinput.toLowerCase()  ))
+        // // console.log(searchFillData)
+        // // if(searchFillData){
+        //     setSearchCart(searchFillData)
+        // // }else{
+        // //     setSearchCart('No results found')
+
+        // // }
+      
+        
+
+    }
+    const handelHideResult =() => {
+        setShowResult(false)
+       }
 
     return (
         <div className='header'  >
-        
+
             <div className='address'>
                 <div>
                     <ul className='list-icon'>
@@ -319,26 +380,47 @@ const testTung=()=>{
                     </NavItem> */}
 
                 </Nav>
-                <Nav className='header-right'>
+                <Nav className='header-right' >
                     <NavItem>
-                        <div className='header-input-search' onClick={testTung}>
+                        <div className='header-input-search' >
                             {removeblock && <span className='remove-block2 animate__animated animate__fadeIn' onClick={handelRemoveblock} >X</span>}
                             <span><input
                                 ref={inputRef}
                                 className='header-input'
                                 placeholder='Search'
                                 style={{ width: `${blockSearch}px` }}
-                             
-                                onChange={(e)=>{setOnClickinput(e.target.value)}}
-                           /></span>
-               {onClickSearch?                <span onClick={handleBlock}
+                                value={onClickinput}
+                                onFocus={() => setShowResult(true)}
+                                // onBlur = {() => setShowResult(false)}
+                                onChange ={(e) => handelChangeCart(e)}
+                            /></span>
+                            {onClickSearch ? <span onClick={handleBlock}
                                 className='header-search '>
                                 <i className="fa-solid fa-magnifying-glass"></i>
-                            </span>:               <span onClick={newHandleBlock}
-                                className='header-search active'>
-                                <i className="fa-solid fa-magnifying-glass"></i>
-                            </span>}             
-               {/* <span onClick={handleBlock}
+                            </span> : <>
+                                <span onClick={newHandleBlock}
+                                    className='header-search active'>
+                                    <i className="fa-solid fa-magnifying-glass"></i>
+
+                                </span>
+                                
+                                { showResult && onClickinput.length > 0 ? <div className='popup_search'>
+                                    {searchCart.map(item => (
+
+                                        <DataSearch
+                                            key={item.id}
+                                            url={item.url}
+                                            name={item.name}
+
+                                        />
+                                    ))}
+                                </div> : ''}
+
+                            </>
+
+
+                            }
+                            {/* <span onClick={handleBlock}
                                 className='header-search'>
                                 <i className="fa-solid fa-magnifying-glass"></i>
                             </span> */}
@@ -406,15 +488,15 @@ const testTung=()=>{
 
 
                         ))}
-                        {dataCard.length === 0  &&
+                        {dataCard.length === 0 &&
 
                             <>
                                 <p>No products in the cart.</p>
                                 <button onClick={handelReturnToShop}>REATURN TO SHOP</button>
                             </>
-                            
+
                         }
-                        {dataCard.length &&  <div className='total_card'>TOTAL: <div>${total}.00</div></div>}
+                        {dataCard.length && <div className='total_card'>TOTAL: <div>${total}.00</div></div>}
                         {dataCard.length && <button onClick={handelViewCard}>
                             CARD & CHECKOUT
                         </button>}
@@ -495,7 +577,7 @@ const Login = (props) => {
                 setLoginApi(data)
             })
     }, [])
-   
+
 
 
     const [isData1, setIsData1] = useState(true)
@@ -529,26 +611,26 @@ const Login = (props) => {
         const user = {
             Email: email,
             Password: pass,
-            
+
         }
 
         fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
             method: 'POST',
             headers: {
-              Acceps: 'application/json',
-              'content-Type': 'application/json'
+                Acceps: 'application/json',
+                'content-Type': 'application/json'
             },
             body: JSON.stringify(user)
-          })
+        })
             .then((res) => {
-              return (res.json())
+                return (res.json())
             }).then((data) => {
-             
+
                 theme.setIsLogin2(!theme.isLogin2)
             });
-        
-        
-           
+
+
+
 
 
         const valid = validationAll()
@@ -587,7 +669,7 @@ const Login = (props) => {
                 }
             }
         };
-       
+
 
 
         if (checkEmail == false || checkPass == false) {
