@@ -117,28 +117,7 @@ const Crud = () => {
     setPrice(index.price)
     setUrl(index.url)
     setExpenseUpdate(index.id)
-    // fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/CRUD/', + id, {
-    //           method: 'PUT',
-    //           headers: {
-    //             Accept: 'application/json',
-    //             'Content-Type': 'application/json',
-    //           },
-    //           body: JSON.stringify({
-    //             name: 'Update',
-    //             style: 'Update',
-    //             shape: 'Update',
-    //             price: 'Update',
-    //           })
-    //         })
-    //         .then(res => {
-    //           res.json().then((res) => {
-
-    //             setIsAdd(!isAdd)  
-    //           })
-    //         })
-    //         .catch(err => {
-    //           console.error(err)
-    //         })
+    
   }
 
   const handelUpdateNew = () => {
