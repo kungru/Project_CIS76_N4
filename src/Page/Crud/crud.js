@@ -30,7 +30,7 @@ const Crud = () => {
 
   useEffect(
     () => {
-      fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card')
+      fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card/')
         .then((res) => {
           return (res.json())
         }).then((data) => {
@@ -62,7 +62,7 @@ const Crud = () => {
 
     }
 
-    fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card', {
+    fetch('https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card/', {
       method: 'POST',
       crossDomain: true,
       xhrFields: {
