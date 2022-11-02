@@ -70,3 +70,56 @@
         align-items: center;
     }
 }
+
+@media (min-width:375px) and (max-width: 767px) {
+
+
+    .sendnow_all {
+        margin-top: 2rem;
+    }
+
+    .title_sendnow_1 h1 {
+        font-size: 27px;
+    }
+
+    .title_sendnow_1 p {
+        font-size: 12px;
+    }
+
+    .block_sendnow_1 {
+        width: 22rem;
+        height: 30rem;
+    }
+
+    .type_sendnow input {
+        width: 20rem;
+    }
+
+    .type_sendnow button {
+        padding: 11px;
+        width: 6rem;
+        font-size: 11px;
+        margin-top: 19px;
+    }
+
+    .thank_sendnow {
+        height: 30px;
+        width: 20rem;
+        margin: 0px 17px;
+    }
+
+    .thank_sendnow span {
+        font-size: 13px;
+    }
+
+    .comment_product_1 {
+        flex-direction: column;
+        align-items: center;
+        gap: 5rem;
+    }
+
+    .comment_user_1 {
+        width: 23rem;
+
+    }
+}

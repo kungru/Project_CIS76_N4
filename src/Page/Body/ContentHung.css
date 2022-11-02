@@ -80,7 +80,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-    
+
     .content-img {
         width: 47rem;
     }
@@ -103,5 +103,53 @@
     .ctnt-hung {
         position: absolute;
         top: 11px;
+    }
+}
+
+@media (min-width:375px) and (max-width: 767px) {
+    .content-title-hung {
+        position: absolute;
+        right: 0rem;
+        top: 410px;
+        padding: 82px 91px;
+        height: 24rem;
+        width: 29rem;
+    }
+
+    .content-img {
+        width: 25rem;
+    }
+
+    .firt-title-content h2 {
+        font-size: 19px;
+    }
+
+    .firt-title-content p {
+        font-size: 15px;
+    }
+
+    .ct-title-content h2 {
+        font-size: 19px;
+    }
+
+    .ct-title-content p {
+        font-size: 15px;
+    }
+
+    .last-title-content h2 {
+        font-size: 19px;
+    }
+
+    .last-title-content p {
+        font-size: 15px;
+    }
+
+
+    .ctnt-hung {
+        width: 23rem;
+        align-items: center;
+        margin-right: -128px;
+        margin-top: -74px;
+
     }
 }

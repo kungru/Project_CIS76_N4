@@ -186,3 +186,25 @@
 
 
 }
+
+
+@media (min-width:375px) and (max-width: 767px) {
+
+    /* put your css styles in here */
+
+    .anh {
+        left: 13px;
+        width: 23rem;
+        height: 33rem;
+
+    }
+
+    .anh img {
+        width: 22rem;
+        height: 26rem;
+    }
+
+    .anh__h1 {
+        display: none;
+    }
+}

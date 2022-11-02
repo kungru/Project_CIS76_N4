@@ -250,12 +250,7 @@ a {
 
 
 }
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-  .form-login {
-    left: 17%;
-    
-  }
-}
+
 
 
 
@@ -669,7 +664,8 @@ form {
   letter-spacing: 1px;
   font-size: 19px;
 }
-.popup_search{
+
+.popup_search {
   position: absolute;
   width: 19rem;
   right: 39vh;
@@ -677,4 +673,161 @@ form {
   background: white;
   right: 30vh;
   padding: 5px;
+}
+
+.example {
+  position: absolute;
+  top: 3rem;
+  right: 0rem;
+  display: none;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .form-login {
+    left: 17%;
+
+  }
+}
+
+@media (min-width:375px) and (max-width: 767px) {
+
+  /* put your css styles in here */
+  .example {
+    display: block;
+  }
+
+
+
+
+  .title_header img {
+    width: 5rem;
+    margin-left: -4px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
+    background: #fff;
+    right: -2rem;
+    width: 14rem;
+    text-align: center;
+    height: 200vh;
+    padding-top: 7rem;
+    /* display: none; */
+  }
+
+  .responsive_icon_login {
+    position: absolute;
+    top: 29rem;
+    /* right: 4rem; */
+    /* text-align: center; */
+    right: 10vh;
+  }
+
+  .responsive_icon_love {
+    position: absolute;
+    right: 10vh;
+    top: 26rem;
+  }
+
+  .responsive_icon_cart {
+    margin-right: -34px;
+  }
+
+  .responsive_icon_search {
+    margin-right: -48px;
+  }
+
+  .responsive_button {
+    font-size: 15px;
+  }
+
+  .card_div1 {
+    flex-direction: column;
+
+  }
+
+  .all__three_product {
+    margin-top: 11rem;
+    margin-bottom: 7rem;
+  }
+
+  .cart1 {
+    width: 22rem;
+  }
+
+  .content_img {
+    width: 25rem;
+  }
+
+  .text__title {
+    margin-bottom: 0rem;
+    margin-right: 0rem;
+  }
+
+  .content-title-hung {
+    position: absolute;
+    right: 0rem;
+    top: 410px;
+    padding: 82px 91px;
+    height: 24rem;
+    width: 29rem;
+  }
+
+  /* form login */
+
+  .form-login {
+    width: 23rem;
+    left: 3%;
+  }
+
+  .all-login {
+    left: 39px;
+  }
+
+  .all-login input {
+    padding: 18px 69px 18px 59px;
+  }
+
+  .all-login button {
+    margin-right: 4rem;
+    margin-top: 2rem;
+  }
+
+  /* regist ter */
+
+  .all-register {
+    width: 23rem;
+  }
+
+  .all-register button {
+    right: 84px;
+  }
+
+  .remove-block-login {
+    margin-right: -13px;
+  }
+
+  .firtname {
+    left: 13px;
+  }
+
+  .lastname {
+    right: 6px;
+  }
+
+  .error {
+    font-size: 0.6rem;
+  }
+
+  .list-icon {
+    display: none;
+  }
+
+  .card__1 button {
+    margin-left: 8rem;
+  }
+
 }
