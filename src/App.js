@@ -153,9 +153,11 @@ function App() {
   const [discountSub, setDiscountSub] = useState('')
 
 
-const [searchBlock,setSearchBlock]=useState('')
-const [linhtinh,setLinhTinh]=useState(false);
-const [linhtinh2,setLinhTinh2]=useState(false)
+  const [searchBlock, setSearchBlock] = useState('')
+  const [linhtinh, setLinhTinh] = useState(false);
+  const [linhtinh2, setLinhTinh2] = useState(false)
+  const [isSearch, setIsSearch] = useState(true)
+
 
   return (
 
@@ -173,19 +175,20 @@ const [linhtinh2,setLinhTinh2]=useState(false)
       onUser: onUser, setOnuser: setOnuser,
       display: display, setDisplay: setDisplay,
 
-      textBlock: textBlock,setTextBlock: setTextBlock,
-      discountSub: discountSub,setDiscountSub: setDiscountSub,
+      textBlock: textBlock, setTextBlock: setTextBlock,
+      discountSub: discountSub, setDiscountSub: setDiscountSub,
 
       textBlock: textBlock,
       setTextBlock: setTextBlock,
-      searchBlock:searchBlock,setSearchBlock,
-      linhtinh:linhtinh,setLinhTinh:setLinhTinh,
-      linhtinh2:linhtinh2,setLinhTinh2:setLinhTinh2,
+      searchBlock: searchBlock, setSearchBlock,
+      linhtinh: linhtinh, setLinhTinh: setLinhTinh,
+      linhtinh2: linhtinh2, setLinhTinh2: setLinhTinh2,
+      isSearch: isSearch, setIsSearch: setIsSearch,
 
     }}>
       <div className='App'>
         {/* <ContextLanguage.Provider value={{onUser:onUser, setOnuser:setOnuser,display:display,setDisplay:setDisplay}} > */}
-         {/* {display == true ? <Sub /> : ''} */}
+        {/* {display == true ? <Sub /> : ''} */}
         <Container fluid className="bg-light border" style={{ backgroundColor: 'white', width: '100%', marginLeft: '0', marginRight: '0', position: 'relative' }}>
           <Row style={{ marginBottom: '106px', }}>
             <Navigation />
