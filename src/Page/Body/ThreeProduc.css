@@ -261,8 +261,26 @@ h5 {
     .text__title {
         margin-right: 0;
     }
-    .goto_shop_ok{
+
+    .goto_shop_ok {
         right: 23%;
         bottom: 58%;
     }
+}
+
+@media (min-width:375px) and (max-width: 767px) {
+    .text__title {
+        margin-bottom: 0rem;
+        margin-right: 0rem;
+
+    }
+
+    .cart1 {
+        width: 22rem;
+    }
+
+    .goto_shop_ok {
+        right: 2%;
+    }
+
 }

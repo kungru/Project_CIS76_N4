@@ -58,3 +58,15 @@
         height: 31rem;
     }
 }
+
+@media (min-width:375px) and (max-width: 767px) {
+    .Above_footer {
+        margin-top: 16rem;
+        margin-top: 22rem;
+    }
+
+    .title_footer_firt h1 {
+        font-weight: bold;
+        font-size: 29px;
+    }
+}

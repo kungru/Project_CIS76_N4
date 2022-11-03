@@ -1,17 +1,24 @@
 import React from 'react';
 import { useState, useRef, useEffect, useContext } from 'react';
 import { ThemeContext } from '../../App';
-import { Routes, Route, Link, NavLink, useNavigate,useParams } from 'react-router-dom';
+import { Routes, Route, Link, NavLink, useNavigate, useParams } from 'react-router-dom';
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+
+    Button,
+    Spinner
+} from 'reactstrap';
 import Sub from '../Body/Sub';
 import DataSearch from '../../DataSearch/DataSearch';
 // import ContextLanguage from '../Context/ContextLanguage';
 import isEmpty from 'validator/lib/isEmpty'
-import { Button, Spinner } from 'reactstrap';
 import './index.css'
-import {
-    Nav,
-    NavItem,
-} from 'reactstrap';
+
 
 
 const Header = (props) => {
@@ -149,7 +156,7 @@ const Header = (props) => {
     )
     const handelSaveCard = () => {
         // theme.setIsDataApp(!theme.isDataApp)
-        setCards(30)
+        setCards(25)
         setRemoveCards(true)
         blockRef.current.style.visibility = 'visible'
     }
@@ -223,7 +230,7 @@ const Header = (props) => {
     const [searchCart2, setSearchCart2] = useState([])
     const [onClickinput, setOnClickinput] = useState('')
     const [showResult, setShowResult] = useState(true)
-    
+
     useEffect(
         () => {
             // if(!onClickinput.trim()){
@@ -265,13 +272,7 @@ const Header = (props) => {
     }
     const params = useParams()
     const [popupInfoSearch, setPopupInfoSearch] = useState('')
-    const handelClickSearch = (id,name) => {
-
-      
-       
-        
-        
-        
+    const handelClickSearch = (id, name) => {
     }
     const handelChangeCart = (e) => {
         if (onClickinput.length == 0) {
@@ -282,22 +283,14 @@ const Header = (props) => {
 
         }
         setOnClickinput(e.target.value)
-
-        // const fakeSearchCart = [...searchCart]
-        // const searchFillData = fakeSearchCart.filter(e => e.name.toLowerCase().includes(onClickinput.toLowerCase()  ))
-        // // console.log(searchFillData)
-        // // if(searchFillData){
-        //     setSearchCart(searchFillData)
-        // // }else{
-        // //     setSearchCart('No results found')
-
-        // // }
-
-
-
     }
     const handelHideResult = () => {
         setShowResult(false)
+    }
+    const [collapsed, setCollapsed] = useState(true);
+
+    const handleToggleNavbar = () => {
+        setCollapsed(!collapsed)
     }
 
     return (
@@ -345,7 +338,7 @@ const Header = (props) => {
                 <div className='title_header'>
                     <img width='119' height='50' src="./images/logo-img-04.png" alt='Day la hinh anh' />
                 </div>
-                <Nav className='header-content ' >
+                {collapsed && <Nav className='header-content ' >
                     <NavItem>
                         <Link className='text-color'
 
@@ -389,9 +382,9 @@ const Header = (props) => {
                         </Link>
                     </NavItem> */}
 
-                </Nav>
+                </Nav>}
                 <Nav className='header-right' >
-                    <NavItem>
+                    <NavItem className='responsive_icon_search'>
                         <div className='header-input-search' >
                             {removeblock && <span className='remove-block2 animate__animated animate__fadeIn' onClick={handelRemoveblock} >X</span>}
                             <span><input
@@ -439,14 +432,14 @@ const Header = (props) => {
                             </span> */}
                         </div>
                     </NavItem>
-                    <NavItem>
-                        <a href='#' ><i className='bx bx-heart'></i> </a>
+                    <NavItem className='responsive_icon_love'>
+                        <a href='#' ><i className='bx bx-heart '></i> </a>
                     </NavItem>
                     <NavItem>
-                        <div >
+                        <div className='responsive_icon_login'>
 
                             {theme.display == true ? <div><Link to='/profile'>{theme.onUser}</Link></div> : <div onClick={handelBlockLogin} href="#">
-                                <i className="fa-regular fa-user"></i>
+                                <i className="fa-regular fa-user "></i>
                             </div>}
                             {/* <div onClick={handelBlockLogin} href="#">
                                 <i className="fa-regular fa-user"></i>
@@ -459,7 +452,7 @@ const Header = (props) => {
 
 
                     </NavItem>
-                    <NavItem>
+                    <NavItem className='responsive_icon_cart'>
                         <div className='flex__quantity'
 
                             href="#"
@@ -467,6 +460,9 @@ const Header = (props) => {
                             <i onClick={handelSaveCard} className="bx bx-shopping-bag"></i>
                             <span className='quantity_sum1'>{totalQuantity}</span>
                         </div>
+                    </NavItem>
+                    <NavItem>
+                        <Example onToggleNavbar={handleToggleNavbar} />
                     </NavItem>
                 </Nav>
 
@@ -956,6 +952,31 @@ const Register = () => {
         </div>
     )
 }
+function Example(props) {
+    const [collapsed, setCollapsed] = useState(true);
 
-export { Login, Register, }
+    const handleToggleNavbar = () => {
+        props.onToggleNavbar()
+    }
+
+    return (
+        <div className='example'>
+            <Navbar color="faded" light>
+                <NavbarBrand href="/" className="me-auto">
+
+                </NavbarBrand>
+                <NavbarToggler onClick={handleToggleNavbar} className="me-2 responsive_button" />
+                <Collapse isOpen={!collapsed} navbar>
+                    <Nav navbar>
+
+                    </Nav>
+                </Collapse>
+            </Navbar>
+        </div>
+    );
+}
+
+
+
+export { Login, Register, Example }
 export default Header;
