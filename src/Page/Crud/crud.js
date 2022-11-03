@@ -110,7 +110,10 @@ const Crud = () => {
   // edit 
   const handelEdit = (id) => {
     setBlock(true)
-    const index = crud[id - 1]
+   console.log(crud)
+    const index = [...crud].find((e)=>e.id==id)
+    
+    console.log(index)
     setName(index.name)
     setStyle(index.style)
     setShape(index.shape)
