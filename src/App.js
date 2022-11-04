@@ -147,12 +147,7 @@ function App() {
   const [visibility, setVisibility] = useState(false)
   const [isDataApp, setIsDataApp] = useState(true)
   const [isLogin, setIsLogin] = useState(true)
-  const [clearCart, setClearCart] = useState(false)
-  const [textBlock, setTextBlock] = useState(true)
-
   const [discountSub, setDiscountSub] = useState('')
-
-
   const [searchBlock, setSearchBlock] = useState('')
   const [linhtinh, setLinhTinh] = useState(false);
   const [linhtinh2, setLinhTinh2] = useState(false)
@@ -168,18 +163,11 @@ function App() {
       isDataApp: isDataApp, setIsDataApp: setIsDataApp,
       isLogin: isLogin, setIsLogin: setIsLogin,
       isLogin2: isLogin2, setIsLogin2: setIsLogin2,
-      clearCart: clearCart, setClearCart: setClearCart,
-      renderCart: renderCart, setRenderCart: setRenderCart,
       visibility: visibility, setVisibility: setVisibility,
       count: count, setCount: setCount,
       onUser: onUser, setOnuser: setOnuser,
       display: display, setDisplay: setDisplay,
-
-      textBlock: textBlock, setTextBlock: setTextBlock,
       discountSub: discountSub, setDiscountSub: setDiscountSub,
-
-      textBlock: textBlock,
-      setTextBlock: setTextBlock,
       searchBlock: searchBlock, setSearchBlock,
       linhtinh: linhtinh, setLinhTinh: setLinhTinh,
       linhtinh2: linhtinh2, setLinhTinh2: setLinhTinh2,

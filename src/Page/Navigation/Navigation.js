@@ -9,7 +9,6 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-
     Button,
     Spinner
 } from 'reactstrap';
@@ -30,22 +29,14 @@ const Header = (props) => {
         if (dataName !== null) theme.setOnuser(JSON.parse(dataName))
 
     }, [])
+
     useEffect(() => {
         window.localStorage.setItem('display', JSON.stringify(theme.display));
         window.localStorage.setItem('username', JSON.stringify(theme.onUser));
     }, [theme.display])
 
     const [position, setPosition] = useState('')
-    // useEffect(() => {
-    //     window.addEventListener('scroll', (e) => {
-    //         if(document.documentElement.scrollTop >= 500){
-    //             setPosition('fixed')
-    //         }else{
-    //             setPosition('')
 
-    //         }
-    //     })
-    // }, [])
 
     const navigate = useNavigate();
     const inputRef = useRef()
@@ -79,20 +70,14 @@ const Header = (props) => {
         setRemoveblock(false);
         setBlockSearch(0);
         setOnClickSearch(true)
-        // inputRef.current=''
     }
     // Ân hiện Form Login
-    const [blockLogin, setBlockLogin] = useState(0)
     const handelBlockLogin = () => {
-        // setBlockLogin(1)
         theme.setVisibility(true)
 
     }
     const handelRemoveLogin = () => {
-        // setBlockLogin(0)
-        // divRef.current.style.visibility = 'hidden';
         theme.setVisibility(false)
-        // theme.display(false)
 
     }
     //set Backgroundcolor cho login-register
@@ -114,7 +99,6 @@ const Header = (props) => {
     const [loadCard, setloadCard] = useState(true);
     //    const [total, setTotal] = useState(0)
     const blockRef = useRef()
-    const [totalHeader, setTotalHeader] = useState(false);
     const [onFormLogin, setOnFormLogin] = useState(false);
     const [onFormRegister, setOnFormRegister] = useState(true)
     //    const [transition, setTransition] = useState(true)
@@ -129,30 +113,14 @@ const Header = (props) => {
 
 
                     if (theme.display == true) {
-
-
                         setDataCard(data)
-                        theme.setTextBlock(false)
-                        theme.setRenderCart(true)
-                        // if(dataCard.length == 0){
-                        //     theme.setTextBlock(true)    
-                        //     theme.setRenderCart(false) 
-                        // }
-
-
-
                     } else {
                         setDataCard([])
-                        theme.setTextBlock(true)
-                        theme.setRenderCart(false)
-                        // theme.setTextBlock(false)
-
                     }
-                    // setIsData(!isData)
                     setloadCard(false)
                 });
 
-        }, [theme.isDataApp, theme.display]
+        }, [theme.display, isData, theme.isDataApp]
     )
     const handelSaveCard = () => {
         // theme.setIsDataApp(!theme.isDataApp)
@@ -175,6 +143,7 @@ const Header = (props) => {
                 // setIsData(arr)
                 // setTotal(total)
                 theme.setIsDataApp(!theme.isDataApp)
+                setIsData(!isData)
 
             }
             )
@@ -212,8 +181,6 @@ const Header = (props) => {
 
     }, [])
     const handelClearCart = () => {
-        // theme.setRenderCart(false)  
-        theme.setClearCart(false)
     }
 
     const handelReturnToShop = () => {
@@ -233,14 +200,11 @@ const Header = (props) => {
 
     useEffect(
         () => {
-            // if(!onClickinput.trim()){
-            //     setSearchCart([])
-            //     return
-            // }
-            // if(!onClickinput.trim()){
-            //      setSearchCart([])
-            //      return
-            // }
+            if (onClickSearch.length == 0) {
+                setSearchCart2([])
+                // return
+            }
+
 
 
             fetch(`https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card`)
@@ -278,7 +242,7 @@ const Header = (props) => {
         if (onClickinput.length == 0) {
             setSearchCart(searchCart1)
         } else {
-            const searchFillData = searchCart1.filter(n => n.name.toLowerCase().includes(e.target.value.toLowerCase()))
+            const searchFillData = searchCart1.filter(n => n.name.toLowerCase().trim().includes(e.target.value.toLowerCase().trim()))
             setSearchCart(searchFillData)
 
         }
@@ -287,6 +251,8 @@ const Header = (props) => {
     const handelHideResult = () => {
         setShowResult(false)
     }
+
+    // responsive
     const [collapsed, setCollapsed] = useState(true);
 
     const handleToggleNavbar = () => {
@@ -366,13 +332,11 @@ const Header = (props) => {
                         </a>
                     </NavItem>
                     <NavItem>
-                        <a
-
-                            href="#"
-                        >
-                            Landing
-                        </a>
+                        <Link to="/card">
+                            Cart
+                        </Link>
                     </NavItem>
+
                     {/* <NavItem>
                         <Link
                        
@@ -505,8 +469,8 @@ const Header = (props) => {
                             </>
 
                         }
-                        {dataCard.length && <div className='total_card'>TOTAL: <div>${total}.00</div></div>}
-                        {dataCard.length && <button onClick={handelViewCard}>
+                        {dataCard.length > 0 && <div className='total_card'>TOTAL: <div>${total}.00</div></div>}
+                        {dataCard.length > 0 && <button onClick={handelViewCard}>
                             CARD & CHECKOUT
                         </button>}
                     </div>

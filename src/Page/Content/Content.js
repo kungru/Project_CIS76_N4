@@ -3,22 +3,14 @@ import { Link, NavLink, parsePath, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Spinner } from 'reactstrap';
 import { useContext } from 'react';
+import Pagination from './Pagination';
 import DetailPopup from '../detail_popup/detailPopup';
 import CatalogMagic from '../../Loading/CatalogMagic';
 // import ContextLanguage from '../Context/ContextLanguage';
 import { ThemeContext } from '../../App';
 import './Content.css';
-const Content = (props,{}) => {
+const Content = (props, { }) => {
   const theme = useContext(ThemeContext)
-
-
-
-  // const Content = () => {
-
-
-  //     const theme = useContext(ThemeContext)
-
-
   const params = useParams()
   const [cards, setCards] = useState([]);
   const [addtoCards, setAddtoCards] = useState([]);
@@ -38,8 +30,9 @@ const Content = (props,{}) => {
           setCards(data);
           setCardsTemp(data)
           setIsLoading(false)
-          
-   
+
+
+
         });
 
     }, []
@@ -49,8 +42,9 @@ const Content = (props,{}) => {
 
 
 
-  // const [dataLogin, setDataLogin] = useState([])
+
   const [isData2, setIsData2] = useState(true)
+
   // api addtocard
   useEffect(
     () => {
@@ -69,31 +63,13 @@ const Content = (props,{}) => {
     }, [theme.isDataApp, theme.display]
 
   )
-  // useEffect(
-  //   () => {
-  //     setIsLoading(true);
-
-  //     fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login')
-  //       .then((res) => {
-  //         return (res.json())
-  //       }).then((data) => {
-  //         setDataLogin(data)
-
-  //       });
-
-  //   }, [theme.isLogin2]
-
-  // )
-
 
   const handelAddtoCard = (id, name, style, shape, price, url) => {
 
+    console.log(id)
 
-    // theme.setClearCart(true)
-    theme.setTextBlock(false)
     // const json = localStorage.getItem('key')
     if (theme.display == true) {
-      theme.setRenderCart(true)
       if (theme.onUser !== {}) {
 
         const newCard = {
@@ -109,11 +85,13 @@ const Content = (props,{}) => {
 
         const checkId = addtoCards.find(c => c.id === id)
 
+
         if (checkId) {
 
 
           // parseInt(checkId.quantity)
           const checkQuantity = checkId.quantity += 1;
+
 
           fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/` + id, {
             method: 'PUT',
@@ -135,6 +113,7 @@ const Content = (props,{}) => {
                 console.log("vao day")
                 theme.setIsDataApp(!theme.isDataApp)
 
+
               })
             })
             .catch(err => {
@@ -147,7 +126,6 @@ const Content = (props,{}) => {
         } else {
 
 
-          //  theme.setIsDataApp(!theme.isDataApp)
           fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/', {
             method: 'POST',
             headers: {
@@ -160,7 +138,6 @@ const Content = (props,{}) => {
               return (res.json())
             }).then((data) => {
               theme.setIsDataApp(!theme.isDataApp)
-              theme.setTextBlock(false)
               setIsLoading(false)
             });
         }
@@ -206,7 +183,6 @@ const Content = (props,{}) => {
 
 
   const handelAddtoCart1 = (id, url, name, price, shape, style, quantity) => {
-    theme.setClearCart(true)
     if (theme.display == true) {
 
       const newCard1 = { id, name, style, shape, url, price, quantity: theme.count }
@@ -236,6 +212,8 @@ const Content = (props,{}) => {
 
               console.log("vao day")
               theme.setIsDataApp(!theme.isDataApp)
+
+
             })
           })
           .catch(err => {
@@ -262,6 +240,8 @@ const Content = (props,{}) => {
           }).then((data) => {
             theme.setIsDataApp(!theme.isDataApp)
 
+
+
             setIsLoading(false)
           });
       }
@@ -271,38 +251,6 @@ const Content = (props,{}) => {
       theme.setVisibility(true)
     }
   }
-
-
-
-
-
-  const handelSumUp = (id) => {
-    // setCount(prev => prev + 1)
-    const totalUp = addtoCards1.find(c => c.id === id)
-
-
-    // theme.setCount(theme.count + 1)
-
-
-
-  }
-  const handelSumDown = (id) => {
-    // setCount(prev => prev - 1)
-    // if(theme.count > 1){
-
-    //   theme.setCount(theme.count - 1)
-    // }
-
-
-
-  }
-
-
-  //   theme.setCount(theme.count - 1)
-  // }
-
-
-
 
   const [alpha, setAlpha] = useState(true);
   const testSort = () => {
@@ -369,18 +317,34 @@ const Content = (props,{}) => {
     setCards(cardsTemp)
   }
 
- const [searchTest,setSearchTest]=useState('')
-const handleForSearch=()=>{
+  const [searchTest, setSearchTest] = useState('')
+  const handleForSearch = () => {
+    const a = [...cardsTemp]
+    const c = a.filter((e) => {
+      return (
+        e.name.toLowerCase().includes(searchTest.toLowerCase().trim())
+      )
+    })
+    console.log(c)
+    setCards(c)
+  }
+  // Pagination
+  const [crPage, setCrPage] = useState(1)
+  const cartPage = 5;
 
-  
-  
-  const a=[...cardsTemp]
-  const c=a.filter((e)=>{return(
-    e.name.toLowerCase().includes(searchTest.toLowerCase())
-  )})
-  console.log(c)
-  setCards(c)
-}
+
+  const lastCart = crPage * cartPage;
+  const firtCart = lastCart - cartPage;
+  const fakeCartPage = [...cards]
+  const currenCart = fakeCartPage.slice(firtCart, lastCart)
+
+
+
+
+  const paginate = (pageNumber) => {
+    setCrPage(pageNumber)
+  }
+
 
   return (
     <div className='Content_container'>
@@ -392,12 +356,12 @@ const handleForSearch=()=>{
         <div><button onClick={testPrice3} className='btn_container_price'>Price 300$-400$</button></div>
         <div><button onClick={testPrice4} className='btn_container_price'>Price {'>'} 400$</button></div>
         <div><button onClick={testAll} className='btn_container_price'>All Product</button></div>
-        <div ><input placeholder='Search...' onChange={(e)=>setSearchTest(e.target.value)} value={searchTest}/><button style={{marginTop:'5px'}} onClick={handleForSearch} className='btn_search_test'>Find</button></div>
+        <div ><input placeholder='Search...' onChange={(e) => setSearchTest(e.target.value)} value={searchTest} /><button style={{ marginTop: '5px' }} onClick={handleForSearch} className='btn_search_test'>Find</button></div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'flex-end', width: '91%', marginLeft: '15px' }} ><span style={{ border: '1px solid black', width: '100%', }}></span></div>
       {params.id}
       {detail ?
-        <DetailPopup onSumUp={handelSumUp} onSumDown={handelSumDown} onDetailAtc={handelAddtoCart1} hideDetail={hideDetail} id={popupInfo[[0]].id} name={popupInfo[0].name} price={popupInfo[0].price} url={popupInfo[0].url} quantity={popupInfo[0].quantity} />
+        <DetailPopup onDetailAtc={handelAddtoCart1} hideDetail={hideDetail} id={popupInfo[[0]].id} name={popupInfo[0].name} price={popupInfo[0].price} url={popupInfo[0].url} quantity={popupInfo[0].quantity} />
         : ''}
       {
         IsLoading ?
@@ -406,9 +370,10 @@ const handleForSearch=()=>{
           </div>
           : <>
             <div className='container_card'>
-           {cards.map((item) => {
+              {currenCart.map((item) => {
                 return (
                   <Container_card
+                    key={item.id}
                     name={item.name}
                     style={item.style}
                     shape={item.shape}
@@ -421,20 +386,17 @@ const handleForSearch=()=>{
                     quantity={item.quantity}
                     setIsShowDetail={setDetailPopup}
 
-                 
+
                   />
                 )
               })}
 
             </div>
 
-            <div className='Content_pagination'>
-              <NavLink to='/shop'>01</NavLink>
-              <NavLink to='/02'>02</NavLink>
-              <NavLink to='03'>03</NavLink>
-              <NavLink to='04'>04</NavLink>
-              <NavLink to='05'>05</NavLink>
-              <NavLink to='/02' style={{ textDecoration: 'none', fontSize: 'bigger' }}><i class='bx bx-chevron-right'></i></NavLink>
+            <div>
+
+              <Pagination cartPage={cartPage} totalPage={cards.length} paginate={paginate} />
+
             </div>
           </>
       }

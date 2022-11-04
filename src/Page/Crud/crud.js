@@ -110,9 +110,9 @@ const Crud = () => {
   // edit 
   const handelEdit = (id) => {
     setBlock(true)
-   console.log(crud)
-    const index = [...crud].find((e)=>e.id==id)
-    
+    console.log(crud)
+    const index = crud.find((e) => e.id === id)
+
     console.log(index)
     setName(index.name)
     setStyle(index.style)
@@ -120,7 +120,7 @@ const Crud = () => {
     setPrice(index.price)
     setUrl(index.url)
     setExpenseUpdate(index.id)
-    
+
   }
 
   const handelUpdateNew = () => {

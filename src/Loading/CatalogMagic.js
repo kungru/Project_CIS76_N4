@@ -2,6 +2,7 @@ import React from 'react'
 import ContentLoader from 'react-content-loader'
 
 const CatalogMagic = ({
+
   width = 1366,
   heading = { width: 140, height: 24 },
   row = 2,
@@ -65,6 +66,7 @@ const CatalogMagic = ({
 
   return (
     <ContentLoader
+      style={{ marginTop: '10rem' }}
       viewBox={`0 0 ${width} ${height}`}
       width={width}
       height={height}
@@ -81,9 +83,9 @@ const CatalogMagic = ({
         />
       )}
       {list}
-      
+
     </ContentLoader>
-    
+
   )
 }
 
