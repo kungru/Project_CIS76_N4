@@ -24,9 +24,9 @@ const Profile = () => {
   // setProfile(localStorage.getItem('username'))
 
   useEffect(() => {
-   const json =   JSON.parse(localStorage.getItem('username'))
-   setProfile(json)
-  },[])
+    const json = JSON.parse(localStorage.getItem('username'))
+    setProfile(json)
+  }, [])
 
   const handelPreview = (e) => {
     const file = e.target.files[0]
@@ -36,36 +36,26 @@ const Profile = () => {
     setBlockAvatar(false)
     setRemoveBlockAvatar(false)
 
-    
-    
-    
+
+
+
   }
   const handelAddAvatar = () => {
-   
+
     setBlockAvatar(!blockAvatar)
 
   }
   const handelLogOut = () => {
     theme.setIsDataApp(!theme.isDataApp)
-  //   fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/addtocard/`, {
-  //     method: 'DELETE',
-  // })
-  //     .then(res => res.text()) // or res.json()
-  //     .then(res => {
-         
-          
 
-  //     })
-    theme.setRenderCart(false)
-    // theme.textBlock(false)
     localStorage.removeItem('username')
     localStorage.removeItem('display')
     localStorage.removeItem('key')
-    setTimeout(() =>{
+    setTimeout(() => {
       theme.setDisplay(false)
       navigate('/')
-    },1000)
-   
+    }, 1000)
+
 
 
   }
@@ -85,7 +75,7 @@ const Profile = () => {
         {blockAvatar && <input onChange={handelPreview} type='file' placeholder='add avatar' />}
 
       </div>
-         <span className='avatar_user_span'>welcome : {theme.onUser}</span>
+      <span className='avatar_user_span'>welcome : {theme.onUser}</span>
       <div className='btn_logout1'>
         <button onClick={handelLogOut}>Logout</button>
       </div>

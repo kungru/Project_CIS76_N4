@@ -330,7 +330,7 @@ const Content = (props, { }) => {
   }
   // Pagination
   const [crPage, setCrPage] = useState(1)
-  const cartPage = 5;
+  const [cartPage, setCartPage] = useState(5);
 
 
   const lastCart = crPage * cartPage;
@@ -343,6 +343,7 @@ const Content = (props, { }) => {
 
   const paginate = (pageNumber) => {
     setCrPage(pageNumber)
+
   }
 
 
@@ -395,7 +396,7 @@ const Content = (props, { }) => {
 
             <div>
 
-              <Pagination cartPage={cartPage} totalPage={cards.length} paginate={paginate} />
+              <Pagination cartPage={cartPage} totalPage={cards.length} paginate={paginate} crPage={crPage} />
 
             </div>
           </>

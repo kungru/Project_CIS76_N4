@@ -14,6 +14,7 @@ import DetailPage from './Page/DetailPage/DetailPage';
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import ProductDetail from './Page/DetailPage/ProductDetail';
 import Crud from './Page/Crud/crud';
+import Admin from './Admin/Admin';
 import ViewCard from './ViewCard/ViewCard';
 // import ContextLanguage from './Page/Context/ContextLanguage';
 import Checkout from './Checkout/Checkout';
@@ -22,6 +23,7 @@ import { Container, Row, Col, Navlink } from 'reactstrap';
 import { Routes, Route, NavLink, Link, useNavigate } from 'react-router-dom'
 // import { Login } from './Page/Navigation/Navigation';
 import Profile from './Profile/Profile';
+import { render } from '@testing-library/react';
 export const ThemeContext = createContext()
 // import Container_card from './Page/Body/Container_card';
 function App() {
@@ -125,6 +127,12 @@ function App() {
     )
 
   }
+  const Admin_test = () => {
+    return (
+      <Admin />
+    )
+
+  }
 
   const [profile, setProfile] = useState([])
   useEffect(() => {
@@ -152,6 +160,9 @@ function App() {
   const [linhtinh, setLinhTinh] = useState(false);
   const [linhtinh2, setLinhTinh2] = useState(false)
   const [isSearch, setIsSearch] = useState(true)
+  const [onEmail, setOnEmail] = useState({})
+  const [adMinlogin, setAdMinlogin] = useState(false)
+  const [block, setBlock] = useState(true)
 
 
   return (
@@ -164,6 +175,7 @@ function App() {
       isLogin: isLogin, setIsLogin: setIsLogin,
       isLogin2: isLogin2, setIsLogin2: setIsLogin2,
       visibility: visibility, setVisibility: setVisibility,
+      adMinlogin: adMinlogin, setAdMinlogin: setAdMinlogin,
       count: count, setCount: setCount,
       onUser: onUser, setOnuser: setOnuser,
       display: display, setDisplay: setDisplay,
@@ -172,6 +184,8 @@ function App() {
       linhtinh: linhtinh, setLinhTinh: setLinhTinh,
       linhtinh2: linhtinh2, setLinhTinh2: setLinhTinh2,
       isSearch: isSearch, setIsSearch: setIsSearch,
+      onEmail: onEmail, setOnEmail: setOnEmail,
+      block: block, setBlock: setBlock,
 
     }}>
       <div className='App'>
@@ -200,6 +214,7 @@ function App() {
 
 
             <Route path="/detail" element={<DetailPage />} />
+            <Route path="/admin" element={<Admin_test />} />
             <Route path="/crud" element={<Crud_test />} />
             <Route path='/card' element={<ViewCard_test />} />
             <Route path='/shop' element={<Content_test />} />

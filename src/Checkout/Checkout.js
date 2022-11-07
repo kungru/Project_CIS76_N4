@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Container, Row, Form, FormGroup, Label, Col, Input, Spinner } from 'reactstrap';
-import { useState, useRef, useEffect,useContext } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import { ThemeContext } from '../App';
 
 import './Checkout.css'
@@ -53,16 +53,16 @@ const Checkout = () => {
     }
     const validationAll = () => {
         let hoder = {}
-        if (name == '') {
+        if (!name) {
             hoder.name = "Please your enter Name"
         }
-        if (phone == '') {
+        if (!phone) {
             hoder.phone = "Please your enter Phone"
         }
-        if (address == '') {
+        if (!address) {
             hoder.address = "Please your enter address"
         }
-        if (city == '') {
+        if (!city) {
             hoder.city = "Please your enter City"
         }
         setValidationCart(hoder)
@@ -81,10 +81,10 @@ const Checkout = () => {
         if (!isNaN(name)) {
             hoder1.name = "Name is not correct"
         }
-        else if (isNaN(phone)) {
+        else if (isNaN(phone) && phoneValid.test(phone)) {
             hoder1.phone = "Wrong phone Number"
         }
-        
+
         else if (address.length < 4) {
             hoder1.address = "The home address is incorrect"
         }
@@ -116,7 +116,7 @@ const Checkout = () => {
         if (!valid) return
     }
 
-    let total1 = dataCard.reduce((items, item) => items + item.quantity* item.price, 0)
+    let total1 = dataCard.reduce((items, item) => items + item.quantity * item.price, 0)
     const [discount, setDiscount] = useState('')
     const [discountProduct, setDiscountProduct] = useState()
     const [block, setBlock] = useState(false)

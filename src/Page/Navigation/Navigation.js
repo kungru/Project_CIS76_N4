@@ -25,8 +25,11 @@ const Header = (props) => {
     useEffect(() => {
         const data = window.localStorage.getItem('display')
         const dataName = window.localStorage.getItem('username')
+        const dataEmail = window.localStorage.getItem('key')
         if (data !== null) theme.setDisplay(JSON.parse(data))
         if (dataName !== null) theme.setOnuser(JSON.parse(dataName))
+        if (dataEmail !== null) theme.setOnEmail(JSON.parse(dataEmail))
+
 
     }, [])
 
@@ -112,7 +115,7 @@ const Header = (props) => {
                 }).then((data) => {
 
 
-                    if (theme.display == true) {
+                    if (theme.display === true) {
                         setDataCard(data)
                     } else {
                         setDataCard([])
@@ -166,7 +169,7 @@ const Header = (props) => {
     }, 0)
     // console.log(totalPrice)
     const toggleFormLogin = (e) => {
-        theme.setIsLogin(!theme.isLogin)
+        // theme.setIsLogin(!theme.isLogin)
         setOnFormLogin(false)
         setOnFormRegister(true);
         if (onFormLogin == false) { e.currentTarget.style.backgroundColor = 'white' } else { e.currentTarget.style.backgroundColor = '#cccccc24' }
@@ -200,7 +203,7 @@ const Header = (props) => {
 
     useEffect(
         () => {
-            if (onClickSearch.length == 0) {
+            if (onClickSearch.length === 0) {
                 setSearchCart2([])
                 // return
             }
@@ -456,10 +459,6 @@ const Header = (props) => {
                                 quantity={item.quantity}
                                 onRemove={handelRemoveCard}
                             />
-
-
-
-
                         ))}
                         {dataCard.length === 0 &&
 
@@ -469,6 +468,7 @@ const Header = (props) => {
                             </>
 
                         }
+                        {dataCard.length === 4 && <div className='full-cart'>Shopping cart is full</div>}
                         {dataCard.length > 0 && <div className='total_card'>TOTAL: <div>${total}.00</div></div>}
                         {dataCard.length > 0 && <button onClick={handelViewCard}>
                             CARD & CHECKOUT
@@ -540,6 +540,7 @@ const Login = (props) => {
     const [loginApi, setLoginApi] = useState([])
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
+    const [emailLogin, setEmailLogin] = useState({})
     const theme = useContext(ThemeContext)
     const [loading, setLoading] = useState(true)
     useEffect(() => {
@@ -553,7 +554,23 @@ const Login = (props) => {
 
 
 
-    const [isData1, setIsData1] = useState(true)
+    const [login, setLogin] = useState([])
+
+    useEffect(
+        () => {
+
+
+            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login')
+                .then((res) => {
+                    return (res.json())
+                }).then((data) => {
+                    setLogin(data)
+
+                });
+
+        }, [theme.isDataApp, theme.display]
+
+    )
 
 
 
@@ -572,41 +589,55 @@ const Login = (props) => {
         if (Object.keys(msg).length > 0) return false
         return true
     }
-    const [loginSuccess, setLoginSuccess] = useState(null)
+    const [loginSuccess, setLoginSuccess] = useState()
     // const [isUser, setIsUser] = useState(true)
 
 
     const handelLogin = () => {
 
 
-        props.onLogin(props.email, props.pass)
+        props.onLogin(props.email, props.pass, props.id)
 
         const user = {
+
             Email: email,
             Password: pass,
+            Check: theme.display
+
 
         }
 
-        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
-            method: 'POST',
-            headers: {
-                Acceps: 'application/json',
-                'content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-            .then((res) => {
-                return (res.json())
-            }).then((data) => {
+        const checkLogin = login.find(u => u.Email === email)
+        if (checkLogin) {
 
-                theme.setIsLogin2(!theme.isLogin2)
-            });
+        } else {
+
+            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
+                method: 'POST',
+                headers: {
+                    Acceps: 'application/json',
+                    'content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+                .then((res) => {
+                    return (res.json())
+                }).then((data) => {
+
+                    theme.setIsLogin2(!theme.isLogin2)
+                });
+
+
+
+        }
+
 
 
 
 
 
         const valid = validationAll()
+        localStorage.setItem('key', JSON.stringify(user))
         if (!valid) return
         let checkEmail = false;
         let checkPass = false;
@@ -618,34 +649,58 @@ const Login = (props) => {
                 if (pass === loginApi[i].Password) {
                     checkPass = true
 
-                    localStorage.setItem('key', JSON.stringify(user))
 
 
 
                     setLoading(false)
-                    console.log(theme.onUser)
                     setTimeout(() => {
                         theme.setDisplay(true)
-
                         theme.setOnuser(loginApi[i].Name)
+                        setEmailLogin(loginApi[i].Email)
                         setEmail('')
                         setPass('')
                         setLoading(false)
                         setValidation1('')
-                        theme.setRenderCart(true)
                         setLoading(true)
                         theme.setVisibility(false)
                         // navigate('/profile')
 
 
+
+
                     }, 3000);
                 }
             }
+
         };
+        // fetch(`https://633e973783f50e9ba3b3be2f.mockapi.io/Login/` + emailLogin, {
+        //     method: 'PUT',
+        //     crossDomain: true,
+        //     xhrFields: {
+        //         withCredentials: true
+        //     },
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         Check: true,
+        //     })
+        // })
+        //     .then(res => {
+        //         res.json().then((res) => {
+        //             setLoading(!loading)
+        //             theme.setIsDataApp(!theme.isDataApp)
+        //         })
+        //     })
+        //     .catch(err => {
+        //         console.error(err)
+        //     })
 
 
 
-        if (checkEmail == false || checkPass == false) {
+
+        if (checkEmail === false || checkPass === false) {
             setLoading(false)
 
             setTimeout(() => {
@@ -763,27 +818,38 @@ const Register = () => {
 
 
         const msg1 = {}
-        const inclu = email.includes('@gmail.com')
+        const inclu = /^\w+@\[a-zA-Z]{3,}\.com$/i;
         if (!isNaN(firtname)) {
             msg1.firtname = "Wrong name format"
+
+
         }
         else if (!isNaN(lastname)) {
             msg1.lastname = "Wrong name format"
+
+
         }
         else if (lastname > 5) {
             msg1.lastname = "The name is too long"
+
         }
-        else if (!inclu) {
+        else if (inclu.test(email) === false) {
             msg1.email = "Email invalid"
+
 
         }
         else if (pass !== repeatPass) {
             msg1.pass = "Password doesn't match"
             msg1.repeatPass = "Password doesn't match"
+
+
+
         }
 
         else if (pass.length < 5) {
             msg1.pass = "Minimum length 5 characters"
+
+
 
         }
         else {
@@ -798,7 +864,7 @@ const Register = () => {
                 Email: email,
                 Password: pass,
             }
-            const checkEmail = registerApi.find(c => c.Email == email)
+            const checkEmail = registerApi.find(c => c.Email === email)
             if (checkEmail) {
                 setTimeout(() => {
                     setLoading(true)
@@ -841,7 +907,7 @@ const Register = () => {
 
                 }, 3000);
             }
-
+            return true
 
         }
 

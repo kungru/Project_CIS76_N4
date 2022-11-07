@@ -1,10 +1,14 @@
-import { React, useEffect, useState, useRef } from 'react';
+import { React, useEffect, useState, useRef, useContext } from 'react';
 import CrudCart from "./CrudCart"
 import { Container, Row, Col, Navlink, Button, Spinner } from 'reactstrap';
+import Admin from '../../Admin/Admin';
+import { ThemeContext } from '../../App';
 import './crud.css';
 
 
 const Crud = () => {
+  const theme = useContext(ThemeContext)
+
   const [crud, setCrud] = useState([])
 
 
@@ -110,16 +114,14 @@ const Crud = () => {
   // edit 
   const handelEdit = (id) => {
     setBlock(true)
-    console.log(crud)
     const index = crud.find((e) => e.id === id)
-
-    console.log(index)
     setName(index.name)
     setStyle(index.style)
     setShape(index.shape)
     setPrice(index.price)
     setUrl(index.url)
     setExpenseUpdate(index.id)
+    console.log(expenseUpdate)
 
   }
 
@@ -160,6 +162,7 @@ const Crud = () => {
 
   return (
     <div>
+
       <Container>
         <div className='crud-all'>
           <h1>add product</h1>

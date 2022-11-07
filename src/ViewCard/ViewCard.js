@@ -22,26 +22,13 @@ const ViewCard = () => {
 
           if (window.localStorage.getItem('display')) {
 
-
             setDataCard(data)
-            theme.setTextBlock(false)
-            theme.setRenderCart(true)
-            // if(dataCard.length == 0){
-            //     theme.setTextBlock(true)    
-            //     theme.setRenderCart(false) 
-            // }
-
-
-
           } else {
             setDataCard([])
-            theme.setTextBlock(true)
-            theme.setRenderCart(false)
-            // theme.setTextBlock(false)
+
 
           }
-          // setIsData(!isData)
-          // setloadCard(false)
+
         });
 
     }, [theme.isDataApp, theme.display]

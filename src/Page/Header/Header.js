@@ -1,13 +1,19 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { ThemeContext } from '../../App';
 import './Header.css';
 const Header = () => {
+    const theme = useContext(ThemeContext)
+    const nav = useNavigate()
     const [block, setBlock] = useState(true)
     const handelView = () => {
         setBlock(false)
     }
     const handelHome = () => {
         setBlock(true)
+    }
+    const handelLoginCrud = () => {
+        nav('/admin')
     }
     // setBlock(true)
     return (
@@ -20,7 +26,7 @@ const Header = () => {
                     <ul className='sidebar_route'>
 
                         <li>home</li>
-                        <li><Link to='/crud'>CRUD</Link></li>
+                        <li onClick={handelLoginCrud} >CRUD</li>
                         <li><Link to=''>Shop</Link></li>
                         <li>blog</li>
                         <li>landing</li>
