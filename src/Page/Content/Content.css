@@ -87,3 +87,24 @@
     color: white;
     background-color: #1c1c1c;
 }
+
+@media (min-width:320px) and (max-width: 812px) {
+    
+    .container_card_sort {
+
+        flex-wrap: wrap;
+        height: 25rem;
+    }
+
+    .Content_pagination {
+        margin: 0px 5rem;
+    }
+
+    .card_div {
+        width: 100%;
+    }
+
+    .container_card {
+        margin-left: 2rem;
+    }
+}

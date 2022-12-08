@@ -1,77 +1,121 @@
-body{
-  margin:0;
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
   position: relative;
 }
-.bg-light{
+
+.bg-light {
   background-color: white !important;
   padding: 0;
 
 
-  margin-top:-0.5px;
+  margin-top: -0.5px;
 
 
 
 
 }
-.col-3{min-width: 200px;
-padding: 0;
+
+.col-3 {
+  min-width: 200px;
+  padding: 0;
 }
-a{
+
+a {
   color: #1c1c1c !important;
 }
-.row{
-  flex-direction: row;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-.col{
-  padding: 0;
-  margin: 0;
-}
-.row{
-  flex-direction: row;
-  width: 100%;
-  margin: -1px ;
-  padding: 0 ;
 
-  
+.row {
+  flex-direction: row;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
-.container_card{
+
+.col {
+  padding: 0;
+  margin: 0;
+}
+
+.row {
+  flex-direction: row;
+  width: 100%;
+  margin: -1px;
+  padding: 0;
+
+
+}
+
+.container_card {
   display: flex;
   flex-wrap: wrap;
- 
+
 }
+
 ::-webkit-scrollbar {
   width: 1em;
   height: 2em
 }
+
 ::-webkit-scrollbar-button {
   background: #ccc
 }
+
 ::-webkit-scrollbar-track-piece {
   background: white
 }
+
 ::-webkit-scrollbar-thumb {
   background: #1c1c1c
-}​
-body{}
-@media only screen and (max-width: 827px){
-  .col-9{width: 70%;};
+}
 
-  .col-3{display: none;}
+​ body {}
+
+@media only screen and (max-width: 827px) {
+  .col-9 {
+    width: 70%;
+  }
+
+  ;
+
+  .col-3 {
+    display: none;
+  }
 }
-@media only screen and (max-width: 1247px){
-  .col-3{display: none;}
-  .container_card{margin-left: 7rem;}
+
+@media only screen and (max-width: 1247px) {
+  .col-3 {
+    display: none;
+  }
+
+  .container_card {
+    margin-left: 7rem;
+  }
 }
-@media only screen and (max-width: 1180px){
-  .col-3{display: none;}
-  .container_card{margin-left: 5rem;}
+
+@media only screen and (max-width: 1180px) {
+  .col-3 {
+    display: none;
+  }
+
+  .container_card {
+    margin-left: 5rem;
+  }
 }
-@media only screen and (max-width: 1115px){
-  .col-3{display: none;}
-  .container_card{margin-left: 5rem;}
+
+@media only screen and (max-width: 1115px) {
+  .col-3 {
+    display: none;
+  }
+
+  .container_card {
+    margin-left: 5rem;
+  }
 }

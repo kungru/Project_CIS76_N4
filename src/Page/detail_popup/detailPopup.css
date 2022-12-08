@@ -1,10 +1,15 @@
+.detail_popup {
+    z-index: 99;
+}
 
-.detail_popup{z-index: 99;}
-.detail_popup_grab{z-index: 999;}
-.detail_popup_grab{
+.detail_popup_grab {
+    z-index: 999;
+}
+
+.detail_popup_grab {
     width: 1000px;
     height: 470px;
-    border:1px solid black;
+    border: 1px solid black;
     display: flex;
     position: fixed;
     /* top:20%;
@@ -17,59 +22,69 @@
     text-align: center;
     background-color: white;
 
-  
+
 }
-.detail_img_popup{
+
+.detail_img_popup {
     width: 50%;
     display: flex;
     align-items: center;
 }
-.detail_img_popup img{
+
+.detail_img_popup img {
     width: 100%;
     height: 400px;
-   
+
 }
-.detail_popup_x{
+
+.detail_popup_x {
     position: absolute;
     font-size: 25px;
     right: 10px;
     top: 5px;
     color: #1c1c1c;
 }
-.detail_content_popup{
+
+.detail_content_popup {
     padding: 50px;
     width: 50%;
     padding-left: 70px;
 }
-.detail_name_popup{
+
+.detail_name_popup {
     font-weight: bold;
-    text-transform:uppercase;
+    text-transform: uppercase;
 }
 
-.detail_price_popup{
+.detail_price_popup {
     font-weight: bold;
     font-size: 30px;
 }
-.detail_quantity_popup{
+
+.detail_quantity_popup {
     display: flex;
     letter-spacing: .15em;
 }
-.detail_add_popup{
+
+.detail_add_popup {
     border: 1px solid #1c1c1c;
     padding: 19px 19px;
     text-transform: uppercase;
     margin-left: 2vh;
     font-size: 15px;
 }
-.detail_add_popup:hover{
+
+.detail_add_popup:hover {
     background-color: black;
     color: white;
 }
-.detail_text_popup{
+
+.detail_text_popup {
     height: 70px;
-    text-align:justify;
+    text-align: justify;
 }
-.detail_popup_view{
+
+.detail_popup_view {
     position: absolute;
     bottom: 10%;
     left: 57%;
@@ -77,28 +92,43 @@
     color: white !important;
     text-align: center;
     cursor: pointer;
-text-transform: uppercase;
+    text-transform: uppercase;
     background-color: #1c1c1c;
     width: 205.31px;
     border: 1px solid #1c1c1c;
- 
+
 }
+
 @keyframes popup {
-    from{opacity: 0;} to{opacity: 1;}
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
-.quantity1{
+
+.quantity1 {
     width: 9rem;
     height: 4rem;
     border: 1px solid #cccccc3b;
     display: flex;
     justify-content: space-around;
     /* margin-left: 2rem; */
-  }
-  .sum1{
+}
+
+.sum1 {
     margin-top: 17px;
     cursor: pointer;
     /* margin-left: 2px; */
     padding-right: -7px;
     width: 11px;
     height: 25px;
-  }
+}
+
+@media (min-width:320px) and (max-width: 812px) {
+    .detail_popup_grab {
+        width: 100%;
+    }
+}

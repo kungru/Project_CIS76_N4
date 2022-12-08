@@ -51,16 +51,16 @@ const Header = (props) => {
     const [apiUser, setApiUser] = useState([])
     // const [visibility, setVisibility] = useState(false)
 
-    useEffect(() => {
-        fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
-            .then((response) => {
-                return response.json()
-            }).then((data) => {
+    // useEffect(() => {
+    //     fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/User')
+    //         .then((response) => {
+    //             return response.json()
+    //         }).then((data) => {
 
-                setApiUser(data)
+    //             setApiUser(data)
 
-            })
-    }, [])
+    //         })
+    // }, [])
 
     const handleBlock = (e) => {
 
@@ -256,9 +256,12 @@ const Header = (props) => {
     }
 
     // responsive
-    const [collapsed, setCollapsed] = useState(true);
+    const [collapsed, setCollapsed] = useState(false);
 
     const handleToggleNavbar = () => {
+        setCollapsed(!collapsed)
+    }
+    const handelXnavbar = () => {
         setCollapsed(!collapsed)
     }
 
@@ -307,7 +310,7 @@ const Header = (props) => {
                 <div className='title_header'>
                     <img width='119' height='50' src="./images/logo-img-04.png" alt='Day la hinh anh' />
                 </div>
-                {collapsed && <Nav className='header-content ' >
+                {collapsed && <div className='body_navbar'><span onClick={handelXnavbar} className='xblock-navbar'>X</span> <Nav className='header-content ' >
                     <NavItem>
                         <Link className='text-color'
 
@@ -349,7 +352,7 @@ const Header = (props) => {
                         </Link>
                     </NavItem> */}
 
-                </Nav>}
+                </Nav></div>}
                 <Nav className='header-right' >
                     <NavItem className='responsive_icon_search'>
                         <div className='header-input-search' >
@@ -429,7 +432,7 @@ const Header = (props) => {
                         </div>
                     </NavItem>
                     <NavItem>
-                        <Example onToggleNavbar={handleToggleNavbar} />
+                        {/* <Example onToggleNavbar={handleToggleNavbar} /> */}
                     </NavItem>
                 </Nav>
 
@@ -595,7 +598,6 @@ const Login = (props) => {
 
     const handelLogin = () => {
 
-
         props.onLogin(props.email, props.pass, props.id)
 
         const user = {
@@ -607,29 +609,29 @@ const Login = (props) => {
 
         }
 
-        const checkLogin = login.find(u => u.Email === email)
-        if (checkLogin) {
+        // const checkLogin = login.find(u => u.Email === email)
+        // if (checkLogin) {
 
-        } else {
+        // } else {
 
-            fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
-                method: 'POST',
-                headers: {
-                    Acceps: 'application/json',
-                    'content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-                .then((res) => {
-                    return (res.json())
-                }).then((data) => {
+        //     fetch('https://633e973783f50e9ba3b3be2f.mockapi.io/Login/', {
+        //         method: 'POST',
+        //         headers: {
+        //             Acceps: 'application/json',
+        //             'content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(user)
+        //     })
+        //         .then((res) => {
+        //             return (res.json())
+        //         }).then((data) => {
 
-                    theme.setIsLogin2(!theme.isLogin2)
-                });
+        //             theme.setIsLogin2(!theme.isLogin2)
+        //         });
 
 
 
-        }
+        // }
 
 
 
@@ -650,19 +652,19 @@ const Login = (props) => {
                     checkPass = true
 
 
-
-
                     setLoading(false)
+
                     setTimeout(() => {
                         theme.setDisplay(true)
+                        setLoading(true)
                         theme.setOnuser(loginApi[i].Name)
                         setEmailLogin(loginApi[i].Email)
                         setEmail('')
                         setPass('')
-                        setLoading(false)
                         setValidation1('')
-                        setLoading(true)
                         theme.setVisibility(false)
+                        // setLoading(true)
+                        // setLoading(false)
                         // navigate('/profile')
 
 
@@ -818,7 +820,7 @@ const Register = () => {
 
 
         const msg1 = {}
-        const inclu = /^\w+@\[a-zA-Z]{3,}\.com$/i;
+        // const inclu = /^\w+@\[a-zA-Z]{3,}\.com$/;
         if (!isNaN(firtname)) {
             msg1.firtname = "Wrong name format"
 
@@ -833,7 +835,7 @@ const Register = () => {
             msg1.lastname = "The name is too long"
 
         }
-        else if (inclu.test(email) === false) {
+        else if (email.includes('@gmail.com')) {
             msg1.email = "Email invalid"
 
 

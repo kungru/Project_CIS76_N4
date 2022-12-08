@@ -688,6 +688,24 @@ form {
   font-weight: 600;
 }
 
+.xblock-navbar {
+  position: absolute;
+  right: 16px;
+  z-index: 1000;
+  top: 12px;
+}
+
+.body_navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background: #00000073;
+  z-index: 2;
+
+}
+
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .form-login {
     left: 17%;
@@ -695,15 +713,20 @@ form {
   }
 }
 
-@media (min-width:375px) and (max-width: 767px) {
-
+@media (min-width:320px) and (max-width: 812px) {
   /* put your css styles in here */
   .example {
     display: block;
   }
 
 
+  .header {
+    width: 100%;
+  }
 
+  .header_first {
+    padding: 21px 35px
+  }
 
   .title_header img {
     width: 5rem;
@@ -721,7 +744,17 @@ form {
     text-align: center;
     height: 200vh;
     padding-top: 7rem;
-    /* display: none; */
+    z-index: 100;
+  }
+
+
+
+  .address {
+    font-size: 11px;
+  }
+
+  .list-icon {
+    display: none;
   }
 
   .responsive_icon_login {
@@ -730,12 +763,14 @@ form {
     /* right: 4rem; */
     /* text-align: center; */
     right: 10vh;
+    z-index: 4;
   }
 
   .responsive_icon_love {
     position: absolute;
     right: 10vh;
     top: 26rem;
+    z-index: 4;
   }
 
   .responsive_icon_cart {
@@ -761,11 +796,23 @@ form {
   }
 
   .cart1 {
-    width: 22rem;
+    width: 100%
+  }
+
+  .three__sale {
+    width: 2rem;
+    height: 2rem;
+    right: 11px;
+  }
+
+  .three__sale span {
+    font-size: 10px;
+    margin-left: 6px;
+    margin-top: 7px;
   }
 
   .content_img {
-    width: 25rem;
+    width: 100%;
   }
 
   .text__title {
@@ -785,8 +832,8 @@ form {
   /* form login */
 
   .form-login {
+    left: 2vh;
     width: 23rem;
-    left: 3%;
   }
 
   .all-login {
