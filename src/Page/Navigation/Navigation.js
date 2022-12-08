@@ -310,7 +310,7 @@ const Header = (props) => {
                 <div className='title_header'>
                     <img width='119' height='50' src="./images/logo-img-04.png" alt='Day la hinh anh' />
                 </div>
-                {collapsed && <div className='body_navbar'><span onClick={handelXnavbar} className='xblock-navbar'>X</span> <Nav className='header-content ' >
+                <Nav className='header-content ' >
                     <NavItem>
                         <Link className='text-color'
 
@@ -352,7 +352,7 @@ const Header = (props) => {
                         </Link>
                     </NavItem> */}
 
-                </Nav></div>}
+                </Nav>
                 <Nav className='header-right' >
                     <NavItem className='responsive_icon_search'>
                         <div className='header-input-search' >
