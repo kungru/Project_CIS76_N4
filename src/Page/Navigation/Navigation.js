@@ -208,8 +208,6 @@ const Header = (props) => {
                 // return
             }
 
-
-
             fetch(`https://634015dae44b83bc73c898c3.mockapi.io/api/v1/card`)
                 .then((res) => {
 
@@ -220,11 +218,6 @@ const Header = (props) => {
                     setSearchCart1(data)
                     setSearchCart2(data)
                     // console.log(q)
-
-
-
-
-
                 });
 
         }, []
@@ -820,7 +813,7 @@ const Register = () => {
 
 
         const msg1 = {}
-        // const inclu = /^\w+@\[a-zA-Z]{3,}\.com$/;
+        // const inclu = /^\w+@\[a-zA-Z]{3,}\.com;
         if (!isNaN(firtname)) {
             msg1.firtname = "Wrong name format"
 
@@ -835,7 +828,7 @@ const Register = () => {
             msg1.lastname = "The name is too long"
 
         }
-        else if (email.includes('@gmail.com')) {
+        else if (!email.includes('@gmail.com')) {
             msg1.email = "Email invalid"
 
 
@@ -859,7 +852,7 @@ const Register = () => {
             setLoading(false)
 
 
-            console.log('test')
+
 
             const newUser = {
                 Name: lastname,
